@@ -245,6 +245,98 @@ body {
   pointer-events: none;
 }
 
+/* Search Results Dropdown & Lesson Highlights */
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  max-height: 440px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.search-dropdown-header {
+  padding: 0.65rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-item {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.search-item:hover, .search-item.selected {
+  background: var(--bg-elevated);
+}
+
+.search-item-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.search-item-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--primary);
+}
+
+.search-item-snippet {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.search-item-snippet mark {
+  background: rgba(234, 179, 8, 0.35);
+  color: inherit;
+  font-weight: 800;
+  padding: 0.05rem 0.25rem;
+  border-radius: 3px;
+}
+
+.search-highlight {
+  font-weight: 800 !important;
+  color: #000000 !important;
+  background: #fde047 !important;
+  padding: 0.08em 0.3em;
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(250, 204, 21, 0.7);
+  display: inline;
+}
+
+.search-empty {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
 .header-nav {
   display: flex;
   align-items: center;

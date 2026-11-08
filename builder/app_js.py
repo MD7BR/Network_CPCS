@@ -105,6 +105,7 @@ function handleRoute() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   updateProgressUI();
   if (typeof initSectionInteractives === 'function') initSectionInteractives();
+  if (typeof checkSearchHighlightsOnRoute === 'function') checkSearchHighlightsOnRoute();
 }
 
 window.addEventListener('hashchange', handleRoute);
@@ -2898,31 +2899,264 @@ function toggleCheckItem(id) {
   localStorage.setItem('cpcs371_checklist', JSON.stringify(Array.from(completedChecklist)));
 }
 
-// Global Search
-function handleGlobalSearch() {
-  const q = document.getElementById('global-search-input').value.toLowerCase().trim();
-  if (!q) return;
+// ==========================================
+// FULL-TEXT LESSON SEARCH & KEYWORD HIGHLIGHTING
+// ==========================================
+const STOPWORDS = new Set([
+  "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", 
+  "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", 
+  "by", "can", "could", "did", "do", "does", "doing", "down", "during", "each", "few", "for", 
+  "from", "further", "had", "has", "have", "having", "he", "her", "here", "hers", "herself", 
+  "him", "himself", "his", "how", "if", "in", "into", "is", "it", "its", "itself", "just", 
+  "me", "more", "most", "my", "myself", "no", "nor", "not", "now", "of", "off", "on", "once", 
+  "only", "or", "other", "our", "ours", "ourselves", "out", "over", "own", "same", "she", 
+  "should", "so", "some", "such", "than", "that", "the", "their", "theirs", "them", "themselves", 
+  "then", "there", "these", "they", "this", "those", "through", "to", "too", "under", "until", 
+  "up", "very", "was", "we", "were", "what", "when", "where", "which", "while", "who", "whom", 
+  "why", "will", "with", "would", "you", "your", "yours", "yourself", "yourselves",
+  "goes", "going", "gone", "got", "get", "gets", "also", "well", "like"
+]);
 
-  // Search across sections
-  const secItems = document.querySelectorAll('.sec-item');
-  let matchFound = false;
-  secItems.forEach(item => {
-    const text = item.innerText.toLowerCase();
-    if (text.includes(q)) {
-      item.style.display = 'flex';
-      if (!matchFound) {
-        navigateTo(item.dataset.sec);
-        matchFound = true;
+let currentSearchQuery = "";
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function handleGlobalSearch() {
+  const input = document.getElementById('global-search-input');
+  const dropdown = document.getElementById('search-results-dropdown');
+  if (!input || !dropdown) return;
+
+  const rawQ = input.value.trim();
+  const q = rawQ.toLowerCase();
+
+  // If query is empty, close dropdown and reset highlights/sidebar
+  if (!q) {
+    dropdown.style.display = 'none';
+    dropdown.innerHTML = '';
+    currentSearchQuery = "";
+    clearSearchHighlights();
+    document.querySelectorAll('.sec-item').forEach(el => el.style.display = 'flex');
+    return;
+  }
+
+  // Filter out common stopwords (like "has", "goes", "with", etc.)
+  if (STOPWORDS.has(q) || (q.length < 2 && !['ip', 'cs'].includes(q))) {
+    dropdown.style.display = 'block';
+    dropdown.innerHTML = `
+      <div class="search-empty">
+        <span style="font-size:1.3rem;">💡</span><br>
+        <strong>"${rawQ}"</strong> is a common filler word.<br>
+        <span style="font-size:0.8rem; color:var(--text-muted); margin-top:5px; display:inline-block;">
+          Try searching for a networking topic or protocol like: 
+          <a href="javascript:void(0)" onclick="applySearchTerm('TCP')" style="color:var(--primary); font-weight:700;">TCP</a>, 
+          <a href="javascript:void(0)" onclick="applySearchTerm('ALOHA')" style="color:var(--primary); font-weight:700;">ALOHA</a>, 
+          <a href="javascript:void(0)" onclick="applySearchTerm('DNS')" style="color:var(--primary); font-weight:700;">DNS</a>, 
+          <a href="javascript:void(0)" onclick="applySearchTerm('Checksum')" style="color:var(--primary); font-weight:700;">Checksum</a>, 
+          <a href="javascript:void(0)" onclick="applySearchTerm('Dijkstra')" style="color:var(--primary); font-weight:700;">Dijkstra</a>, 
+          <a href="javascript:void(0)" onclick="applySearchTerm('BGP')" style="color:var(--primary); font-weight:700;">BGP</a>, 
+          <a href="javascript:void(0)" onclick="applySearchTerm('Subnet')" style="color:var(--primary); font-weight:700;">Subnet</a>.
+        </span>
+      </div>
+    `;
+    return;
+  }
+
+  currentSearchQuery = q;
+
+  // Search inside all lesson content across all 9 chapters!
+  const sections = document.querySelectorAll('section.content-section');
+  const results = [];
+  const regex = new RegExp('\\b(' + escapeRegExp(q) + ')', 'gi');
+
+  sections.forEach(sec => {
+    const secId = sec.id.replace('-section', '');
+    if (['dashboard', 'simulators', 'calculators', 'dissector', 'checklist', 'flashcards', 'exam'].includes(secId)) return;
+
+    const heading = sec.querySelector('.sec-heading');
+    const titleText = heading ? heading.innerText.trim() : secId;
+    const bodyEl = sec.querySelector('.sec-body-content') || sec;
+    const bodyText = bodyEl.innerText || "";
+
+    // Count matches in title and body
+    const matches = bodyText.match(regex);
+    const count = matches ? matches.length : 0;
+    const titleMatch = titleText.toLowerCase().includes(q);
+
+    if (count > 0 || titleMatch) {
+      // Find snippet around first match
+      let snippet = "";
+      const lowerBody = bodyText.toLowerCase();
+      const matchIdx = lowerBody.indexOf(q);
+      if (matchIdx !== -1) {
+        const start = Math.max(0, matchIdx - 45);
+        const end = Math.min(bodyText.length, matchIdx + q.length + 65);
+        snippet = (start > 0 ? "..." : "") + 
+                  bodyText.substring(start, end).replace(/\s+/g, ' ').trim() + 
+                  (end < bodyText.length ? "..." : "");
+        // Highlight matched word in snippet
+        snippet = snippet.replace(regex, '<mark><strong>$1</strong></mark>');
+      } else {
+        snippet = titleText;
       }
+
+      results.push({
+        id: secId,
+        title: titleText,
+        count: count + (titleMatch ? 2 : 0),
+        snippet: snippet
+      });
+    }
+  });
+
+  // Sort by match count descending
+  results.sort((a, b) => b.count - a.count);
+
+  // Render dropdown
+  if (results.length === 0) {
+    dropdown.style.display = 'block';
+    dropdown.innerHTML = `
+      <div class="search-empty">
+        No lesson content found matching "<strong>${rawQ}</strong>".<br>
+        <span style="font-size:0.8rem; color:var(--text-muted);">Try a broader keyword (e.g. TCP, ALOHA, UDP, Handshake, OSPF).</span>
+      </div>
+    `;
+  } else {
+    dropdown.style.display = 'block';
+    dropdown.innerHTML = `
+      <div class="search-dropdown-header">
+        <span>Found in ${results.length} Lesson${results.length > 1 ? 's' : ''}</span>
+        <span>${results.reduce((acc, r) => acc + r.count, 0)} occurrences</span>
+      </div>
+      ${results.slice(0, 10).map(r => `
+        <div class="search-item" onclick="selectSearchResult('${r.id}')">
+          <div class="search-item-title">
+            <span>${r.title}</span>
+            <span class="search-item-badge">${r.count} match${r.count > 1 ? 'es' : ''}</span>
+          </div>
+          <div class="search-item-snippet">${r.snippet}</div>
+        </div>
+      `).join('')}
+    `;
+  }
+
+  // Update sidebar: show matching sections and keep their accordions open
+  const matchingIds = new Set(results.map(r => r.id));
+  document.querySelectorAll('.sec-item').forEach(item => {
+    const sec = item.dataset.sec;
+    if (matchingIds.has(sec)) {
+      item.style.display = 'flex';
+      const acc = item.closest('.ch-accordion');
+      if (acc) acc.classList.add('open');
     } else {
       item.style.display = 'none';
     }
   });
+}
 
-  if (!q) {
-    secItems.forEach(item => item.style.display = 'flex');
+function selectSearchResult(secId) {
+  const dropdown = document.getElementById('search-results-dropdown');
+  if (dropdown) dropdown.style.display = 'none';
+
+  navigateTo(secId);
+
+  setTimeout(() => {
+    if (currentSearchQuery) {
+      highlightSearchInCurrentSection(currentSearchQuery);
+    }
+  }, 120);
+}
+
+function applySearchTerm(term) {
+  const input = document.getElementById('global-search-input');
+  if (input) {
+    input.value = term;
+    handleGlobalSearch();
+    input.focus();
   }
 }
+
+function highlightSearchInCurrentSection(query) {
+  clearSearchHighlights();
+  if (!query || STOPWORDS.has(query)) return;
+
+  const activeSec = document.querySelector('.content-section.active .sec-body-content');
+  if (!activeSec) return;
+
+  const regex = new RegExp('\\b(' + escapeRegExp(query) + ')\\b', 'gi');
+  const walker = document.createTreeWalker(activeSec, NodeFilter.SHOW_TEXT, null, false);
+  const nodes = [];
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    const parent = node.parentElement;
+    if (parent && (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE' || parent.tagName === 'SVG' || parent.closest('.search-highlight') || parent.closest('button') || parent.closest('input'))) {
+      continue;
+    }
+    if (regex.test(node.nodeValue)) {
+      nodes.push(node);
+    }
+  }
+
+  let firstMatch = null;
+  nodes.forEach(node => {
+    const parent = node.parentNode;
+    if (!parent) return;
+
+    const text = node.nodeValue;
+    const frag = document.createDocumentFragment();
+    let lastIndex = 0;
+    let m;
+    regex.lastIndex = 0;
+
+    while ((m = regex.exec(text)) !== null) {
+      if (m.index > lastIndex) {
+        frag.appendChild(document.createTextNode(text.substring(lastIndex, m.index)));
+      }
+      const strong = document.createElement('strong');
+      strong.className = 'search-highlight';
+      strong.innerText = m[0];
+      frag.appendChild(strong);
+      if (!firstMatch) firstMatch = strong;
+      lastIndex = regex.lastIndex;
+    }
+
+    if (lastIndex < text.length) {
+      frag.appendChild(document.createTextNode(text.substring(lastIndex)));
+    }
+
+    parent.replaceChild(frag, node);
+  });
+
+  if (firstMatch) {
+    firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function clearSearchHighlights() {
+  document.querySelectorAll('.search-highlight').forEach(el => {
+    const textNode = document.createTextNode(el.innerText);
+    if (el.parentNode) el.parentNode.replaceChild(textNode, el);
+  });
+}
+
+function checkSearchHighlightsOnRoute() {
+  if (currentSearchQuery) {
+    setTimeout(() => {
+      highlightSearchInCurrentSection(currentSearchQuery);
+    }, 100);
+  }
+}
+
+// Dismiss search dropdown on outside click
+document.addEventListener('click', (e) => {
+  const headerCenter = document.querySelector('.header-center');
+  const dropdown = document.getElementById('search-results-dropdown');
+  if (dropdown && headerCenter && !headerCenter.contains(e.target)) {
+    dropdown.style.display = 'none';
+  }
+});
 
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
