@@ -138,7 +138,12 @@ CHAPTERS = [CH1_DATA, CH2_DATA, CH3_DATA, CH4_DATA, CH5_DATA, CH6_DATA, CH7_DATA
 
 def build_sidebar():
     sidebar_html = []
-    sidebar_html.append('<div class="sidebar-title">All 9 Chapters</div>')
+    sidebar_html.append('''
+    <div class="sidebar-header-row">
+      <div class="sidebar-title">All 9 Chapters</div>
+      <button class="sidebar-close-mobile-btn" onclick="closeSidebar()" aria-label="Close Chapters Sidebar" title="Close">✕</button>
+    </div>
+    ''')
 
     for ch in CHAPTERS:
         badge_style = f"background-color: {ch['color']};"
@@ -147,7 +152,7 @@ def build_sidebar():
           <div class="ch-header" onclick="toggleChapterAccordion(this)">
             <div class="ch-header-left">
               <span class="ch-badge" style="{badge_style}">Ch {ch['num']}</span>
-              <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:180px;">{ch['title']}</span>
+              <span class="ch-title-text">{ch['title']}</span>
             </div>
             <span class="arrow-icon" style="transition:transform 0.2s ease;">▶</span>
           </div>
@@ -336,24 +341,37 @@ def assemble_all():
 
   <!-- TOP HEADER -->
   <header class="app-header">
-    <div class="logo-group" onclick="navigateTo('dashboard')">
-      <div class="logo-badge">CPCS 371</div>
-      <div class="logo-text">
-        <h1>Computer Networks</h1>
-        <p>Kurose & Ross 6th Ed. &bull; Unofficial Student Study Companion</p>
+    <div class="header-left">
+      <!-- Mobile / iPad Sidebar Hamburger Toggle -->
+      <button id="sidebar-toggle-btn" class="icon-btn sidebar-toggle-btn" onclick="toggleSidebar()" title="Toggle Chapters Sidebar" aria-label="Toggle Navigation Sidebar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+        </svg>
+      </button>
+
+      <!-- Logo Group -->
+      <div class="logo-group" onclick="navigateTo('dashboard')">
+        <div class="logo-badge">CPCS 371</div>
+        <div class="logo-text">
+          <h1>Computer Networks</h1>
+          <p>Kurose &amp; Ross 6th Ed. &bull; Unofficial Student Companion</p>
+        </div>
       </div>
     </div>
 
-    <!-- Center Search Input -->
-    <div class="header-center">
-      <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-      <input type="text" id="global-search-input" class="search-input" placeholder="Search lessons for TCP, ALOHA, DNS, BGP, Checksum..." oninput="handleGlobalSearch()" onfocus="handleGlobalSearch()" autocomplete="off">
+    <!-- Expandable Search Dot & Bar ("Dot then Expand, Pushing Everything") -->
+    <div id="search-container" class="search-container" onclick="handleSearchContainerClick(event)">
+      <button id="search-dot-trigger" class="search-dot-btn" onclick="openSearch(event)" title="Search lessons (click to expand)" aria-label="Search lessons">
+        <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      </button>
+      <input type="text" id="global-search-input" class="search-input" placeholder="Search TCP, ALOHA, DNS, BGP..." oninput="handleGlobalSearch()" onfocus="handleGlobalSearch()" autocomplete="off" aria-label="Search lessons">
+      <button id="search-close-btn" class="search-close-btn" onclick="closeSearch(event)" title="Close search" aria-label="Close search">✕</button>
       <div id="search-results-dropdown" class="search-dropdown"></div>
     </div>
 
-    <!-- Right Header Navigation -->
-    <div class="header-nav">
-      <span id="overall-progress-pct" class="interactive-badge" style="margin-right:0.4rem;">0% Mastered</span>
+    <!-- Right Header Navigation (Horizontally Scrollable) -->
+    <nav class="header-nav" id="header-nav" aria-label="Main Navigation">
+      <span id="overall-progress-pct" class="interactive-badge" style="margin-right:0.2rem;">0% Mastered</span>
       <button class="nav-btn" data-route="dashboard" onclick="navigateTo('dashboard')">🏠 Home</button>
       <button class="nav-btn" data-route="dissector" onclick="navigateTo('dissector')">🔍 HTTP Dissector</button>
       <button class="nav-btn" data-route="calculators" onclick="navigateTo('calculators')">🧮 Calculators</button>
@@ -363,9 +381,16 @@ def assemble_all():
       <button class="nav-btn" data-route="flashcards" onclick="navigateTo('flashcards')">🃏 Flashcards</button>
       <button class="nav-btn" data-route="exam" onclick="navigateTo('exam')">🎯 Exam</button>
       <button class="nav-btn" data-route="checklist" onclick="navigateTo('checklist')">✅ Checklist</button>
-      <button class="icon-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">🌓</button>
+    </nav>
+
+    <!-- Pinned Header Actions -->
+    <div class="header-actions">
+      <button class="icon-btn theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">🌓</button>
     </div>
   </header>
+
+  <!-- Sidebar Backdrop for Mobile/iPad -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop" onclick="closeSidebar()"></div>
 
   <!-- MAIN APP CONTAINER -->
   <div class="app-container">

@@ -52,10 +52,18 @@ function handleRoute() {
   // Update header nav buttons
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   const activeNavBtn = document.querySelector(`.nav-btn[data-route="${hash}"]`);
-  if (activeNavBtn) activeNavBtn.classList.add('active');
+  if (activeNavBtn) {
+    activeNavBtn.classList.add('active');
+    activeNavBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+  }
 
   // Deactivate sidebar items
   document.querySelectorAll('.sec-item').forEach(el => el.classList.remove('active'));
+
+  // Close mobile sidebar drawer when navigating
+  if (window.innerWidth <= 1024) {
+    closeSidebar();
+  }
 
   if (hash === 'dashboard') {
     const dash = document.getElementById('dashboard-section');
@@ -95,6 +103,9 @@ function handleRoute() {
         sideItem.classList.add('active');
         const parentAcc = sideItem.closest('.ch-accordion');
         if (parentAcc) parentAcc.classList.add('open');
+        setTimeout(() => {
+          sideItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }, 80);
       }
     } else {
       // Fallback
@@ -114,6 +125,35 @@ window.addEventListener('hashchange', handleRoute);
 function toggleChapterAccordion(header) {
   const acc = header.closest('.ch-accordion');
   acc.classList.toggle('open');
+}
+
+// Sidebar Drawer Controls for Mobile / iPad
+function toggleSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  if (!sidebar) return;
+  if (sidebar.classList.contains('open')) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+}
+
+function openSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (sidebar) sidebar.classList.add('open');
+  if (backdrop) backdrop.classList.add('active');
+  if (window.innerWidth <= 1024) {
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (sidebar) sidebar.classList.remove('open');
+  if (backdrop) backdrop.classList.remove('active');
+  document.body.style.overflow = '';
 }
 
 // Toggle Solution Box
@@ -2923,10 +2963,60 @@ function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+// Expandable Search Dot ("Dot then Expand, Pushing Everything")
+function openSearch(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  const container = document.getElementById('search-container');
+  const input = document.getElementById('global-search-input');
+  if (!container || !input) return;
+
+  if (!container.classList.contains('expanded')) {
+    container.classList.add('expanded');
+    setTimeout(() => {
+      input.focus();
+      if (input.value.trim()) {
+        handleGlobalSearch();
+      }
+    }, 60);
+  } else {
+    input.focus();
+  }
+}
+
+function closeSearch(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  const container = document.getElementById('search-container');
+  const dropdown = document.getElementById('search-results-dropdown');
+  const input = document.getElementById('global-search-input');
+  if (!container) return;
+
+  container.classList.remove('expanded');
+  if (dropdown) dropdown.style.display = 'none';
+  if (input) input.blur();
+}
+
+function handleSearchContainerClick(e) {
+  const container = document.getElementById('search-container');
+  if (container && !container.classList.contains('expanded')) {
+    openSearch(e);
+  }
+}
+
 function handleGlobalSearch() {
   const input = document.getElementById('global-search-input');
   const dropdown = document.getElementById('search-results-dropdown');
+  const container = document.getElementById('search-container');
   if (!input || !dropdown) return;
+
+  if (container && !container.classList.contains('expanded')) {
+    container.classList.add('expanded');
+  }
 
   const rawQ = input.value.trim();
   const q = rawQ.toLowerCase();
@@ -3060,6 +3150,7 @@ function selectSearchResult(secId) {
   if (dropdown) dropdown.style.display = 'none';
 
   navigateTo(secId);
+  closeSearch();
 
   setTimeout(() => {
     if (currentSearchQuery) {
@@ -3070,6 +3161,10 @@ function selectSearchResult(secId) {
 
 function applySearchTerm(term) {
   const input = document.getElementById('global-search-input');
+  const container = document.getElementById('search-container');
+  if (container && !container.classList.contains('expanded')) {
+    container.classList.add('expanded');
+  }
   if (input) {
     input.value = term;
     handleGlobalSearch();
@@ -3149,12 +3244,37 @@ function checkSearchHighlightsOnRoute() {
   }
 }
 
-// Dismiss search dropdown on outside click
+// Mouse Wheel Horizontal Scroll Support for Upper Nav Bar
+function initHeaderNavScroll() {
+  const nav = document.getElementById('header-nav');
+  if (!nav) return;
+  nav.addEventListener('wheel', (e) => {
+    if (e.deltaY !== 0 && nav.scrollWidth > nav.clientWidth) {
+      e.preventDefault();
+      nav.scrollLeft += e.deltaY;
+    }
+  }, { passive: false });
+}
+
+// Dismiss search dropdown and collapse on outside click
 document.addEventListener('click', (e) => {
-  const headerCenter = document.querySelector('.header-center');
+  const container = document.getElementById('search-container');
   const dropdown = document.getElementById('search-results-dropdown');
-  if (dropdown && headerCenter && !headerCenter.contains(e.target)) {
-    dropdown.style.display = 'none';
+  if (container && container.classList.contains('expanded')) {
+    if (!container.contains(e.target)) {
+      closeSearch();
+    }
+  }
+});
+
+// Keyboard shortcuts: Escape to close search / drawer, Ctrl+K or / to open search
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeSearch();
+    closeSidebar();
+  } else if ((e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+    e.preventDefault();
+    openSearch();
   }
 });
 
@@ -3165,6 +3285,7 @@ document.addEventListener('DOMContentLoaded', () => {
   filteredFlashcards = [...ALL_FLASHCARDS];
   renderFlashcard();
   initChecklist();
+  initHeaderNavScroll();
   handleRoute();
 });
 """

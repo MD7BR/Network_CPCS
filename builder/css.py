@@ -168,24 +168,57 @@ body {
 .app-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 60;
   background-color: var(--bg-primary);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   height: 64px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 1.5rem;
+  justify-content: flex-start;
+  padding: 0 1rem;
+  gap: 0.65rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+.sidebar-toggle-btn {
+  display: none; /* Shown on <= 1024px screens */
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+.sidebar-toggle-btn:hover {
+  background: var(--primary-light);
+  color: var(--primary-text);
+  border-color: var(--primary);
 }
 
 .logo-group {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  flex-shrink: 0;
+  user-select: none;
 }
 
 .logo-badge {
@@ -193,56 +226,153 @@ body {
   color: white;
   font-weight: 800;
   font-size: 0.85rem;
-  padding: 0.4rem 0.65rem;
+  padding: 0.35rem 0.6rem;
   border-radius: 8px;
   letter-spacing: 0.5px;
+  flex-shrink: 0;
 }
 
 .logo-text h1 {
   font-size: 1.05rem;
   font-weight: 700;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .logo-text p {
   font-size: 0.72rem;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
-.header-center {
-  flex: 1;
-  max-width: 480px;
-  margin: 0 1.5rem;
+/* Expandable Search Dot & Bar ("Dot then Expand, Pushing Everything") */
+.search-container {
   position: relative;
-}
-
-.search-input {
-  width: 100%;
-  padding: 0.5rem 1rem 0.5rem 2.25rem;
-  border-radius: 20px;
-  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 40px; /* Collapsed dot */
+  border-radius: 50%;
   background: var(--bg-secondary);
-  color: var(--text-primary);
-  font-size: 0.875rem;
-  outline: none;
-  transition: all 0.2s ease;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  cursor: pointer;
+  overflow: visible;
+  transition: width 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-radius 0.25s ease,
+              background-color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.25s ease;
+  z-index: 70;
 }
 
-.search-input:focus {
+.search-container:hover {
   border-color: var(--primary);
-  background: var(--bg-primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  background: var(--bg-elevated);
+}
+
+.search-dot-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+  touch-action: manipulation;
+  padding: 0;
+}
+
+.search-dot-btn:hover {
+  color: var(--primary);
 }
 
 .search-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 0;
+  height: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.search-close-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  left: 0.8rem;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  fill: var(--text-muted);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0;
   pointer-events: none;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+}
+
+.search-close-btn:hover {
+  background: var(--danger-light);
+  color: var(--danger-text);
+}
+
+/* Expanded State: Pushes Adjacent Content */
+.search-container.expanded {
+  width: 360px; /* Expands pushing everything to the right */
+  border-radius: 20px;
+  background: var(--bg-primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15), var(--shadow-sm);
+  cursor: default;
+}
+
+.search-container.expanded .search-dot-btn {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  color: var(--primary);
+}
+
+.search-container.expanded .search-input {
+  width: 100%;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 0.45rem 2.2rem 0.45rem 2.35rem;
+}
+
+.search-container.expanded .search-close-btn {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Search Results Dropdown & Lesson Highlights */
@@ -250,13 +380,15 @@ body {
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
-  right: 0;
+  width: 440px;
+  max-width: 90vw;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
   max-height: 440px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   z-index: 1000;
   display: none;
 }
@@ -337,10 +469,48 @@ body {
   line-height: 1.6;
 }
 
+/* Header Navigation - Horizontally Scrollable & Never Squished */
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
+  flex: 1;
+  min-width: 0; /* Vital for flex child horizontal scroll */
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  padding: 0.3rem 0.2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  touch-action: pan-x;
+}
+
+.header-nav::-webkit-scrollbar {
+  height: 3px;
+}
+.header-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.header-nav::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+.header-nav::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Ensure all nav buttons and badges NEVER squish */
+.header-nav > * {
+  flex-shrink: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .nav-btn {
@@ -356,6 +526,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  touch-action: manipulation;
 }
 
 .nav-btn:hover {
@@ -382,11 +553,33 @@ body {
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
+  touch-action: manipulation;
 }
 
 .icon-btn:hover {
   color: var(--text-primary);
   border-color: var(--primary);
+}
+
+/* Sidebar Backdrop for Mobile/iPad */
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 85;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.sidebar-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Main Container Layout */
@@ -402,14 +595,43 @@ body {
   background-color: var(--bg-primary);
   border-right: 1px solid var(--border);
   overflow-y: auto;
+  overflow-x: hidden;
   position: sticky;
   top: 64px;
   height: calc(100vh - 64px);
+  max-height: calc(100dvh - 64px);
   padding: 1rem 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  transition: transform 0.25s ease;
+  gap: 0.45rem;
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  flex-shrink: 0;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.sidebar-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem 0.5rem;
+  flex-shrink: 0;
 }
 
 .sidebar-title {
@@ -418,15 +640,42 @@ body {
   text-transform: uppercase;
   color: var(--text-muted);
   letter-spacing: 0.05em;
-  padding: 0.5rem 0.75rem 0.25rem;
 }
 
+.sidebar-close-mobile-btn {
+  display: none; /* Shown on mobile/iPad drawer */
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+.sidebar-close-mobile-btn:hover {
+  background: var(--danger-light);
+  color: var(--danger-text);
+}
+
+/* Accordion: MUST HAVE flex-shrink: 0 so opening multiple chapters never squishes lessons! */
 .ch-accordion {
   border: 1px solid var(--border-light);
   border-radius: 8px;
-  overflow: hidden;
   margin-bottom: 0.35rem;
   background: var(--bg-primary);
+  flex-shrink: 0; /* CRITICAL FIX: prevents accordions from collapsing */
+  min-height: min-content;
+  transition: border-color 0.15s ease;
+}
+
+.ch-accordion:hover {
+  border-color: var(--border);
 }
 
 .ch-header {
@@ -440,6 +689,8 @@ body {
   font-size: 0.85rem;
   font-weight: 600;
   transition: background 0.15s ease;
+  border-radius: 7px;
+  touch-action: manipulation;
 }
 
 .ch-header:hover {
@@ -450,6 +701,16 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.ch-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  font-size: 0.85rem;
 }
 
 .ch-badge {
@@ -458,12 +719,14 @@ body {
   padding: 0.15rem 0.4rem;
   border-radius: 4px;
   color: white;
+  flex-shrink: 0;
 }
 
 .sec-list {
   display: none;
   padding: 0.25rem 0;
   background: var(--bg-primary);
+  min-height: min-content;
 }
 
 .ch-accordion.open .sec-list {
@@ -474,17 +737,23 @@ body {
   transform: rotate(90deg);
 }
 
+.ch-accordion.open .ch-header {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 .sec-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.45rem 0.85rem 0.45rem 1.85rem;
-  font-size: 0.8rem;
+  padding: 0.5rem 0.85rem 0.5rem 1.85rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
   text-decoration: none;
   cursor: pointer;
-  border-left: 2px solid transparent;
+  border-left: 3px solid transparent;
   transition: all 0.15s ease;
+  touch-action: manipulation;
 }
 
 .sec-item:hover {
@@ -1009,22 +1278,73 @@ body {
   border-top: 1px solid var(--border);
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* Responsive Styles for iPad & Mobile Devices */
+@media (max-width: 1024px) {
+  .sidebar-toggle-btn {
+    display: inline-flex;
+  }
+  .sidebar-close-mobile-btn {
+    display: inline-flex;
+  }
   .sidebar {
     position: fixed;
-    left: -320px;
-    z-index: 40;
+    top: 64px;
+    left: -340px;
+    bottom: 0;
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
+    z-index: 90;
     box-shadow: var(--shadow-lg);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .sidebar.open {
-    transform: translateX(320px);
+    transform: translateX(340px);
+  }
+  .logo-text p {
+    display: none; /* Hide secondary subtitle on tablet/iPad to preserve space */
+  }
+  .search-container.expanded {
+    width: 290px;
+  }
+  .search-dropdown {
+    width: 320px;
+  }
+  .search-input {
+    font-size: 16px; /* Prevents iOS Safari auto-zoom on input focus */
   }
   .main-content {
-    padding: 1.25rem;
+    padding: 1.5rem 1.25rem;
   }
-  .header-center {
-    display: none;
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    padding: 0 0.65rem;
+    gap: 0.5rem;
+  }
+  .logo-text h1 {
+    font-size: 0.95rem;
+  }
+  .logo-badge {
+    padding: 0.25rem 0.45rem;
+    font-size: 0.75rem;
+  }
+  .search-container.expanded {
+    width: 220px;
+  }
+  .search-dropdown {
+    width: 280px;
+    left: -40px;
+  }
+  .main-content {
+    padding: 1.25rem 0.75rem;
+  }
+  .header-nav {
+    gap: 0.35rem;
+  }
+  .nav-btn {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.78rem;
   }
 }
 
