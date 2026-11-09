@@ -1353,6 +1353,89 @@ body {
   }
 }
 
+/* Midterm & Quiz Custom Styles */
+.word-chip {
+  display: inline-block;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: default;
+  transition: all 0.15s ease;
+}
+.word-chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+.fill-blank-input {
+  font-family: inherit;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.6rem;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  width: 220px;
+  max-width: 100%;
+  transition: all 0.2s ease;
+}
+.fill-blank-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.fill-blank-input.correct {
+  border-color: #10b981;
+  background-color: #ecfdf5;
+  color: #065f46;
+}
+.fill-blank-input.wrong {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+.fill-feedback {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-left: 0.4rem;
+}
+
+.solution-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 8px;
+  padding: 1.25rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.calc-table {
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+}
+.calc-table th, .calc-table td {
+  border: 1px solid var(--border);
+  padding: 0.6rem 0.75rem;
+}
+.calc-table th {
+  background: var(--bg-elevated);
+  font-weight: 700;
+}
+.calc-table tr:nth-child(even) {
+  background: var(--bg-secondary);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Print Styles */
 @media print {
   .app-header, .sidebar, .section-nav-footer, .nav-btn, .icon-btn, .quiz-controls, .sim-controls {
@@ -1410,6 +1493,8 @@ body {
     <nav class="header-nav" id="header-nav" aria-label="Main Navigation">
       <span id="overall-progress-pct" class="interactive-badge" style="margin-right:0.2rem;">0% Mastered</span>
       <button class="nav-btn" data-route="dashboard" onclick="navigateTo('dashboard')">🏠 Home</button>
+      <button class="nav-btn" data-route="sample-midterm" onclick="navigateTo('sample-midterm')">📝 Sample Midterm</button>
+      <button class="nav-btn" data-route="quiz-net" onclick="navigateTo('quiz-net')">⚡ Quiz 2 (Net Layer)</button>
       <button class="nav-btn" data-route="dissector" onclick="navigateTo('dissector')">🔍 HTTP Dissector</button>
       <button class="nav-btn" data-route="calculators" onclick="navigateTo('calculators')">🧮 Calculators</button>
       <button class="nav-btn" data-route="simulators" onclick="navigateTo('simulators')">⚡ Simulators</button>
@@ -2011,10 +2096,46 @@ body {
           Interactive, visual digital textbook covering <strong>all 9 chapters</strong> based on Kurose & Ross (6th Edition) and lecture slides. Features bit-accurate calculators, step-by-step protocol simulators, inline SVG figures, and exam problem walkthroughs.
         </p>
         <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-          <button class="btn-primary" style="background:white; color:#1e40af; font-weight:700;" onclick="navigateTo('ch1-1')">Begin Chapter 1 →</button>
-          <button class="btn-secondary" style="background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.3);" onclick="navigateTo('dissector')">HTTP Message Dissector (Exam Focus)</button>
+          <button class="btn-primary" style="background:white; color:#1e40af; font-weight:700;" onclick="navigateTo('sample-midterm')">📝 Sample Midterm Exam (Ch 1–3) →</button>
+          <button class="btn-secondary" style="background:rgba(255,255,255,0.25); color:white; border-color:rgba(255,255,255,0.4); font-weight:700;" onclick="navigateTo('quiz-net')">⚡ Upcoming Quiz 2: Network Layer →</button>
+          <button class="btn-secondary" style="background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.3);" onclick="navigateTo('ch1-1')">Begin Chapter 1 →</button>
           <button class="btn-secondary" style="background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.3);" onclick="navigateTo('calculators')">18 Calculators Hub</button>
           <button class="btn-secondary" style="background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.3);" onclick="navigateTo('exam')">50-Question Final Exam</button>
+        </div>
+      </div>
+
+      <!-- ACTIVE EXAM PREP & TARGETED QUIZZES BANNER -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-bottom:2rem;">
+        <!-- Card 1: Sample Midterm Exam -->
+        <div class="interactive-card" style="border-top:4px solid #2563eb; cursor:pointer;" onclick="navigateTo('sample-midterm')">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <span class="interactive-badge" style="background:#eff6ff; color:#1d4ed8; font-weight:700;">Chapters 1, 2 &amp; 3</span>
+            <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">21 Exam Problems</span>
+          </div>
+          <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-primary); margin-bottom:0.5rem;">📝 Sample Midterm Exam</h3>
+          <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1rem;">
+            Practice with 21 high-yield questions (10 MCQs and 11 Written Problems) covering Chapters 1–3. Includes complete step-by-step collapsible solutions, calculation tables, and clear tags for slide references and student-reported book topics.
+          </p>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.85rem; font-weight:700; color:var(--primary-text);">
+            <span>Open Sample Midterm &rarr;</span>
+            <span style="font-size:0.75rem; background:#ecfdf5; color:#047857; padding:2px 8px; border-radius:4px;">100% Solved</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Upcoming Network Layer Quiz -->
+        <div class="interactive-card" style="border-top:4px solid #10b981; cursor:pointer;" onclick="navigateTo('quiz-net')">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-weight:700;">Chapters 4 &amp; 5 Focus</span>
+            <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">10 Target Questions</span>
+          </div>
+          <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-primary); margin-bottom:0.5rem;">⚡ Upcoming Quiz 2: Network Layer</h3>
+          <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1rem;">
+            Master the 10 specific exam focus topics: Forwarding vs. Routing, Best-Effort Service, Longest Prefix Matching, Subnet Masks, DHCP DORA, IPv4/IPv6 Tunneling, SDN Control Plane, Link-State Dijkstra, Bellman-Ford Distance Vector, and RIP vs. OSPF.
+          </p>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.85rem; font-weight:700; color:#047857;">
+            <span>Start 10-Question Quiz &rarr;</span>
+            <span style="font-size:0.75rem; background:#eff6ff; color:#1d4ed8; padding:2px 8px; border-radius:4px;">Interactive Scoring</span>
+          </div>
         </div>
       </div>
 
@@ -2186,6 +2307,1654 @@ body {
     </section>
 
     
+      
+<!-- ========================================== -->
+<!-- SAMPLE MIDTERM EXAM (CHAPTERS 1-3)         -->
+<!-- ========================================== -->
+<section id="sample-midterm-section" class="content-section">
+  <div class="breadcrumb">Assessment &bull; Sample Midterm Exam (Chapters 1–3)</div>
+  
+  <!-- HERO BANNER -->
+  <div style="background:linear-gradient(135deg, #1e3a8a 0%, #312e81 60%, #4338ca 100%); color:white; border-radius:14px; padding:2rem 2.25rem; margin-bottom:2rem; box-shadow:var(--shadow-lg);">
+    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem; flex-wrap:wrap;">
+      <span style="background:rgba(255,255,255,0.2); font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px;">Midterm Revision Set</span>
+      <span style="background:#10b981; color:white; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:20px;">Chapters 1, 2 &amp; 3</span>
+      <span style="font-size:0.85rem; opacity:0.9;">Total: 25 Points &bull; 21 Questions</span>
+    </div>
+    <h2 class="sec-heading" style="font-size:2.2rem; font-weight:800; line-height:1.2; margin-bottom:0.75rem;">CPCS-371 Sample Midterm Exam</h2>
+    <p style="font-size:1.05rem; opacity:0.95; max-width:820px; line-height:1.6; margin-bottom:1.25rem;">
+      Comprehensive sample exam covering the primary topics, problem sets, and course learning objectives from Chapters 1, 2, and 3. Includes step-by-step mathematical solutions and conceptual explanations to help you master every topic before exam day.
+    </p>
+    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
+      <button class="btn-primary" style="background:white; color:#1e3a8a; font-weight:700;" onclick="revealAllMidtermSolutions()">👁️ Reveal All Solutions</button>
+      <button class="btn-secondary" style="background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.35);" onclick="hideAllMidtermSolutions()">🙈 Hide All Solutions</button>
+      <span style="font-size:0.85rem; opacity:0.85; margin-left:0.5rem;">Tip: Attempt each problem before expanding its step-by-step walkthrough!</span>
+    </div>
+  </div>
+
+  <!-- SOURCE & SYLLABUS TAGGING NOTICE -->
+  <div class="interactive-card" style="border-left:5px solid #3b82f6; margin-bottom:2rem; background:var(--bg-secondary);">
+    <h3 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem;">
+      <span>💡</span> Syllabus Alignment &amp; Source Tagging Guide
+    </h3>
+    <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:0.75rem;">
+      Each question is cross-referenced with the corresponding lecture slides or textbook section so you can easily review the theory. A special tag is added for high-yield topics reported by students that appear in the Kurose &amp; Ross textbook even if omitted from standard classroom slides.
+    </p>
+    <div style="display:flex; gap:0.5rem; flex-wrap:wrap; font-size:0.8rem;">
+      <span style="background:var(--primary-light); color:var(--primary-text); padding:0.25rem 0.6rem; border-radius:6px; font-weight:600;">[Slide Reference] Directly covered in official CPCS-371 slide decks</span>
+      <span style="background:#fef3c7; color:#92400e; padding:0.25rem 0.6rem; border-radius:6px; font-weight:700; border:1px solid #fcd34d;">⚠️ [REPORTED BY STUDENTS] Book Topic: Kurose &amp; Ross 6th Ed. (Not in Slides)</span>
+    </div>
+  </div>
+
+  <!-- PART I: MULTIPLE CHOICE QUESTIONS (1-10) -->
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; border-bottom:2px solid var(--border); padding-bottom:0.5rem;">
+    <div>
+      <h3 style="font-size:1.4rem; font-weight:800; color:var(--text-primary);">Part I — Multiple-Choice Questions</h3>
+      <p style="font-size:0.875rem; color:var(--text-muted);">Questions 1–10 &bull; 0.5 point each &bull; Total: 5.0 Points</p>
+    </div>
+    <span class="interactive-badge" style="background:var(--primary-light); color:var(--primary-text);">10 MCQs</span>
+  </div>
+
+  <!-- Q1 -->
+  <div class="quiz-box" id="midterm-q1">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:var(--primary);">Question 1 (0.5 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 1</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 1 Slide 67</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Protocol Architecture</span>
+    </div>
+    <div class="quiz-question">
+      Within the five-layer Internet protocol stack architecture, which layer is fundamentally responsible for routing datagrams from the source host across interconnected networks to the destination host?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'The Transport layer is responsible for logical process-to-process communication (TCP/UDP segments), not routing across intermediate hosts.')">
+        <span>A.</span> Transport layer
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'The Link layer is responsible for node-to-node frame transfer between directly connected neighboring elements across a single communication channel.')">
+        <span>B.</span> Link layer
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="selectQuizOption(this, true, 'Correct! The Network Layer (Layer 3) handles end-to-end host-to-host routing of datagrams from source to destination across multiple router hops (IP protocol).')">
+        <span>C.</span> Network layer
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'The Application layer supports distributed end-user network applications (HTTP, SMTP, DNS) and produces application messages.')">
+        <span>D.</span> Application layer
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="quiz-box" id="midterm-q2">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:var(--primary);">Question 2 (0.5 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 2</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 1 Slides 13–15</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Access Networks</span>
+    </div>
+    <div class="quiz-question">
+      Which of the following statements regarding residential Internet access architectures is <strong>TRUE</strong>?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="true" onclick="selectQuizOption(this, true, 'Correct! In HFC cable access, neighborhood subscribers share the downstream/upstream coaxial distribution tree to the cable headend (shared broadcast medium). In contrast, DSL utilizes a dedicated unshielded twisted-pair copper line running directly from each subscriber home to the telco Central Office DSLAM.')">
+        <span>A.</span> In cable (HFC) access, homes share the access network to the cable headend; DSL uses a dedicated line from each home to the central office.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Incorrect. DSL lines are dedicated local loops; neighborhood homes do NOT share the physical copper line to the central office.')">
+        <span>B.</span> In DSL, the homes of a neighborhood share one physical copper line to the central office.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Incorrect. Both cable and DSL access are traditionally asymmetric (ADSL), allocating much higher bandwidth downstream than upstream.')">
+        <span>C.</span> Cable and DSL both provide symmetric upstream and downstream transmission rates.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Incorrect. DSL operates over existing telephone twisted-pair copper wire, not coaxial cable.')">
+        <span>D.</span> DSL carries Internet data and television broadcasts over a shared coaxial cable.
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="quiz-box" id="midterm-q3">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:var(--primary);">Question 3 (0.5 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 3</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 1 Slide 45</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Queuing &amp; Traffic Intensity</span>
+    </div>
+    <div class="quiz-question">
+      Packets of size <span class="math-inline">L = 1,000 bytes</span> arrive at a router's output link buffer at an average arrival rate of <span class="math-inline">a = 11,250 packets/sec</span>. The outbound link transmission rate is <span class="math-inline">R = 100 Mbps</span>. What is the traffic intensity (<span class="math-inline">La/R</span>), and what does this value indicate regarding the average queueing delay?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Incorrect. Remember to convert bytes to bits! L = 1,000 bytes = 8,000 bits. If you forgot the factor of 8, you would get 0.1125.')">
+        <span>A.</span> 0.11 &mdash; the average queueing delay is negligible and close to zero
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Incorrect. While La/R = 0.90 is correct, queueing delay is NOT small! As traffic intensity approaches 1, queue length and delay explode exponentially.')">
+        <span>B.</span> 0.90 &mdash; the average queueing delay is small
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Incorrect. 11,250 × 8,000 bps = 90 Mbps. 90 / 100 = 0.90, not 9.')">
+        <span>C.</span> 9.00 &mdash; the average queueing delay is infinite due to severe overload
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="selectQuizOption(this, true, 'Correct! Calculation: L = 1,000 × 8 = 8,000 bits. Arrival rate in bits: L × a = 8,000 × 11,250 = 90,000,000 bps = 90 Mbps. Link capacity R = 100 Mbps. Traffic Intensity La/R = 90 / 100 = 0.90. In queuing theory, as La/R approaches 1 from below, queueing delay grows dramatically (exponential curve).')">
+        <span>D.</span> 0.90 &mdash; the average queueing delay is large
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="quiz-box" id="midterm-q4">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:var(--primary);">Question 4 (0.5 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 4</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 2 Slide 57</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">DNS Architecture</span>
+    </div>
+    <div class="quiz-question">
+      In the Domain Name System (DNS), which Resource Record (RR) type provides the standard direct mapping from an authoritative host domain name to its 32-bit IPv4 address?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'NS (Name Server) records specify the domain name of an authoritative DNS name server for a specific zone.')">
+        <span>A.</span> NS
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="selectQuizOption(this, true, 'Correct! Type A records map a canonical hostname (Name) to its corresponding 32-bit IPv4 address (Value).')">
+        <span>B.</span> Type A
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'CNAME records map an alias hostname to its canonical (official) hostname.')">
+        <span>C.</span> CNAME
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'MX records identify the mail server responsible for accepting email on behalf of a recipient domain.')">
+        <span>D.</span> MX
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="quiz-box" id="midterm-q5">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:var(--primary);">Question 5 (0.5 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 4</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 2 Slide 42</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">HTTP Caching</span>
+    </div>
+    <div class="quiz-question">
+      A client proxy cache issues an HTTP Conditional GET request containing the header line <code>If-modified-since: &lt;date&gt;</code>. If the origin server determines that the target object has <strong>NOT</strong> been modified since <code>&lt;date&gt;</code>, what status code and message does the server return?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, '200 OK is sent when the file HAS been modified (or on an unconditional GET), and it carries the entire object payload.')">
+        <span>A.</span> 200 OK, followed by the requested object
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, '301 Moved Permanently is an HTTP redirection response indicating a resource has permanently changed URI.')">
+        <span>B.</span> 301 Moved Permanently, with the redirection URI
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="selectQuizOption(this, true, 'Correct! The server responds with status code 304 Not Modified. Crucially, the response body is completely empty, saving bandwidth and transmission delay since the cache can safely serve its cached copy.')">
+        <span>C.</span> 304 Not Modified, with no object payload
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, '404 Not Found indicates the requested URL path does not exist on the origin server.')">
+        <span>D.</span> 404 Not Found
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="quiz-box" id="midterm-q6">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:var(--primary);">Question 6 (0.5 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 4</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 2 Slide 87</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Multimedia Streaming</span>
+    </div>
+    <div class="quiz-question">
+      In Dynamic Adaptive Streaming over HTTP (DASH), which network entity is dynamically responsible for selecting the encoding rate / quality of successive video chunks during playback?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="true" onclick="selectQuizOption(this, true, 'Correct! In DASH, client intelligence governs streaming: the client media player periodically estimates its available download throughput and requests the highest video encoding quality that the current network capacity can sustain.')">
+        <span>A.</span> The client, based on the bandwidth it measures periodically
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'The server remains stateless and simply serves whatever URL/chunk rate the client explicitly requests via HTTP GET.')">
+        <span>B.</span> The video origin server, based on overall file size
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'The local DNS server only resolves server hostnames to IP addresses; it has zero visibility into video chunk encoding.')">
+        <span>C.</span> The local DNS server, based on client geographical location
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Core routers are pure packet switchers at Layer 3; they do not inspect HTTP video chunk requests.')">
+        <span>D.</span> The core routers, based on internal buffer queue lengths
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="quiz-box" id="midterm-q7">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:var(--primary);">Question 7 (0.5 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 4</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 2 Slide 83</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Peer-to-Peer</span>
+    </div>
+    <div class="quiz-question">
+      In the BitTorrent peer-to-peer file sharing protocol, an active peer periodically queries its neighbors for their chunk lists. Which decision policy does the peer execute to decide which missing chunk to request first?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Tit-for-tat is the unchoking policy used to decide to whom a peer UPLOADS data, based on who is providing the highest download rates.')">
+        <span>A.</span> Tit-for-tat
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Optimistic unchoking is used to discover new high-bandwidth peers by randomly unchoking one peer every 30 seconds.')">
+        <span>B.</span> Optimistic unchoking
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'FCFS is a scheduling queue mechanism, not a peer chunk request heuristic.')">
+        <span>C.</span> First-come-first-served (FCFS)
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="selectQuizOption(this, true, 'Correct! BitTorrent uses Rarest First for chunk requests: chunks that are least widely distributed among neighbors are requested first. This evens out chunk replication and prevents rarest chunks from vanishing if seeders leave.')">
+        <span>D.</span> Rarest first
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="quiz-box" id="midterm-q8">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:var(--primary);">Question 8 (0.5 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 7</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 3 Slide 15</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Transport Demultiplexing</span>
+    </div>
+    <div class="quiz-question">
+      When an end host receives an incoming UDP segment from the network layer, how does the transport layer demultiplex the segment to deliver it to the appropriate application socket?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Source IP and source port are not used to select the receiving socket in connectionless UDP.')">
+        <span>A.</span> The source IP address and the source port number
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="selectQuizOption(this, true, 'Correct! In connectionless demultiplexing (UDP), the receiving operating system directs the segment to the bound socket using the destination port number only. Segments with different source IPs and source ports will arrive at the identical UDP socket if they share the same destination port.')">
+        <span>B.</span> The destination port number only
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'The 4-tuple is used for connection-oriented demultiplexing in TCP, NOT UDP!')">
+        <span>C.</span> The 4-tuple (source IP, source port, destination IP, destination port)
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'The checksum is for error verification, not socket addressing.')">
+        <span>D.</span> The checksum field
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="quiz-box" id="midterm-q9">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:var(--primary);">Question 9 (0.5 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 6</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 3 Slides 25–27</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Reliable Data Transfer (rdt)</span>
+    </div>
+    <div class="quiz-question">
+      The stop-and-wait reliable data transfer protocol <code>rdt2.1</code> uses only two sequence numbers (0 and 1). Why are two sequence numbers sufficient to guarantee correct, duplicate-free transmission?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="true" onclick="selectQuizOption(this, true, 'Correct! Because rdt2.1 operates under stop-and-wait, at most one packet is unacknowledged at any given instant. When the receiver gets a packet, it only needs a single bit (0 vs 1) to determine whether the incoming packet is a new packet or an identical retransmission of the preceding packet.')">
+        <span>A.</span> It is stop-and-wait: only one packet is unacknowledged at a time, so the receiver only has to tell a new packet from a retransmission.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Incorrect. rdt2.1 operates over a channel with bit errors where corrupted ACKs/NAKs trigger duplicate retransmissions.')">
+        <span>B.</span> The channel never loses or corrupts packets, so duplicates cannot occur.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'NAKs in rdt2.1 do not carry sequence numbers.')">
+        <span>C.</span> NAKs carry the full sequence number of the corrupted packet.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'A checksum detects bit flips; it cannot distinguish between fresh data and duplicate retransmissions.')">
+        <span>D.</span> The checksum can detect duplicate packets.
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="quiz-box" id="midterm-q10">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:var(--primary);">Question 10 (0.5 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 6</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 3 Slide 45</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Pipelined Protocols</span>
+    </div>
+    <div class="quiz-question">
+      In a sliding-window Go-Back-N (GBN) protocol, when the retransmission countdown timer for the oldest unacknowledged packet expires, what exact action does the sender perform?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Retransmitting only the oldest unacknowledged packet is the behavior of Selective Repeat (SR), NOT Go-Back-N!')">
+        <span>A.</span> Retransmits only the oldest unacknowledged packet
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'Senders do not send NAKs; receivers send ACKs/NAKs.')">
+        <span>B.</span> Sends a NAK to the receiver
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="selectQuizOption(this, true, 'Correct! In GBN, the sender uses a single timer for the oldest in-flight packet. If this timer expires, the sender goes back and retransmits ALL packets currently transmitted but unacknowledged in the window [send_base, nextseqnum - 1].')">
+        <span>C.</span> Retransmits all unacknowledged packets currently in the window
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="selectQuizOption(this, false, 'A packet timeout is a routine loss recovery event; it does not terminate the connection.')">
+        <span>D.</span> Closes the connection and starts a new 3-way handshake
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- PART II: WRITTEN & COMPUTATIONAL PROBLEMS (11-21) -->
+  <div style="display:flex; justify-content:space-between; align-items:center; margin:3rem 0 1.25rem 0; border-bottom:2px solid var(--border); padding-bottom:0.5rem;">
+    <div>
+      <h3 style="font-size:1.4rem; font-weight:800; color:var(--text-primary);">Part II — Written &amp; Analytical Problems</h3>
+      <p style="font-size:0.875rem; color:var(--text-muted);">Questions 11–21 &bull; Total: 20.0 Points &bull; Complete Step-by-Step Derivations</p>
+    </div>
+    <span class="interactive-badge" style="background:#ecfdf5; color:#047857;">11 Problems</span>
+  </div>
+
+  <!-- Q11: MATCHING WORD BANK -->
+  <div class="interactive-card" id="midterm-q11" style="margin-bottom:2rem;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:var(--primary);">Question 11 (2.5 points)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLOs 1, 2, 4, 7, 13</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Comprehensive Vocab</span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">0.25 pt per blank</span>
+    </div>
+    <p style="font-size:0.95rem; margin-bottom:1rem; color:var(--text-primary);">
+      Fill in each blank with the most appropriate networking term from the word bank below. Each term may be used at most once; some terms will remain unused.
+    </p>
+
+    <!-- WORD BANK CHIPS -->
+    <div style="background:var(--bg-elevated); border:1px solid var(--border); border-radius:8px; padding:1rem; margin-bottom:1.5rem;">
+      <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem;">Word Bank Options:</div>
+      <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+        <span class="word-chip">Botnet</span>
+        <span class="word-chip">Bring home</span>
+        <span class="word-chip">Congestion control</span>
+        <span class="word-chip">Cookie</span>
+        <span class="word-chip">Cumulative ACK</span>
+        <span class="word-chip">Encapsulation</span>
+        <span class="word-chip">Enter deep</span>
+        <span class="word-chip">Flow control</span>
+        <span class="word-chip">Internet Exchange Point (IXP)</span>
+        <span class="word-chip">Local DNS server</span>
+        <span class="word-chip">Negative acknowledgment (NAK)</span>
+        <span class="word-chip">Root DNS server</span>
+        <span class="word-chip">Spyware</span>
+        <span class="word-chip">Tier-1 ISP</span>
+        <span class="word-chip">Tracker</span>
+      </div>
+    </div>
+
+    <!-- 10 QUESTIONS LIST -->
+    <ol style="margin-left:1.5rem; font-size:0.925rem; line-height:2.2; color:var(--text-primary);">
+      <li>
+        Competing Internet service providers (ISPs) can directly interconnect and exchange peering traffic without transit fees at a(n) 
+        <input type="text" class="fill-blank-input" id="q11-1" placeholder="Type term..."> 
+        <span class="fill-feedback" id="fb-q11-1"></span>
+        <small style="color:var(--text-muted); display:block; font-size:0.78rem; line-height:1.2;">[Slide Ref: Ch 1 Slide 34]</small>
+      </li>
+      <li>
+        As an application message travels down the protocol stack at the sending host, each subsequent layer wraps the data with its own header fields. This fundamental architectural process is termed 
+        <input type="text" class="fill-blank-input" id="q11-2" placeholder="Type term..."> 
+        <span class="fill-feedback" id="fb-q11-2"></span>
+        <small style="color:var(--text-muted); display:block; font-size:0.78rem; line-height:1.2;">[Slide Ref: Ch 1 Slide 68]</small>
+      </li>
+      <li>
+        A compromised host malware-infected and remotely coordinated by a malicious actor can be enrolled into a(n) 
+        <input type="text" class="fill-blank-input" id="q11-3" placeholder="Type term..."> 
+        used to launch distributed denial-of-service (DDoS) flood attacks.
+        <span class="fill-feedback" id="fb-q11-3"></span>
+        <small style="color:var(--text-muted); display:block; font-size:0.78rem; line-height:1.2;">[Slide Ref: Ch 1 Slide 73]</small>
+      </li>
+      <li>
+        Because core HTTP transactions are stateless, an online service can track client user sessions by issuing a unique identifier stored by the browser and echoed in future requests, known as a(n) 
+        <input type="text" class="fill-blank-input" id="q11-4" placeholder="Type term...">.
+        <span class="fill-feedback" id="fb-q11-4"></span>
+        <small style="color:var(--text-muted); display:block; font-size:0.78rem; line-height:1.2;">[Slide Ref: Ch 2 Slide 33]</small>
+      </li>
+      <li>
+        When a host issues a DNS query, the request is initially dispatched to the network's 
+        <input type="text" class="fill-blank-input" id="q11-5" placeholder="Type term..."> 
+        (default name server), which caches recent translations and acts as a resolving proxy.
+        <span class="fill-feedback" id="fb-q11-5"></span>
+        <small style="color:var(--text-muted); display:block; font-size:0.78rem; line-height:1.2;">[Slide Ref: Ch 2 Slide 53]</small>
+      </li>
+      <li>
+        The CDN server placement philosophy that deploys server clusters directly into hundreds of access networks close to subscribers is called 
+        <input type="text" class="fill-blank-input" id="q11-6" placeholder="Type term...">.
+        <span class="fill-feedback" id="fb-q11-6"></span>
+        <small style="color:var(--text-muted); display:block; font-size:0.78rem; line-height:1.2;">[Slide Ref: Ch 2 Slide 90]</small>
+      </li>
+      <li>
+        In the BitTorrent protocol, a new peer wishing to join an active swarm registers with the central 
+        <input type="text" class="fill-blank-input" id="q11-7" placeholder="Type term..."> 
+        to obtain an initial bootstrap list of participating peers.
+        <span class="fill-feedback" id="fb-q11-7"></span>
+        <small style="color:var(--text-muted); display:block; font-size:0.78rem; line-height:1.2;">[Slide Ref: Ch 2 Slide 82]</small>
+      </li>
+      <li>
+        The transport mechanism wherein the receiver dynamically advertises available buffer space (rwnd) to prevent the sender from overflowing its socket buffer is called 
+        <input type="text" class="fill-blank-input" id="q11-8" placeholder="Type term...">.
+        <span class="fill-feedback" id="fb-q11-8"></span>
+        <small style="color:var(--text-muted); display:block; font-size:0.78rem; line-height:1.2;">[Slide Ref: Ch 3 Slide 73]</small>
+      </li>
+      <li>
+        The transport mechanism wherein the sender throttles its transmission rate in response to router queue buildup and dropped segments across the core network is called 
+        <input type="text" class="fill-blank-input" id="q11-9" placeholder="Type term...">.
+        <span class="fill-feedback" id="fb-q11-9"></span>
+        <small style="color:var(--text-muted); display:block; font-size:0.78rem; line-height:1.2;">[Slide Ref: Ch 3 Slide 75]</small>
+      </li>
+      <li>
+        A TCP acknowledgment number reflects the sequence number of the next expected byte, thereby acknowledging all previous contiguous received bytes. This is termed a(n) 
+        <input type="text" class="fill-blank-input" id="q11-10" placeholder="Type term...">.
+        <span class="fill-feedback" id="fb-q11-10"></span>
+        <small style="color:var(--text-muted); display:block; font-size:0.78rem; line-height:1.2;">[Slide Ref: Ch 3 Slide 60]</small>
+      </li>
+    </ol>
+
+    <div style="display:flex; gap:0.75rem; margin-top:1.5rem;">
+      <button class="btn-primary" onclick="checkWordBankQ11()">Check My Answers</button>
+      <button class="btn-secondary" onclick="revealSolution('sol-q11')">Show Answer Key</button>
+      <button class="btn-secondary" onclick="resetWordBankQ11()">Clear Inputs</button>
+    </div>
+
+    <!-- COLLAPSIBLE SOLUTION -->
+    <div id="sol-q11" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.5rem;">Official Answer Key &amp; Concept Map:</h4>
+      <table class="calc-table" style="width:100%; font-size:0.875rem;">
+        <tr><th style="width:10%;">Item</th><th style="width:30%;">Correct Term</th><th>Rationale &amp; Slide Reference</th></tr>
+        <tr><td>1</td><td><strong>Internet Exchange Point (IXP)</strong></td><td>Hub where distinct ISP autonomous systems peer directly. [Ch 1 Slide 34]</td></tr>
+        <tr><td>2</td><td><strong>Encapsulation</strong></td><td>Wrapping payload with protocol headers at each descending layer. [Ch 1 Slide 68]</td></tr>
+        <tr><td>3</td><td><strong>Botnet</strong></td><td>Network of zombie devices controlled via C&amp;C for DDoS attacks. [Ch 1 Slide 73]</td></tr>
+        <tr><td>4</td><td><strong>Cookie</strong></td><td>State tracking string stored by browser and echoed in HTTP headers. [Ch 2 Slide 33]</td></tr>
+        <tr><td>5</td><td><strong>Local DNS server</strong></td><td>First-hop resolving cache proxy for client name queries. [Ch 2 Slide 53]</td></tr>
+        <tr><td>6</td><td><strong>Enter deep</strong></td><td>Pushing CDN caches into tier-3 access networks close to consumers. [Ch 2 Slide 90]</td></tr>
+        <tr><td>7</td><td><strong>Tracker</strong></td><td>BitTorrent node maintaining the live peer directory for a torrent. [Ch 2 Slide 82]</td></tr>
+        <tr><td>8</td><td><strong>Flow control</strong></td><td>Receiver buffer protection mechanism via advertised rwnd. [Ch 3 Slide 73]</td></tr>
+        <tr><td>9</td><td><strong>Congestion control</strong></td><td>Network pipe protection throttling sender via cwnd. [Ch 3 Slide 75]</td></tr>
+        <tr><td>10</td><td><strong>Cumulative ACK</strong></td><td>One ACK confirms receipt of all bytes preceding the ACK number. [Ch 3 Slide 60]</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Q12: CIRCUIT VS PACKET SWITCHING -->
+  <div class="interactive-card" id="midterm-q12" style="margin-bottom:2rem;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:var(--primary);">Question 12 (1.5 points)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 2</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 1 Slides 24–27</span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">0.5 pt each (a, b, c)</span>
+    </div>
+    <div style="font-size:0.95rem; line-height:1.7; color:var(--text-primary); margin-bottom:1rem;">
+      A shared communication link has a bandwidth capacity of <strong><span class="math-inline">C = 1.2 Gbps</span></strong> (<span class="math-inline">1,200 Mbps</span>). Individual end users transmit at a rate of <strong><span class="math-inline">r = 40 Mbps</span></strong> when actively generating data, but each user is active only <strong><span class="math-inline">10\%</span></strong> of the time (<span class="math-inline">p = 0.10</span>).
+    </div>
+
+    <div style="margin-bottom:1rem; padding-left:1rem; border-left:3px solid var(--border);">
+      <p><strong>(a)</strong> With <em>circuit switching</em> (e.g., TDM or FDM), what is the maximum number of simultaneous users (<span class="math-inline">N</span>) that the link can support? Show your working. (0.5 point)</p>
+      <p style="margin-top:0.75rem;"><strong>(b)</strong> Explain clearly why <em>packet switching</em> allows significantly more users than your answer in (a) to comfortably share this link. (0.5 point)</p>
+      <p style="margin-top:0.75rem;"><strong>(c)</strong> State one major disadvantage of packet switching compared with circuit switching. (0.5 point)</p>
+    </div>
+
+    <button class="btn-primary" onclick="toggleSolution('sol-q12')">Toggle Step-by-Step Solution</button>
+
+    <div id="sol-q12" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.75rem;">Complete Analytical Walkthrough:</h4>
+      
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(a) Circuit Switching User Capacity:</p>
+        <p>In circuit switching, dedicated bandwidth must be permanently allocated to each user whether active or silent. No statistical overbooking is permitted.</p>
+        <div class="math-display">
+          N = <span class="math-frac"><span class="math-num">Total Link Bandwidth</span><span class="math-denom">Per-User Active Rate</span></span> = <span class="math-frac"><span class="math-num">1.2 Gbps</span><span class="math-denom">40 Mbps</span></span> = <span class="math-frac"><span class="math-num">1,200 Mbps</span><span class="math-denom">40 Mbps</span></span> = 30 users
+        </div>
+        <p><em>Conclusion:</em> Circuit switching supports at most <strong>30 users</strong>.</p>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(b) Why Packet Switching Accommodates More Users (Statistical Multiplexing):</p>
+        <p>
+          Users generate <strong>bursty traffic</strong> and are idle 90% of the time. In packet switching, resources are allocated <strong>on-demand</strong> rather than reserved permanently. By the Binomial Distribution, if 100 users share the link, the probability that more than 30 are active simultaneously is given by:
+        </p>
+        <div class="math-display">
+          P(more than 30 users active) = &sum;<sub>k=31</sub><sup>100</sup> <span class="math-frac"><span class="math-num">100</span><span class="math-denom">k</span></span> (0.10)<sup>k</sup> (0.90)<sup>100-k</sup> < 0.0001
+        </div>
+        <p>
+          Because the probability of simultaneous burst collision is virtually zero, packet switching allows 60–100 users to enjoy full 40 Mbps bursts almost 100% of the time without congestion.
+        </p>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(c) Disadvantage of Packet Switching:</p>
+        <p>
+          <strong>Variable queuing delays and unpredictable packet loss:</strong> When unexpected traffic surges occur simultaneously, router buffers fill up, introducing jitter and dropping packets upon buffer overflow. Circuit switching, in contrast, provides guaranteed, deterministic bandwidth and zero packet loss.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q13: STORE AND FORWARD NODAL DELAY -->
+  <div class="interactive-card" id="midterm-q13" style="margin-bottom:2rem;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:var(--primary);">Question 13 (2 points)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 3 | SO1</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 1 Slides 42–44</span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Total: 2.0 pts</span>
+    </div>
+    <div style="font-size:0.95rem; line-height:1.7; color:var(--text-primary); margin-bottom:1rem;">
+      Host A transmits a single packet of size <strong><span class="math-inline">L = 16,000 bits</span></strong> to Host B across a two-router path:
+      <div class="math-display">Host A \xrightarrow{Link 1} Router R1 \xrightarrow{Link 2} Router R2 \xrightarrow{Link 3} Host B</div>
+      The propagation speed across all physical media is <strong><span class="math-inline">s = 2 &times; 10<sup>8</sup> m/s</span></strong>. Packets are forwarded using store-and-forward transmission. Neglect nodal processing and queuing delays.
+    </div>
+
+    <!-- TOPOLOGY DIAGRAM -->
+    <div class="svg-figure" style="text-align:center; padding:1.25rem; background:var(--bg-elevated); border-radius:8px; margin-bottom:1.25rem;">
+      <svg viewBox="0 0 720 120" style="width:100%; max-width:700px; height:auto; font-family:inherit;">
+        <!-- Host A -->
+        <rect x="20" y="35" width="85" height="50" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+        <text x="62" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">Host A</text>
+        
+        <!-- Link 1 -->
+        <line x1="105" y1="60" x2="235" y2="60" stroke="#64748b" stroke-width="3"/>
+        <text x="170" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">Link 1: R1 = 4 Mbps</text>
+        <text x="170" y="80" text-anchor="middle" font-size="11" fill="#64748b">d1 = 20 km</text>
+
+        <!-- Router R1 -->
+        <circle cx="260" cy="60" r="25" fill="#f8fafc" stroke="#10b981" stroke-width="2"/>
+        <text x="260" y="65" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">R1</text>
+
+        <!-- Link 2 -->
+        <line x1="285" y1="60" x2="435" y2="60" stroke="#64748b" stroke-width="3"/>
+        <text x="360" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">Link 2: R2 = 16 Mbps</text>
+        <text x="360" y="80" text-anchor="middle" font-size="11" fill="#64748b">d2 = 2,000 km</text>
+
+        <!-- Router R2 -->
+        <circle cx="460" cy="60" r="25" fill="#f8fafc" stroke="#10b981" stroke-width="2"/>
+        <text x="460" y="65" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">R2</text>
+
+        <!-- Link 3 -->
+        <line x1="485" y1="60" x2="615" y2="60" stroke="#64748b" stroke-width="3"/>
+        <text x="550" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">Link 3: R3 = 8 Mbps</text>
+        <text x="550" y="80" text-anchor="middle" font-size="11" fill="#64748b">d3 = 40 km</text>
+
+        <!-- Host B -->
+        <rect x="615" y="35" width="85" height="50" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+        <text x="657" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">Host B</text>
+      </svg>
+    </div>
+
+    <div style="margin-bottom:1rem; padding-left:1rem; border-left:3px solid var(--border); font-size:0.9rem;">
+      <p><strong>(a)</strong> Compute the transmission delay on each of the three links. (0.75 points)</p>
+      <p style="margin-top:0.5rem;"><strong>(b)</strong> Compute the propagation delay on each of the three links. (0.75 points)</p>
+      <p style="margin-top:0.5rem;"><strong>(c)</strong> What is the total end-to-end delay from the moment Host A starts transmitting until Host B has fully received the entire packet? (0.5 point)</p>
+    </div>
+
+    <button class="btn-primary" onclick="toggleSolution('sol-q13')">Toggle Step-by-Step Solution</button>
+
+    <div id="sol-q13" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.75rem;">Complete Delay Calculation Table &amp; Derivations:</h4>
+      
+      <table class="calc-table" style="width:100%; margin-bottom:1rem; font-size:0.875rem;">
+        <thead>
+          <tr>
+            <th>Link Segment</th>
+            <th>(a) Transmission Delay: <span class="math-inline">d<sub>trans</sub> = L / R</span></th>
+            <th>(b) Propagation Delay: <span class="math-inline">d<sub>prop</sub> = d / s</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Link 1</strong> (<span class="math-inline">A &rarr; R1</span>)</td>
+            <td><div class="math-display"><span class="math-frac"><span class="math-num">16,000 bits</span><span class="math-denom">4 &times; 10<sup>6</sup> bps</span></span> = 0.004 s = <strong>4.0 ms</strong></div></td>
+            <td><div class="math-display"><span class="math-frac"><span class="math-num">20,000 m</span><span class="math-denom">2 &times; 10<sup>8</sup> m/s</span></span> = 0.0001 s = <strong>0.1 ms</strong></div></td>
+          </tr>
+          <tr>
+            <td><strong>Link 2</strong> (<span class="math-inline">R1 &rarr; R2</span>)</td>
+            <td><div class="math-display"><span class="math-frac"><span class="math-num">16,000 bits</span><span class="math-denom">16 &times; 10<sup>6</sup> bps</span></span> = 0.001 s = <strong>1.0 ms</strong></div></td>
+            <td><div class="math-display"><span class="math-frac"><span class="math-num">2,000,000 m</span><span class="math-denom">2 &times; 10<sup>8</sup> m/s</span></span> = 0.010 s = <strong>10.0 ms</strong></div></td>
+          </tr>
+          <tr>
+            <td><strong>Link 3</strong> (<span class="math-inline">R2 &rarr; B</span>)</td>
+            <td><div class="math-display"><span class="math-frac"><span class="math-num">16,000 bits</span><span class="math-denom">8 &times; 10<sup>6</sup> bps</span></span> = 0.002 s = <strong>2.0 ms</strong></div></td>
+            <td><div class="math-display"><span class="math-frac"><span class="math-num">40,000 m</span><span class="math-denom">2 &times; 10<sup>8</sup> m/s</span></span> = 0.0002 s = <strong>0.2 ms</strong></div></td>
+          </tr>
+          <tr style="background:var(--bg-elevated); font-weight:700;">
+            <td><strong>Total per column:</strong></td>
+            <td><strong><span class="math-inline">&sum; d<sub>trans</sub> = 7.0 ms</span></strong></td>
+            <td><strong><span class="math-inline">&sum; d<sub>prop</sub> = 10.3 ms</span></strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(c) Total End-to-End Delay:</p>
+        <p>Because each intermediate router implements <strong>store-and-forward transmission</strong>, a router must receive all 16,000 bits before it can begin transmitting onto the next outbound link:</p>
+        <div class="math-display">
+          d<sub>end-to-end</sub> = &sum;<sub>i=1</sub><sup>3</sup> d<sub>trans, i</sub> + &sum;<sub>i=1</sub><sup>3</sup> d<sub>prop, i</sub> = (4.0 + 1.0 + 2.0) + (0.1 + 10.0 + 0.2) = 7.0 ms + 10.3 ms = <strong>17.3 ms</strong>
+        </div>
+        <p><em>Final Answer:</em> <strong>17.3 ms</strong> (or <strong>0.0173 seconds</strong>).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q14: THROUGHPUT & BOTTLENECK LINK -->
+  <div class="interactive-card" id="midterm-q14" style="margin-bottom:2rem;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:var(--primary);">Question 14 (1.5 points)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 3 | SO1</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 1 Slides 56–58</span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">0.5 pt each</span>
+    </div>
+    <div style="font-size:0.95rem; line-height:1.7; color:var(--text-primary); margin-bottom:1rem;">
+      Twelve distinct origin servers each concurrently transmit a file to twelve distinct clients (12 independent server-client pairs). All 12 connections fairly and equally share a common core backbone link of capacity <strong><span class="math-inline">R = 240 Mbps</span></strong>. Each server connects to the backbone via an access link of <strong><span class="math-inline">R<sub>s</sub> = 30 Mbps</span></strong>, and each client connects via an access link of <strong><span class="math-inline">R<sub>c</sub> = 40 Mbps</span></strong>. Ignore all other traffic.
+    </div>
+
+    <!-- DIAGRAM -->
+    <div class="svg-figure" style="text-align:center; padding:1.25rem; background:var(--bg-elevated); border-radius:8px; margin-bottom:1.25rem;">
+      <svg viewBox="0 0 680 130" style="width:100%; max-width:650px; height:auto; font-family:inherit;">
+        <!-- 12 Servers Box -->
+        <rect x="20" y="20" width="100" height="90" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+        <text x="70" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">12 Servers</text>
+        <text x="70" y="75" text-anchor="middle" font-size="10" fill="#64748b">Rs = 30 Mbps ea</text>
+
+        <!-- Ingress Lines -->
+        <line x1="120" y1="45" x2="210" y2="65" stroke="#94a3b8" stroke-width="2"/>
+        <line x1="120" y1="65" x2="210" y2="65" stroke="#94a3b8" stroke-width="2"/>
+        <line x1="120" y1="85" x2="210" y2="65" stroke="#94a3b8" stroke-width="2"/>
+
+        <!-- Ingress Router -->
+        <circle cx="225" cy="65" r="18" fill="#f8fafc" stroke="#10b981" stroke-width="2"/>
+
+        <!-- Shared Backbone -->
+        <line x1="243" y1="65" x2="437" y2="65" stroke="#ef4444" stroke-width="5"/>
+        <text x="340" y="50" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">Shared Backbone Link</text>
+        <text x="340" y="90" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">R = 240 Mbps (shared by 12)</text>
+
+        <!-- Egress Router -->
+        <circle cx="455" cy="65" r="18" fill="#f8fafc" stroke="#10b981" stroke-width="2"/>
+
+        <!-- Egress Lines -->
+        <line x1="470" y1="65" x2="560" y2="45" stroke="#94a3b8" stroke-width="2"/>
+        <line x1="470" y1="65" x2="560" y2="65" stroke="#94a3b8" stroke-width="2"/>
+        <line x1="470" y1="65" x2="560" y2="85" stroke="#94a3b8" stroke-width="2"/>
+
+        <!-- 12 Clients Box -->
+        <rect x="560" y="20" width="100" height="90" rx="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2"/>
+        <text x="610" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">12 Clients</text>
+        <text x="610" y="75" text-anchor="middle" font-size="10" fill="#64748b">Rc = 40 Mbps ea</text>
+      </svg>
+    </div>
+
+    <div style="margin-bottom:1rem; padding-left:1rem; border-left:3px solid var(--border); font-size:0.9rem;">
+      <p><strong>(a)</strong> What is the end-to-end throughput achieved by each individual connection? (0.5 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(b)</strong> Which link is the bottleneck link? Justify your answer briefly. (0.5 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(c)</strong> How long does it take for each client to completely receive a <strong>60 MB</strong> file? (Use standard networking convention <span class="math-inline">1 MB = 10<sup>6</sup> bytes</span>). (0.5 point)</p>
+    </div>
+
+    <button class="btn-primary" onclick="toggleSolution('sol-q14')">Toggle Step-by-Step Solution</button>
+
+    <div id="sol-q14" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.75rem;">Complete Throughput &amp; Transfer Walkthrough:</h4>
+      
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(a) End-to-End Throughput per Connection:</p>
+        <p>Each connection traverses three sequential link segments: server access (<span class="math-inline">R<sub>s</sub></span>), shared core link (<span class="math-inline">R/12</span>), and client access (<span class="math-inline">R<sub>c</sub></span>).</p>
+        <div class="math-display">
+          Throughput = min( R<sub>s</sub>, &nbsp;R<sub>c</sub>, &nbsp;<span class="math-frac"><span class="math-num">R</span><span class="math-denom">12</span></span> ) = min( 30 Mbps, &nbsp;40 Mbps, &nbsp;<span class="math-frac"><span class="math-num">240 Mbps</span><span class="math-denom">12</span></span> ) = min(30, 40, 20) = <strong>20 Mbps</strong>
+        </div>
+        <p><em>Answer:</em> <strong>20 Mbps</strong>.</p>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(b) Bottleneck Link Identification:</p>
+        <p>
+          The <strong>shared core backbone link</strong> is the bottleneck link. While its raw aggregate capacity is high (240 Mbps), when fairly shared among 12 competing flows, its effective per-connection bandwidth of 20 Mbps is the smallest value along the entire transmission path.
+        </p>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(c) File Transfer Time Calculation:</p>
+        <div class="math-display">
+          File size in bits  (F) = 60 MB &times; 10<sup>6</sup> bytes/MB &times; 8 bits/byte = 480 &times; 10<sup>6</sup> bits = 480 Mbits
+        </div>
+        <div class="math-display">
+          Transfer Time  (T) = <span class="math-frac"><span class="math-num">F</span><span class="math-denom">Throughput</span></span> = <span class="math-frac"><span class="math-num">480 Mbits</span><span class="math-denom">20 Mbps</span></span> = <strong>24 seconds</strong>
+        </div>
+        <p><em>Answer:</em> <strong>24 seconds</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q15: HTTP PULL VS SMTP PUSH -->
+  <div class="interactive-card" id="midterm-q15" style="margin-bottom:2rem;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:var(--primary);">Question 15 (1 point)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 4</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 2 Slides 49–51</span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">0.5 pt each (a, b)</span>
+    </div>
+    <div style="font-size:0.95rem; line-height:1.7; color:var(--text-primary); margin-bottom:1rem;">
+      Alice sends an email message across the Internet to Bob.
+    </div>
+
+    <div style="margin-bottom:1rem; padding-left:1rem; border-left:3px solid var(--border); font-size:0.9rem;">
+      <p><strong>(a)</strong> In protocol taxonomy, HTTP is described as a <em>"pull"</em> protocol, whereas SMTP is described as a <em>"push"</em> protocol. Explain this fundamental difference clearly. (0.5 point)</p>
+      <p style="margin-top:0.75rem;"><strong>(b)</strong> Bob's mail user agent (client) does not use SMTP to retrieve the email message from Bob's incoming mail server. Why not? Name at least one protocol used for this retrieval step. (0.5 point)</p>
+    </div>
+
+    <button class="btn-primary" onclick="toggleSolution('sol-q15')">Toggle Step-by-Step Solution</button>
+
+    <div id="sol-q15" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.75rem;">Complete Architectural Comparison:</h4>
+      
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(a) Pull vs. Push Protocol Distinction:</p>
+        <ul style="margin-left:1.25rem;">
+          <li><strong>HTTP is a Pull protocol:</strong> The consumer (client) initiates the TCP connection and issues a request to <em>pull</em> (retrieve) an object from the server. The client dictates when data is transferred.</li>
+          <li><strong>SMTP is a Push protocol:</strong> The sending host initiates the TCP connection and <em>pushes</em> the message/file onto the receiving server. The sender controls the timing of data delivery.</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(b) Why SMTP Cannot Be Used for Mail Retrieval &amp; Valid Protocols:</p>
+        <p>
+          <strong>Why not:</strong> SMTP was explicitly designed as a push protocol to transfer messages forward from sender to sender's server, and between mail servers. It contains no commands to pull messages from a mailbox, authenticate a mailbox owner, list individual messages, or organize mail into folders.
+        </p>
+        <p style="margin-top:0.5rem;">
+          <strong>Retrieval Protocols:</strong> <strong>POP3</strong> (Post Office Protocol v3), <strong>IMAP</strong> (Internet Message Access Protocol), or <strong>HTTP</strong> (Web-based email).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q16: WEB CACHE UTILIZATION (REPORTED BY STUDENTS) -->
+  <div class="interactive-card" id="midterm-q16" style="margin-bottom:2rem; border-left:5px solid #f59e0b;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:#b45309;">Question 16 (2 points)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLOs 3, 4 | SO1</span>
+        <span style="background:#fef3c7; color:#92400e; font-weight:700; padding:2px 8px; border-radius:4px; font-size:0.75rem; border:1px solid #fcd34d;">
+          ⚠️ [REPORTED BY STUDENTS: Kurose &amp; Ross 6th Ed. §2.2.5 — Not in Lecture Slides!]
+        </span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">0.5 pt each (a, b, c, d)</span>
+    </div>
+    
+    <div style="background:#fffbeb; padding:0.75rem 1rem; border-radius:6px; margin-bottom:1rem; font-size:0.85rem; color:#92400e;">
+      <strong>⚠️ Student Report Notice:</strong> It was reported by some students that this type of quantitative Web caching question appeared on exams, even though the numerical example is skipped in the lecture slides (which jump from slide 2-37 straight to 2-42). Make sure to study this textbook calculation (§2.2.5) thoroughly!
+    </div>
+
+    <div style="font-size:0.95rem; line-height:1.7; color:var(--text-primary); margin-bottom:1rem;">
+      An institutional campus network is connected to the public Internet through a dedicated <strong><span class="math-inline">10 Mbps</span></strong> access link. The campus browsers generate an average arrival rate of <strong><span class="math-inline">18 requests/sec</span></strong> directed to origin web servers. The average web object size is <strong><span class="math-inline">500 Kbits</span></strong>. The Internet delay (from the institutional gateway router out to any origin server and back) is <strong><span class="math-inline">2.0 seconds</span></strong>. Assume the internal 1 Gbps campus LAN delay is negligible.
+    </div>
+
+    <div style="margin-bottom:1rem; padding-left:1rem; border-left:3px solid var(--border); font-size:0.9rem;">
+      <p><strong>(a)</strong> What is the average data rate arriving to the browsers, and what is the utilization of the access link? (0.5 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(b)</strong> Based on your answer in (a), explain what happens to the packet queuing delay on the access link. (0.5 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(c)</strong> A local Web proxy cache with a hit rate of <strong><span class="math-inline">h = 0.40</span></strong> (40%) is installed on the institutional LAN. What is the new utilization of the access link? (0.5 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(d)</strong> Assume that a request satisfied by an origin server takes <strong><span class="math-inline">2.02 s</span></strong> on average, while a request satisfied locally by the cache takes only <strong><span class="math-inline">0.01 s</span></strong>. What is the overall average response time with the cache? (0.5 point)</p>
+    </div>
+
+    <button class="btn-primary" onclick="toggleSolution('sol-q16')">Toggle Step-by-Step Solution</button>
+
+    <div id="sol-q16" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.75rem;">Complete Quantitative Web Cache Walkthrough:</h4>
+      
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(a) Average Arrival Rate &amp; Link Utilization:</p>
+        <div class="math-display">
+          Data Arrival Rate = 18 req/sec &times; 500 Kbits/req = 9,000 Kbps = <strong>9.0 Mbps</strong>
+        </div>
+        <div class="math-display">
+          Utilization  (&Delta;) = <span class="math-frac"><span class="math-num">Arrival Rate</span><span class="math-denom">Capacity  R</span></span> = <span class="math-frac"><span class="math-num">9.0 Mbps</span><span class="math-denom">10.0 Mbps</span></span> = <strong>0.90</strong> &emsp; (90\%)
+        </div>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(b) Behavior of Access Link Delay:</p>
+        <p>
+          Because link utilization is <strong>0.90 (approaching 1)</strong>, queueing delay grows dramatically (non-linear queuing asymptote). Packets experience lengthy buffer waits, leading to severe congestion, high latency (tens of seconds), and eventual buffer overflow packet drops.
+        </p>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(c) New Access Link Utilization with 40% Hit Rate:</p>
+        <p>With a hit rate of <span class="math-inline">h = 0.40</span>, 40% of requests are fulfilled locally from the LAN cache without crossing the access link. Only <span class="math-inline">1 - h = 0.60</span> (60%) traverse the link:</p>
+        <div class="math-display">
+          New Data Rate = 0.60 &times; 9.0 Mbps = 5.4 Mbps
+        </div>
+        <div class="math-display">
+          New Utilization = <span class="math-frac"><span class="math-num">5.4 Mbps</span><span class="math-denom">10.0 Mbps</span></span> = <strong>0.54</strong> &emsp; (54\%)
+        </div>
+        <p><em>Impact:</em> The access link drops from dangerous near-saturation (90%) to a comfortable, stable operating level (54%).</p>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(d) Overall Average Response Time:</p>
+        <p>By the weighted probability average formula:</p>
+        <div class="math-display">
+          T<sub>avg</sub> = (h &times; T<sub>cache</sub>) + ((1 - h) &times; T<sub>origin</sub>) = (0.40 &times; 0.01 s) + (0.60 &times; 2.02 s) = 0.004 s + 1.212 s = <strong>1.216 seconds</strong>
+        </div>
+        <p><em>Conclusion:</em> The local cache reduces average user wait time from several minutes under congestion down to just <strong>1.216 seconds</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q17: HTTP NON-PERSISTENT VS PERSISTENT TIMING -->
+  <div class="interactive-card" id="midterm-q17" style="margin-bottom:2rem;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:var(--primary);">Question 17 (2.5 points)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 4 | SO1</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 2 Slides 27–31</span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Total: 2.5 pts</span>
+    </div>
+    <div style="font-size:0.95rem; line-height:1.7; color:var(--text-primary); margin-bottom:1rem;">
+      A user clicks on a hyperlink to a web page. The IP address of the target server is not cached, requiring a sequential DNS lookup that contacts three DNS servers one after the other, with RTTs of <strong><span class="math-inline">6 ms</span></strong>, <strong><span class="math-inline">14 ms</span></strong>, and <strong><span class="math-inline">20 ms</span></strong>.
+      The requested web page consists of a small base HTML file referencing <strong>8 very small images</strong> stored on the exact same origin server. The round-trip time between the client and the origin web server is <strong><span class="math-inline">RTT<sub>0</sub> = 25 ms</span></strong>. Neglect all packet transmission times.
+      How much total time elapses from the click until the browser has received the base file and all 8 images under each scenario?
+    </div>
+
+    <div style="margin-bottom:1rem; padding-left:1rem; border-left:3px solid var(--border); font-size:0.9rem;">
+      <p><strong>(a)</strong> Non-persistent HTTP with <em>no parallel</em> TCP connections? (1.0 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(b)</strong> Non-persistent HTTP with <em>up to 4 parallel</em> TCP connections? (0.75 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(c)</strong> Persistent HTTP with pipelining (browser sends requests for all 8 objects back-to-back over the same open connection)? (0.75 point)</p>
+    </div>
+
+    <button class="btn-primary" onclick="toggleSolution('sol-q17')">Toggle Step-by-Step Solution</button>
+
+    <div id="sol-q17" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.75rem;">Detailed HTTP Timing Derivations:</h4>
+      
+      <div style="background:var(--bg-secondary); padding:0.75rem 1rem; border-radius:6px; margin-bottom:1rem; font-size:0.9rem;">
+        <strong>Common DNS Phase:</strong> Contacting 3 servers sequentially takes:
+        <div class="math-display">T<sub>DNS</sub> = 6 ms + 14 ms + 20 ms = <strong>40 ms</strong></div>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(a) Non-Persistent HTTP without Parallel Connections:</p>
+        <p>Total objects = 1 base HTML + 8 embedded objects = <strong>9 objects</strong>.</p>
+        <p>In non-persistent mode, each object requires 1 RTT for the TCP 3-way handshake + 1 RTT for the HTTP GET request/response <span class="math-inline">= 2 &times; RTT<sub>0</sub> = 2 &times; 25 = 50 ms</span>.</p>
+        <div class="math-display">
+          T = T<sub>DNS</sub> + (9 &times; 2 &times; RTT<sub>0</sub>) = 40 ms + (9 &times; 50 ms) = 40 + 450 = <strong>490 ms</strong>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(b) Non-Persistent HTTP with up to 4 Parallel Connections:</p>
+        <p>1. Base HTML must be fetched first sequentially so browser can parse references: <span class="math-inline">2 &times; RTT<sub>0</sub> = 50 ms</span>.</p>
+        <p>2. The 8 images are downloaded across up to 4 parallel sockets: <span class="math-inline">\lceil 8 / 4 \rceil = 2 parallel rounds</span>.</p>
+        <p>Each parallel round takes <span class="math-inline">2 &times; RTT<sub>0</sub> = 50 ms</span>. Time for 8 images <span class="math-inline">= 2 &times; 50 ms = 100 ms</span>.</p>
+        <div class="math-display">
+          T = T<sub>DNS</sub> + 50 ms (base) + 100 ms (images) = 40 + 50 + 100 = <strong>190 ms</strong>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(c) Persistent HTTP with Pipelining:</p>
+        <p>1. TCP handshake (1 RTT) + Base HTML request/response (1 RTT) <span class="math-inline">= 2 &times; RTT<sub>0</sub> = 50 ms</span>.</p>
+        <p>2. With pipelining over the open TCP connection, all 8 requests are sent back-to-back immediately. The server sends back all 8 responses in 1 single RTT (<span class="math-inline">RTT<sub>0</sub> = 25 ms</span>).</p>
+        <div class="math-display">
+          T = T<sub>DNS</sub> + 50 ms + 25 ms = 40 + 50 + 25 = <strong>115 ms</strong>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem;">
+          *(Note: Without pipelining, each of the 8 objects would take 1 serial RTT over the open socket: <span class="math-inline">40 + 50 + 8 &times; 25 = 290 ms</span>).*
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q18: 16-BIT UDP INTERNET CHECKSUM -->
+  <div class="interactive-card" id="midterm-q18" style="margin-bottom:2rem;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:var(--primary);">Question 18 (1.5 points)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 12 | SO1</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 3 Slides 19–21</span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Total: 1.5 pts</span>
+    </div>
+    <div style="font-size:0.95rem; line-height:1.7; color:var(--text-primary); margin-bottom:1rem;">
+      UDP uses the Internet Checksum algorithm to detect bit errors. Compute the Internet Checksum of the following two 16-bit binary words:
+      <div style="font-family:monospace; margin:0.5rem 0 1rem 1rem; font-size:1rem;">
+        Word 1: 1 0 1 0 &nbsp; 1 1 0 0 &nbsp; 1 1 0 1 &nbsp; 0 0 1 1<br>
+        Word 2: 0 1 1 1 &nbsp; 0 1 1 0 &nbsp; 1 0 1 0 &nbsp; 1 1 0 1
+      </div>
+    </div>
+
+    <div style="margin-bottom:1rem; padding-left:1rem; border-left:3px solid var(--border); font-size:0.9rem;">
+      <p><strong>(a)</strong> Compute the sum after wraparound (end-around carry addition). (0.75 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(b)</strong> Compute the final 16-bit Checksum. (0.25 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(c)</strong> How does the receiver use the checksum to detect errors? Does it detect <em>every</em> error? Explain briefly. (0.5 point)</p>
+    </div>
+
+    <button class="btn-primary" onclick="toggleSolution('sol-q18')">Toggle Step-by-Step Solution</button>
+
+    <div id="sol-q18" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.75rem;">Complete 16-Bit Bitwise Calculation Table:</h4>
+      
+      <div style="overflow-x:auto;">
+        <table class="calc-table" style="width:100%; text-align:center; font-family:monospace; font-size:0.85rem;">
+          <thead>
+            <tr style="background:var(--bg-elevated);">
+              <th style="text-align:left;">Field</th>
+              <th style="color:#b91c1c;">C</th>
+              <th>15</th><th>14</th><th>13</th><th>12</th>
+              <th>11</th><th>10</th><th>9</th><th>8</th>
+              <th>7</th><th>6</th><th>5</th><th>4</th>
+              <th>3</th><th>2</th><th>1</th><th>0</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:left; font-weight:700;">Word 1</td>
+              <td>-</td>
+              <td>1</td><td>0</td><td>1</td><td>0</td>
+              <td>1</td><td>1</td><td>0</td><td>0</td>
+              <td>1</td><td>1</td><td>0</td><td>1</td>
+              <td>0</td><td>0</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+              <td style="text-align:left; font-weight:700;">Word 2</td>
+              <td>-</td>
+              <td>0</td><td>1</td><td>1</td><td>1</td>
+              <td>0</td><td>1</td><td>1</td><td>0</td>
+              <td>1</td><td>0</td><td>1</td><td>0</td>
+              <td>1</td><td>1</td><td>0</td><td>1</td>
+            </tr>
+            <tr style="border-top:2px solid var(--border);">
+              <td style="text-align:left; font-weight:700; color:var(--text-muted);">Raw Sum</td>
+              <td style="color:#b91c1c; font-weight:800;">1</td>
+              <td>0</td><td>0</td><td>1</td><td>0</td>
+              <td>0</td><td>0</td><td>1</td><td>1</td>
+              <td>0</td><td>1</td><td>1</td><td>1</td>
+              <td>1</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+              <td style="text-align:left; font-weight:700; color:#b91c1c;">+ Carry Wraparound</td>
+              <td></td>
+              <td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td><td style="color:#b91c1c; font-weight:800;">1</td>
+            </tr>
+            <tr style="background:#eff6ff; font-weight:800; color:#1d4ed8;">
+              <td style="text-align:left;">(a) Sum after wraparound</td>
+              <td></td>
+              <td>0</td><td>0</td><td>1</td><td>0</td>
+              <td>0</td><td>0</td><td>1</td><td>1</td>
+              <td>0</td><td>1</td><td>1</td><td>1</td>
+              <td>1</td><td>0</td><td>0</td><td>1</td>
+            </tr>
+            <tr style="background:#ecfdf5; font-weight:800; color:#047857;">
+              <td style="text-align:left;">(b) Checksum (1's comp)</td>
+              <td></td>
+              <td>1</td><td>1</td><td>0</td><td>1</td>
+              <td>1</td><td>1</td><td>0</td><td>0</td>
+              <td>1</td><td>0</td><td>0</td><td>0</td>
+              <td>0</td><td>1</td><td>1</td><td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-top:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(c) Verification &amp; Error Detection Capability:</p>
+        <ul style="margin-left:1.25rem;">
+          <li><strong>Receiver Error Check:</strong> The receiver adds Word 1 + Word 2 + Checksum using 1's complement addition. If no errors occurred, the resulting sum must be all 1s (<code>0xFFFF</code>). If even a single bit is 0, an error has occurred.</li>
+          <li><strong>Will every error be detected? No!</strong> If multiple bit errors flip in opposite directions (e.g. one bit flips from 0 to 1 and another in the same column flips from 1 to 0), the column sum remains identical, and the checksum fails to detect the corruption.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q19: RDT 3.0 UTILIZATION & PIPELINING -->
+  <div class="interactive-card" id="midterm-q19" style="margin-bottom:2rem;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:var(--primary);">Question 19 (1.5 points)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 6 | SO1</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 3 Slides 38–41</span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">0.5 pt each (a, b, c)</span>
+    </div>
+    <div style="font-size:0.95rem; line-height:1.7; color:var(--text-primary); margin-bottom:1rem;">
+      Two hosts communicate over a channel with a transmission rate of <strong><span class="math-inline">R = 1 Gbps</span></strong> (<span class="math-inline">10<sup>9</sup> bps</span>) and round-trip time <strong><span class="math-inline">RTT = 30 ms</span></strong> (<span class="math-inline">0.030 s</span>). The sender transmits packets of size <strong><span class="math-inline">L = 1,500 bytes</span></strong> (<span class="math-inline">12,000 bits</span>). Ignore the transmission time of ACK packets.
+    </div>
+
+    <div style="margin-bottom:1rem; padding-left:1rem; border-left:3px solid var(--border); font-size:0.9rem;">
+      <p><strong>(a)</strong> Using stop-and-wait protocol <code>rdt3.0</code>, what is the sender utilization <span class="math-inline">U<sub>sender</sub></span>? (0.5 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(b)</strong> What is the effective throughput (in bits/sec and kbps) achieved with stop-and-wait? (0.5 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(c)</strong> If a pipelined sliding-window protocol allows <strong><span class="math-inline">N = 1,500 packets</span></strong> to be in flight at the same time, what is the new sender utilization? (0.5 point)</p>
+    </div>
+
+    <button class="btn-primary" onclick="toggleSolution('sol-q19')">Toggle Step-by-Step Solution</button>
+
+    <div id="sol-q19" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.75rem;">Complete Utilization &amp; Pipelining Walkthrough:</h4>
+      
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(a) Stop-and-Wait Utilization:</p>
+        <div class="math-display">
+          d<sub>trans</sub> = <span class="math-frac"><span class="math-num">L</span><span class="math-denom">R</span></span> = <span class="math-frac"><span class="math-num">1,500 &times; 8 bits</span><span class="math-denom">10<sup>9</sup> bps</span></span> = <span class="math-frac"><span class="math-num">12,000</span><span class="math-denom">10<sup>9</sup></span></span> = 0.000012 s = 0.012 ms
+        </div>
+        <div class="math-display">
+          U<sub>sender</sub> = <span class="math-frac"><span class="math-num">d<sub>trans</sub></span><span class="math-denom">RTT + d<sub>trans</sub></span></span> = <span class="math-frac"><span class="math-num">0.012 ms</span><span class="math-denom">30 ms + 0.012 ms</span></span> = <span class="math-frac"><span class="math-num">0.012</span><span class="math-denom">30.012</span></span> &approx; <strong>0.0003998</strong> &emsp; (&approx; 0.040\%)
+        </div>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(b) Stop-and-Wait Effective Throughput:</p>
+        <div class="math-display">
+          Throughput = U<sub>sender</sub> &times; R = 0.0003998 &times; 10<sup>9</sup> bps &approx; <strong>399,840 bps</strong> &approx; <strong>400 kbps</strong>
+        </div>
+        <p><em>Observation:</em> Over a 1,000,000 kbps (1 Gbps) physical link, stop-and-wait achieves only 400 kbps (wasting 99.96% of link capacity)!</p>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(c) Pipelined Protocol with Window <span class="math-inline">N = 1,500</span> Packets:</p>
+        <div class="math-display">
+          U<sub>pipelined</sub> = <span class="math-frac"><span class="math-num">N &times; (L/R)</span><span class="math-denom">RTT + (L/R)</span></span> = <span class="math-frac"><span class="math-num">1,500 &times; 0.012 ms</span><span class="math-denom">30.012 ms</span></span> = <span class="math-frac"><span class="math-num">18.0 ms</span><span class="math-denom">30.012 ms</span></span> &approx; <strong>0.5998</strong> &emsp; (&approx; <strong>60.0\%</strong>)
+        </div>
+        <p><em>Conclusion:</em> Pipelining scales throughput by 1,500x, achieving ~600 Mbps throughput!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q20: TCP 3-WAY HANDSHAKE & 2-WAY FAILURE -->
+  <div class="interactive-card" id="midterm-q20" style="margin-bottom:2rem;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:var(--primary);">Question 20 (2 points)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 7 | SO1</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 3 Slides 65–70</span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">1.5 pt table, 0.5 pt essay</span>
+    </div>
+    <div style="font-size:0.95rem; line-height:1.7; color:var(--text-primary); margin-bottom:1rem;">
+      A TCP client chooses an initial sequence number <strong><span class="math-inline">x = 5,000</span></strong>, and the server chooses an initial sequence number <strong><span class="math-inline">y = 8,000</span></strong>.
+    </div>
+
+    <div style="margin-bottom:1rem; padding-left:1rem; border-left:3px solid var(--border); font-size:0.9rem;">
+      <p><strong>(a)</strong> Complete the table for the three segments of the TCP 3-way handshake. (1.5 points)</p>
+      <p style="margin-top:0.5rem;"><strong>(b)</strong> Explain clearly one major problem that could occur if TCP used only a 2-way handshake in an asynchronous real-world network. (0.5 point)</p>
+    </div>
+
+    <button class="btn-primary" onclick="toggleSolution('sol-q20')">Toggle Step-by-Step Solution</button>
+
+    <div id="sol-q20" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.75rem;">Complete 3-Way Handshake Walkthrough:</h4>
+      
+      <table class="calc-table" style="width:100%; margin-bottom:1rem; font-size:0.875rem;">
+        <thead>
+          <tr style="background:var(--bg-elevated);">
+            <th>Segment</th>
+            <th>SYN bit</th>
+            <th>ACK bit</th>
+            <th>Sequence Number</th>
+            <th>ACK Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. SYN</strong> (client &rarr; server)</td>
+            <td><strong style="color:var(--primary);">1</strong></td>
+            <td>0</td>
+            <td><strong>5,000</strong></td>
+            <td style="color:var(--text-muted);"><em>(not used)</em></td>
+          </tr>
+          <tr>
+            <td><strong>2. SYNACK</strong> (server &rarr; client)</td>
+            <td><strong style="color:var(--primary);">1</strong></td>
+            <td><strong style="color:var(--primary);">1</strong></td>
+            <td><strong>8,000</strong></td>
+            <td><strong>5,001</strong></td>
+          </tr>
+          <tr>
+            <td><strong>3. ACK</strong> (client &rarr; server)</td>
+            <td>0</td>
+            <td><strong style="color:var(--primary);">1</strong></td>
+            <td><strong>5,001</strong></td>
+            <td><strong>8,001</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(b) Why a 2-Way Handshake Fails (Half-Open Ghost Connections):</p>
+        <p>
+          In a real network, packet delivery delays and duplicate retransmissions occur. If a 2-way handshake were used, an old delayed duplicate SYN from a long-terminated or crashed client could eventually arrive at the server. Under a 2-way handshake, the server would immediately establish a connection upon receiving the SYN, allocate memory and buffer variables, and send a SYNACK. However, the client, having already closed, ignores this SYNACK. The server remains in an <strong>ESTABLISHED half-open state</strong> forever waiting for incoming data, consuming memory and port resources. The 3rd segment in the 3-way handshake ensures the client confirms it genuinely initiated the connection.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q21: TCP FAST RETRANSMIT & BYTE NUMBERING -->
+  <div class="interactive-card" id="midterm-q21" style="margin-bottom:2rem;">
+    <div class="interactive-header">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <span style="font-size:1.1rem; font-weight:800; color:var(--primary);">Question 21 (2 points)</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">CLO 7 | SO1</span>
+        <span style="font-size:0.75rem; background:var(--primary-light); color:var(--primary-text); padding:2px 8px; border-radius:4px; font-weight:600;">Slide Reference: Ch 3 Slides 62–64</span>
+      </div>
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">0.5 pt each (a, b, c, d)</span>
+    </div>
+    <div style="font-size:0.95rem; line-height:1.7; color:var(--text-primary); margin-bottom:1rem;">
+      Host A transmits five TCP segments back-to-back to Host B. The first segment has sequence number <strong>2,000</strong>, and each segment carries <strong>500 bytes</strong> of application data. Segment 2 is lost in the network. Segments 1, 3, 4, and 5 arrive at Host B in that order. Host B buffers out-of-order segments and sends an ACK immediately for every segment it receives. No ACK is lost, and Host A's retransmission timer does not expire during this scenario.
+    </div>
+
+    <!-- TIMELINE DIAGRAM -->
+    <div class="svg-figure" style="text-align:center; padding:1.25rem; background:var(--bg-elevated); border-radius:8px; margin-bottom:1.25rem;">
+      <svg viewBox="0 0 650 200" style="width:100%; max-width:600px; height:auto; font-family:inherit;">
+        <!-- Timelines -->
+        <line x1="120" y1="20" x2="120" y2="190" stroke="#2563eb" stroke-width="3"/>
+        <text x="120" y="15" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">Host A (Sender)</text>
+
+        <line x1="480" y1="20" x2="480" y2="190" stroke="#10b981" stroke-width="3"/>
+        <text x="480" y="15" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">Host B (Receiver)</text>
+
+        <!-- Seg 1 -->
+        <line x1="120" y1="35" x2="480" y2="60" stroke="#3b82f6" stroke-width="2"/>
+        <text x="300" y="42" text-anchor="middle" font-size="10" fill="#1e3a8a">Seg 1 (Seq 2000, 500B)</text>
+        <line x1="480" y1="60" x2="120" y2="85" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="300" y="77" text-anchor="middle" font-size="10" fill="#047857">ACK 2500</text>
+
+        <!-- Seg 2 LOST -->
+        <line x1="120" y1="50" x2="300" y2="67" stroke="#ef4444" stroke-width="2"/>
+        <text x="300" y="65" text-anchor="middle" font-size="14" fill="#ef4444">✖ (LOST)</text>
+
+        <!-- Seg 3 -->
+        <line x1="120" y1="65" x2="480" y2="90" stroke="#3b82f6" stroke-width="2"/>
+        <text x="340" y="102" text-anchor="middle" font-size="10" fill="#1e3a8a">Seg 3 (Seq 3000)</text>
+        <line x1="480" y1="90" x2="120" y2="115" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="260" y="107" text-anchor="middle" font-size="10" fill="#b45309">Dup ACK 1: 2500</text>
+
+        <!-- Seg 4 -->
+        <line x1="120" y1="80" x2="480" y2="105" stroke="#3b82f6" stroke-width="2"/>
+        <line x1="480" y1="105" x2="120" y2="130" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="260" y="122" text-anchor="middle" font-size="10" fill="#b45309">Dup ACK 2: 2500</text>
+
+        <!-- Seg 5 -->
+        <line x1="120" y1="95" x2="480" y2="120" stroke="#3b82f6" stroke-width="2"/>
+        <line x1="480" y1="120" x2="120" y2="145" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="260" y="137" text-anchor="middle" font-size="10" fill="#b45309">Dup ACK 3: 2500 &rarr; Fast Retransmit!</text>
+
+        <!-- Retransmitted Seg 2 -->
+        <line x1="120" y1="150" x2="480" y2="175" stroke="#8b5cf6" stroke-width="2.5"/>
+        <text x="300" y="167" text-anchor="middle" font-size="10" font-weight="700" fill="#6d28d9">Retransmit Seg 2 (Seq 2500)</text>
+
+        <line x1="480" y1="175" x2="120" y2="200" stroke="#10b981" stroke-width="2" stroke-dasharray="3,3"/>
+        <text x="300" y="195" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">Cumulative ACK 4500!</text>
+      </svg>
+    </div>
+
+    <div style="margin-bottom:1rem; padding-left:1rem; border-left:3px solid var(--border); font-size:0.9rem;">
+      <p><strong>(a)</strong> Write the Sequence Number of each of the five segments transmitted by Host A. (0.5 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(b)</strong> Write the ACK number that Host B sends after receiving Segments 1, 3, 4, and 5. (0.5 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(c)</strong> Which segment does Host A retransmit? What event triggers this retransmission, and what is this mechanism called? (0.5 point)</p>
+      <p style="margin-top:0.5rem;"><strong>(d)</strong> After Host B receives the retransmitted segment, what ACK number does it send? Why? (0.5 point)</p>
+    </div>
+
+    <button class="btn-primary" onclick="toggleSolution('sol-q21')">Toggle Step-by-Step Solution</button>
+
+    <div id="sol-q21" class="solution-box" style="display:none; margin-top:1rem;">
+      <h4 style="color:var(--primary-text); margin-bottom:0.75rem;">Complete Fast Retransmit Walkthrough:</h4>
+      
+      <table class="calc-table" style="width:100%; margin-bottom:1rem; font-size:0.875rem;">
+        <thead>
+          <tr style="background:var(--bg-elevated);">
+            <th>Segment</th>
+            <th>(a) Sequence Number</th>
+            <th>Bytes Carried</th>
+            <th>Arrival Status</th>
+            <th>(b) ACK Sent by Host B</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Segment 1</strong></td>
+            <td><strong>2,000</strong></td>
+            <td>2,000 – 2,499</td>
+            <td>Arrives safely</td>
+            <td><strong>ACK = 2,500</strong></td>
+          </tr>
+          <tr style="background:#fef2f2;">
+            <td><strong>Segment 2</strong></td>
+            <td><strong>2,500</strong></td>
+            <td>2,500 – 2,999</td>
+            <td style="color:#b91c1c; font-weight:700;">LOST</td>
+            <td><em>(None sent)</em></td>
+          </tr>
+          <tr>
+            <td><strong>Segment 3</strong></td>
+            <td><strong>3,000</strong></td>
+            <td>3,000 – 3,499</td>
+            <td>Out-of-order (buffered)</td>
+            <td><strong>ACK = 2,500</strong> (Duplicate ACK 1)</td>
+          </tr>
+          <tr>
+            <td><strong>Segment 4</strong></td>
+            <td><strong>3,500</strong></td>
+            <td>3,500 – 3,999</td>
+            <td>Out-of-order (buffered)</td>
+            <td><strong>ACK = 2,500</strong> (Duplicate ACK 2)</td>
+          </tr>
+          <tr>
+            <td><strong>Segment 5</strong></td>
+            <td><strong>4,000</strong></td>
+            <td>4,000 – 4,499</td>
+            <td>Out-of-order (buffered)</td>
+            <td><strong>ACK = 2,500</strong> (Duplicate ACK 3)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(c) Retransmission Trigger &amp; Mechanism Name:</p>
+        <ul style="margin-left:1.25rem;">
+          <li><strong>Segment Retransmitted:</strong> Segment 2 (Sequence number <strong>2,500</strong>).</li>
+          <li><strong>Triggering Event:</strong> Receipt of <strong>3 duplicate ACKs</strong> (4 ACKs total with ACK = 2,500).</li>
+          <li><strong>Mechanism Name:</strong> <strong>Fast Retransmit</strong>.</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px; font-size:0.9rem; line-height:1.6;">
+        <p style="font-weight:700; color:var(--primary-text); margin-bottom:0.25rem;">(d) ACK Sent After Receiving Retransmission &amp; Why:</p>
+        <p><strong>ACK Number:</strong> <strong>4,500</strong>.</p>
+        <p>
+          <strong>Why:</strong> Host B has already received and buffered out-of-order Segments 3, 4, and 5 (spanning bytes 3,000 through 4,499). When retransmitted Segment 2 (bytes 2,500 through 2,999) arrives, the missing gap is completely filled. Because TCP uses <strong>cumulative acknowledgments</strong>, Host B acknowledges all contiguous bytes received so far (<span class="math-inline">2,000</span> to <span class="math-inline">4,499</span>) and requests the next expected byte: <span class="math-inline">2,000 + (5 &times; 500) = <strong>4,500</strong></span>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+      
+<!-- ========================================== -->
+<!-- UPCOMING QUIZ 2: NETWORK LAYER (10 Qs)     -->
+<!-- ========================================== -->
+<section id="quiz-net-section" class="content-section">
+  <div class="breadcrumb">Assessment &bull; Upcoming Quiz 2: Network Layer</div>
+
+  <!-- HERO BANNER -->
+  <div style="background:linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%); color:white; border-radius:14px; padding:2rem 2.25rem; margin-bottom:2rem; box-shadow:var(--shadow-lg);">
+    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem; flex-wrap:wrap;">
+      <span style="background:rgba(255,255,255,0.25); font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px;">Upcoming In-Class Assessment</span>
+      <span style="background:#10b981; color:white; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:20px;">Chapters 4 &amp; 5 Focus</span>
+      <span style="font-size:0.85rem; opacity:0.9;">10 High-Yield Questions &bull; 100% Interactive</span>
+    </div>
+    <h2 class="sec-heading" style="font-size:2.2rem; font-weight:800; line-height:1.2; margin-bottom:0.75rem;">Network Layer Mastery Quiz</h2>
+    <p style="font-size:1.05rem; opacity:0.95; max-width:840px; line-height:1.6; margin-bottom:1.25rem;">
+      Targeted preparation covering the 10 vital exam topics: Forwarding vs. Routing, Best-Effort Service, Longest Prefix Matching, Subnet Masks, DHCP DORA, IPv4/IPv6 Tunneling, SDN Control Plane, Link-State Dijkstra, Bellman-Ford Distance Vector, and RIP vs. OSPF (RIB/FIB).
+    </p>
+    <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+      <div style="background:rgba(255,255,255,0.15); padding:0.4rem 1rem; border-radius:8px; border:1px solid rgba(255,255,255,0.3); font-weight:700; font-size:0.95rem;">
+        Score: <span id="quiz2-score">0</span> / 10
+      </div>
+      <button class="btn-secondary" style="background:rgba(255,255,255,0.2); color:white; border-color:rgba(255,255,255,0.4);" onclick="resetQuiz2()">🔄 Reset Quiz</button>
+    </div>
+  </div>
+
+  <!-- TOPICS CHECKLIST BADGES -->
+  <div class="interactive-card" style="margin-bottom:2rem; background:var(--bg-secondary);">
+    <div style="font-size:0.85rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:0.75rem;">Quiz Syllabus Coverage Map:</div>
+    <div style="display:flex; flex-wrap:wrap; gap:0.4rem;">
+      <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-size:0.78rem;">1. Forwarding vs. Routing</span>
+      <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-size:0.78rem;">2. Bandwidth &amp; Best-Effort</span>
+      <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-size:0.78rem;">3. Longest Prefix Matching</span>
+      <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-size:0.78rem;">4. Subnet Mask &amp; CIDR</span>
+      <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-size:0.78rem;">5. DHCP 4-Step DORA</span>
+      <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-size:0.78rem;">6. IPv4 vs. IPv6 (Tunneling)</span>
+      <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-size:0.78rem;">7. Control vs. Data Plane (SDN)</span>
+      <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-size:0.78rem;">8. Link-State (Dijkstra)</span>
+      <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-size:0.78rem;">9. Bellman-Ford Distance Vector</span>
+      <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-size:0.78rem;">10. RIP vs. OSPF (RIB &amp; FIB)</span>
+    </div>
+  </div>
+
+  <!-- QUESTION 1: FORWARDING VS ROUTING -->
+  <div class="quiz-box" id="quiz2-q1">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:#047857;">Question 1 of 10</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">Topic: Forwarding vs. Routing</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Data Plane vs. Control Plane</span>
+    </div>
+    <div class="quiz-question">
+      Which of the following statements correctly distinguishes <strong>forwarding</strong> from <strong>routing</strong> in the network layer?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Incorrect. Forwarding is local to a single router (data plane), whereas routing determines the network-wide end-to-end path (control plane).')">
+        <span>A.</span> Forwarding is the network-wide process that determines end-to-end paths, while routing is the local action of transferring a packet across an internal switch fabric.
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="handleQuiz2Click(this, true, 'Correct! Forwarding is the local, per-router data-plane action of moving a packet from an input link interface to the appropriate output link interface (typically executed in hardware in nanoseconds). Routing is the network-wide control-plane process that coordinates routers via algorithms to determine the complete end-to-end path taken by packets from source to destination (executed in software in seconds).')">
+        <span>B.</span> Forwarding is the local, per-router action of transferring a packet from an input link to the appropriate output link; routing is the network-wide process that determines the end-to-end path taken by packets from source to destination.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Incorrect. Forwarding is implemented in fast hardware (ASICs/TCAM), not slow software, and routing determines the path before or during forwarding.')">
+        <span>C.</span> Forwarding is implemented entirely in software at the application layer, while routing is implemented in hardware at the physical layer.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Incorrect. Both functions operate at Layer 3 (Network Layer).')">
+        <span>D.</span> Forwarding occurs only in bridges and switches at Layer 2, while routing occurs only in autonomous border gateways at Layer 4.
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- QUESTION 2: BANDWIDTH & BEST-EFFORT SERVICE -->
+  <div class="quiz-box" id="quiz2-q2">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:#047857;">Question 2 of 10</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">Topic: Best-Effort Service Model</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Delivery Guarantees</span>
+    </div>
+    <div class="quiz-question">
+      An enterprise upgrades its internet gateway connection from <span class="math-inline">100 Mbps</span> to a high-speed <span class="math-inline">10 Gbps</span> fiber link. Why does this significant bandwidth upgrade <strong>NOT guarantee</strong> that every transmitted packet will arrive safely at its remote destination?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Incorrect. 10 Gbps transmission hardware is highly reliable and does not generate chronic bit errors.')">
+        <span>A.</span> Because 10 Gbps links suffer from chromatic dispersion that inherently corrupts more than 50% of transmitted packets.
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="handleQuiz2Click(this, true, 'Correct! The Internet Network Layer (IP) provides a strictly "best-effort" service model. Bandwidth defines solely how fast bits are transmitted onto a link (L/R), but IP provides zero guarantees regarding packet delivery, packet loss, transmission latency, or in-order arrival. If downstream intermediate routers experience buffer overflow due to transient congestion, or if a physical link suffers an outage, packets will still be dropped.')">
+        <span>B.</span> Because the IP layer provides a "best-effort" service model: bandwidth only determines transmission speed, but IP makes zero guarantees regarding packet loss, bounded delay, or arrival. Packets can still be dropped if downstream router buffers overflow.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Incorrect. TCP can retransmit dropped segments, but IP itself never guarantees arrival.')">
+        <span>C.</span> Because the IP layer converts all packets into UDP datagrams whenever link bandwidth exceeds 1 Gbps.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Incorrect. Propagation delay depends on distance and speed of light (d/s), not bandwidth.')">
+        <span>D.</span> Because higher bandwidth increases signal propagation delay, causing sender timeouts to expire prematurely.
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- QUESTION 3: LONGEST PREFIX MATCHING -->
+  <div class="quiz-box" id="quiz2-q3">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:#047857;">Question 3 of 10</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">Topic: Longest Prefix Matching (LPM)</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Forwarding Table Lookup</span>
+    </div>
+    <div class="quiz-question">
+      A router has the following four entries in its CIDR-based forwarding table:
+      <div style="background:var(--bg-elevated); padding:0.75rem; border-radius:6px; margin:0.5rem 0; font-family:monospace; font-size:0.875rem;">
+        Prefix 1: 192.168.0.0/16 &nbsp;&rarr; Interface 0<br>
+        Prefix 2: 192.168.128.0/18 &rarr; Interface 1<br>
+        Prefix 3: 192.168.130.0/24 &rarr; Interface 2<br>
+        Otherwise (Default) &nbsp;&nbsp;&nbsp;&nbsp;&rarr; Interface 3
+      </div>
+      A datagram arrives with destination IP address <strong>192.168.130.45</strong>. To which interface will this datagram be forwarded, and why?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Prefix 1 (/16) matches, but it is not the longest matching prefix.')">
+        <span>A.</span> Interface 0, because 192.168.0.0/16 is the first entry listed in the forwarding table.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Prefix 2 (/18) matches, but /24 is longer (more specific).')">
+        <span>B.</span> Interface 1, because 192.168.128.0/18 covers addresses up to 192.168.191.255.
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="handleQuiz2Click(this, true, 'Correct! Under Longest Prefix Matching (LPM), when a destination IP address matches multiple table entries, the router selects the entry with the longest prefix length (the most specific route). Here, 192.168.130.45 matches Prefix 1 (/16), Prefix 2 (/18), and Prefix 3 (/24). Because /24 is the longest match (24 bits match exactly), the router forwards the packet to Interface 2.')">
+        <span>C.</span> Interface 2, because the destination IP matches multiple prefixes (/16, /18, and /24), and /24 is the longest (most specific) matching prefix.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Default is only chosen when zero specific prefixes match.')">
+        <span>D.</span> Interface 3, because ambiguous multi-prefix matches are discarded to the default gateway.
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- QUESTION 4: SUBNET MASK & HOST CAPACITY -->
+  <div class="quiz-box" id="quiz2-q4">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:#047857;">Question 4 of 10</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">Topic: Subnet Mask &amp; CIDR</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">IP Addressing Mathematics</span>
+    </div>
+    <div class="quiz-question">
+      A department is allocated the IPv4 block <strong>172.16.48.0/22</strong>. What is the dotted-decimal subnet mask for this network, and what is the maximum number of <strong>usable host IP addresses</strong> that can be assigned to workstations on this subnet?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Incorrect. /22 has 22 network bits and 10 host bits. 255.255.240.0 corresponds to /20.')">
+        <span>A.</span> Subnet Mask: 255.255.240.0 &bull; Usable Hosts: 4,094
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="handleQuiz2Click(this, true, 'Correct! Calculation: /22 means the first 22 bits are 1s and the remaining 32 - 22 = 10 bits are 0s. 22 bits = 11111111.11111111.11111100.00000000 = 255.255.252.0. With 10 host bits, the total number of IP addresses is 2^10 = 1,024. Subtracting 2 (the subnet network address 172.16.48.0 and the directed broadcast address 172.16.51.255) yields 1,024 - 2 = 1,022 usable host addresses.')">
+        <span>B.</span> Subnet Mask: 255.255.252.0 &bull; Usable Hosts: 1,022
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Incorrect. 255.255.254.0 corresponds to /23, which provides 510 usable hosts.')">
+        <span>C.</span> Subnet Mask: 255.255.254.0 &bull; Usable Hosts: 510
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Remember: You must subtract 2 for the network address and broadcast address!')">
+        <span>D.</span> Subnet Mask: 255.255.252.0 &bull; Usable Hosts: 1,024
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- QUESTION 5: DHCP USES & 4-STEP DORA -->
+  <div class="quiz-box" id="quiz2-q5">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:#047857;">Question 5 of 10</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">Topic: DHCP Protocol (DORA)</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Dynamic Host Configuration</span>
+    </div>
+    <div class="quiz-question">
+      When a laptop joins a campus Wi-Fi network, it runs the Dynamic Host Configuration Protocol (DHCP). What is the correct sequence of the 4-step DHCP exchange, what transport protocol and ports are used, and what key network configuration parameters does the client receive?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="true" onclick="handleQuiz2Click(this, true, 'Correct! DHCP follows the 4-step DORA exchange: Discover &rarr; Offer &rarr; Request &rarr; ACK. It operates over UDP using port 67 (server) and port 68 (client). In the ACK, the client receives: (1) Allocated client IP address, (2) Subnet mask, (3) First-hop router / Default gateway IP address, and (4) Local DNS server IP address and domain name.')">
+        <span>A.</span> 4-step DORA (Discover &rarr; Offer &rarr; Request &rarr; ACK) over UDP ports 67 (server) and 68 (client); allocates Client IP, Subnet Mask, First-Hop Router (Default Gateway), and Local DNS Server IP.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'DHCP uses UDP, not TCP, because an unconfigured client has no IP address to perform a TCP 3-way handshake!')">
+        <span>B.</span> 3-way TCP handshake (SYN &rarr; SYNACK &rarr; ACK) over TCP port 80; allocates only the client IP address.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'The sequence is DORA (Discover, Offer, Request, ACK), not Request, Discover, Offer, ACK.')">
+        <span>C.</span> Request &rarr; Discover &rarr; Offer &rarr; ACK over ICMP; allocates MAC address and BGP Autonomous System Number.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'DHCP server listens on UDP port 67, client on 68.')">
+        <span>D.</span> Discover &rarr; Request &rarr; Offer &rarr; ACK over UDP ports 53 and 443; allocates only the web proxy address.
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- QUESTION 6: IPV4 VS IPV6 & TUNNELING -->
+  <div class="quiz-box" id="quiz2-q6">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:#047857;">Question 6 of 10</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">Topic: IPv4 vs. IPv6 &amp; Tunneling</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Transition Mechanisms</span>
+    </div>
+    <div class="quiz-question">
+      During the global coexistence and transition from IPv4 to IPv6, how does <strong>dual-router tunneling</strong> allow two IPv6-capable nodes to exchange packets across an intervening IPv4-only core network backbone?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'IPv6 addresses (128 bits) cannot fit into 32-bit IPv4 address fields; truncation is impossible.')">
+        <span>A.</span> The ingress router truncates the 128-bit IPv6 address down to 32 bits and restores it using NAT at the egress router.
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="handleQuiz2Click(this, true, 'Correct! In tunneling, the sending IPv6 router takes the entire IPv6 datagram (headers + payload) and encapsulates it inside the payload (data field) of a standard IPv4 datagram. The IPv4 header destination is set to the IPv4 address of the tunnel exit router. Intermediate IPv4 routers forward the packet normally without inspecting its contents. Upon reaching the tunnel exit, the IPv4 header is stripped, and the original IPv6 datagram emerges intact.')">
+        <span>B.</span> The ingress IPv6 router encapsulates the entire IPv6 datagram inside the payload field of an IPv4 datagram; intermediate IPv4 routers forward it normally, and the egress router unpackages the original IPv6 datagram.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Core IPv4 routers cannot be dynamically recompiled or converted via ICMP.')">
+        <span>C.</span> The intermediate IPv4 routers execute an ICMP translation hook that dynamically converts the IPv4 routers into temporary IPv6 virtual switches.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Tunneling operates at Layer 3 (Network Layer encapsulation), not Layer 7 Application proxies.')">
+        <span>D.</span> All IPv6 traffic is routed through application-layer DNS servers using HTTP POST requests.
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- QUESTION 7: CONTROL PLANE & DATA PLANE (SDN) -->
+  <div class="quiz-box" id="quiz2-q7">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:#047857;">Question 7 of 10</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">Topic: SDN &amp; Remote Controllers</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Control Plane vs. Data Plane</span>
+    </div>
+    <div class="quiz-question">
+      In modern Software-Defined Networking (SDN), how does the architecture decouple the <strong>Control Plane</strong> from the <strong>Data Plane</strong> compared to traditional per-router routing?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'In traditional networks, the control plane is per-router and distributed, not centralized.')">
+        <span>A.</span> In traditional networks, routing is centralized in the cloud; in SDN, each individual physical router computes its own routing tables independently.
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="handleQuiz2Click(this, true, 'Correct! In traditional networks, per-router control means each physical router runs distributed routing algorithm software (OSPF/BGP) and manages both data and control planes locally. In Software-Defined Networking (SDN), the control plane is moved out of the routers into a logically centralized remote controller (software running on servers). The controller calculates forwarding tables and installs flow rules directly into data-plane switches via southbound protocols (e.g., OpenFlow).')">
+        <span>B.</span> In traditional routing, control and data planes reside in every physical router (per-router control). In SDN, the control plane is implemented in a logically centralized remote controller that computes routing state and installs flow tables into simple data-plane switches.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Data-plane switches still execute local packet forwarding at line rate.')">
+        <span>C.</span> In SDN, physical switches do not forward packets; all packets are routed across the Internet to the remote controller to be inspected and redirected.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Data plane operates in fast hardware; control plane operates in software.')">
+        <span>D.</span> SDN replaces hardware forwarding tables with manual DNS lookup tables stored on local client endpoints.
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- QUESTION 8: LINK-STATE (DIJKSTRA) -->
+  <div class="quiz-box" id="quiz2-q8">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:#047857;">Question 8 of 10</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">Topic: Link-State (Dijkstra)</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Global Routing Algorithms</span>
+    </div>
+    <div class="quiz-question">
+      In a Link-State (LS) routing algorithm such as OSPF, what fundamental prerequisite must be met before a router can execute Dijkstra's algorithm, and what is the computational complexity of the algorithm?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="true" onclick="handleQuiz2Click(this, true, 'Correct! Link-State algorithms require complete, global network topology knowledge. Every router floods Link-State Advertisements (LSAs) so that all routers possess an identical graph of the network and link costs. Each router then independently runs Dijkstra's shortest-path algorithm (computational complexity O(n^2), or O(n log n) with a min-heap implementation).')">
+        <span>A.</span> The router must have complete, global knowledge of all network nodes and link costs achieved via link-state broadcast (flooding); Dijkstra has computational complexity <span class="math-inline">O(n<sup>2</sup>)</span> or <span class="math-inline">O(n \log n)</span>.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Routers only knowing directly connected neighbors and exchanging estimates with neighbors describes Distance Vector (Bellman-Ford), NOT Link-State!')">
+        <span>B.</span> The router only needs to know the costs to its directly connected neighbors; it exchanges distance vectors iteratively with computational complexity <span class="math-inline">O(1)</span>.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Dijkstra computes least-cost paths, not spanning trees with zero cycles.')">
+        <span>C.</span> All link costs must be configured to 1 hop, and Dijkstra runs in linear time <span class="math-inline">O(n)</span> without flooding.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Link-state does not require a central master router.')">
+        <span>D.</span> A single designated master router must compute all paths and push them via FTP to neighboring nodes.
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- QUESTION 9: FORD ALGORITHM (BELLMAN-FORD) -->
+  <div class="quiz-box" id="quiz2-q9">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:#047857;">Question 9 of 10</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">Topic: Bellman-Ford Distance Vector</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Decentralized Equation</span>
+    </div>
+    <div class="quiz-question">
+      Node <span class="math-inline">X</span> is directly connected to two neighbors, <span class="math-inline">A</span> and <span class="math-inline">B</span>, with link costs <span class="math-inline">c(X, A) = 2</span> and <span class="math-inline">c(X, B) = 7</span>.
+      Node <span class="math-inline">X</span> receives distance vector updates from its neighbors regarding destination node <span class="math-inline">Y</span>:
+      <div style="background:var(--bg-elevated); padding:0.5rem 1rem; border-radius:6px; margin:0.5rem 0; font-family:monospace; font-size:0.875rem;">
+        Neighbor A reports: D_A(Y) = 8<br>
+        Neighbor B reports: D_B(Y) = 2
+      </div>
+      Using the <strong>Bellman-Ford equation</strong> <span class="math-inline">d<sub>x</sub>(y) = min<sub>v</sub> \{ c(x, v) + d<sub>v</sub>(y) \}</span>, what is node <span class="math-inline">X</span>'s new minimum distance estimate <span class="math-inline">D<sub>X</sub>(Y)</span>, and which neighbor is chosen as the next hop?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Via neighbor A: cost = 2 + 8 = 10. But via neighbor B: cost = 7 + 2 = 9. Since 9 < 10, neighbor B gives a lower total cost!')">
+        <span>A.</span> Distance: 10 &bull; Next Hop: Neighbor A (because direct link cost 2 is smaller than 7)
+      </div>
+      <div class="quiz-opt" data-correct="true" onclick="handleQuiz2Click(this, true, 'Correct! Bellman-Ford equation evaluates all neighbors v: d_X(Y) = min { c(X,A) + D_A(Y), c(X,B) + D_B(Y) } = min { 2 + 8, 7 + 2 } = min { 10, 9 } = 9. Therefore, node X updates its distance vector to D_X(Y) = 9, and sets its next-hop forwarding interface toward Neighbor B (even though link c(X,B) is locally more expensive!).')">
+        <span>B.</span> Distance: 9 &bull; Next Hop: Neighbor B (because <span class="math-inline">c(X, B) + D<sub>B</sub>(Y) = 7 + 2 = 9 < 10</span>)
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'You cannot simply take the minimum of D_A(Y) and D_B(Y) without adding the link cost from X!')">
+        <span>C.</span> Distance: 2 &bull; Next Hop: Neighbor B
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, '17 is the sum of all values, which is incorrect.')">
+        <span>D.</span> Distance: 17 &bull; Next Hop: Neighbor A
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- QUESTION 10: ROUTING PROTOCOLS: RIP VS OSPF & RIB/FIB -->
+  <div class="quiz-box" id="quiz2-q10">
+    <div class="quiz-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-weight:700; color:#047857;">Question 10 of 10</span>
+        <span class="interactive-badge" style="font-size:0.75rem;">Topic: RIP vs. OSPF &amp; RIB vs. FIB</span>
+      </div>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Protocol Classification</span>
+    </div>
+    <div class="quiz-question">
+      Consider the interior gateway routing protocols <strong>RIP</strong> and <strong>OSPF</strong>, and the router tables <strong>RIB</strong> and <strong>FIB</strong>. Which statement accurately contrasts them?
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="true" onclick="handleQuiz2Click(this, true, 'Correct! RIP is a Distance-Vector protocol using hop count (max 15 hops; 16 = infinity) and periodic vector broadcasts. OSPF is a Link-State protocol using Dijkstra's shortest-path algorithm over flooded link-state advertisements (LSAs). The RIB (Routing Information Base) is the master control-plane routing repository stored in software containing all learned routes, while the FIB (Forwarding Information Base) is the distilled, optimized data-plane table installed in hardware (TCAM) for line-rate packet forwarding.')">
+        <span>A.</span> RIP is a Distance-Vector protocol using hop count; OSPF is a Link-State protocol using Dijkstra. The RIB is the control-plane software routing repository, while the FIB is the hardware-installed forwarding table used for line-rate forwarding.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'RIP uses Distance Vector, and OSPF uses Link State, not the reverse!')">
+        <span>B.</span> RIP is a Link-State protocol using Dijkstra; OSPF is a Distance-Vector protocol using hop count. The FIB builds the RIB.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'Both RIP and OSPF are interior gateway protocols, not exterior BGP.')">
+        <span>C.</span> OSPF operates only between different Autonomous Systems across the public Internet, while RIP is used exclusively inside data center SDN switches.
+      </div>
+      <div class="quiz-opt" data-correct="false" onclick="handleQuiz2Click(this, false, 'RIB and FIB are distinct architectural structures (control plane vs data plane).')">
+        <span>D.</span> RIB and FIB are identical acronyms for the same hardware memory buffer inside an Ethernet switch.
+      </div>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- SUMMARY & NEXT STEPS -->
+  <div class="interactive-card" style="margin-top:2rem; background:linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);">
+    <div class="interactive-header">
+      <div class="interactive-title">🎓 Ready for More Practice?</div>
+    </div>
+    <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1rem;">
+      Solidify your mastery by exploring the <strong>Sample Midterm Exam (Ch 1–3)</strong> with full step-by-step mathematical working, or experiment with the <strong>CIDR Subnet Calculator</strong> (§4.3) and the <strong>18 Interactive Calculators</strong> hub!
+    </p>
+    <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+      <button class="btn-primary" onclick="navigateTo('sample-midterm')">Practice Sample Midterm (Ch 1–3) &rarr;</button>
+      <button class="btn-secondary" onclick="navigateTo('calculators')">Open Calculators Hub &rarr;</button>
+      <button class="btn-secondary" onclick="navigateTo('ch4-1')">Review Chapter 4 (Network Layer) &rarr;</button>
+    </div>
+  </div>
+
+</section>
+
       
         <section id="ch1-1-section" class="content-section">
           <div class="breadcrumb">Chapter 1: Computer Networks and the Internet &bull; Section 1.1</div>
@@ -14095,6 +15864,12 @@ function handleRoute() {
   } else if (hash === 'checklist') {
     const chk = document.getElementById('checklist-section');
     if (chk) chk.classList.add('active');
+  } else if (hash === 'sample-midterm') {
+    const sm = document.getElementById('sample-midterm-section');
+    if (sm) sm.classList.add('active');
+  } else if (hash === 'quiz-net') {
+    const qn = document.getElementById('quiz-net-section');
+    if (qn) qn.classList.add('active');
   } else {
     // Standard section like ch1-1
     const secEl = document.getElementById(hash + '-section');
@@ -17280,6 +19055,131 @@ document.addEventListener('keydown', (e) => {
     openSearch();
   }
 });
+
+// ==========================================
+// SAMPLE MIDTERM & NETWORK QUIZ LOGIC
+// ==========================================
+function toggleSolution(id) {
+  const box = document.getElementById(id);
+  if (!box) return;
+  if (box.style.display === 'none' || !box.style.display) {
+    box.style.display = 'block';
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+function revealSolution(id) {
+  const box = document.getElementById(id);
+  if (box) box.style.display = 'block';
+}
+
+function revealAllMidtermSolutions() {
+  document.querySelectorAll('#sample-midterm-section .solution-box').forEach(el => el.style.display = 'block');
+}
+
+function hideAllMidtermSolutions() {
+  document.querySelectorAll('#sample-midterm-section .solution-box').forEach(el => el.style.display = 'none');
+}
+
+const Q11_ANSWERS = {
+  'q11-1': ['internet exchange point', 'internet exchange point (ixp)', 'ixp'],
+  'q11-2': ['encapsulation'],
+  'q11-3': ['botnet'],
+  'q11-4': ['cookie'],
+  'q11-5': ['local dns server'],
+  'q11-6': ['enter deep'],
+  'q11-7': ['tracker'],
+  'q11-8': ['flow control'],
+  'q11-9': ['congestion control'],
+  'q11-10': ['cumulative ack', 'cumulative']
+};
+
+function checkWordBankQ11() {
+  let correctCount = 0;
+  for (const [id, validAnswers] of Object.entries(Q11_ANSWERS)) {
+    const input = document.getElementById(id);
+    const fb = document.getElementById('fb-' + id);
+    if (!input || !fb) continue;
+    const val = input.value.trim().toLowerCase();
+    const isCorrect = validAnswers.some(ans => val === ans || val.includes(ans));
+    if (isCorrect) {
+      input.className = 'fill-blank-input correct';
+      fb.innerHTML = '✅ Correct!';
+      fb.style.color = '#047857';
+      correctCount++;
+    } else {
+      input.className = 'fill-blank-input wrong';
+      fb.innerHTML = `❌ Expected: <em>${validAnswers[0]}</em>`;
+      fb.style.color = '#b91c1c';
+    }
+  }
+}
+
+function resetWordBankQ11() {
+  for (const id of Object.keys(Q11_ANSWERS)) {
+    const input = document.getElementById(id);
+    const fb = document.getElementById('fb-' + id);
+    if (input) {
+      input.value = '';
+      input.className = 'fill-blank-input';
+    }
+    if (fb) fb.innerHTML = '';
+  }
+}
+
+let quiz2Answered = {};
+let quiz2Score = 0;
+
+function handleQuiz2Click(btn, isCorrect, expText) {
+  const parent = btn.closest('.quiz-box');
+  if (!parent) return;
+  const qId = parent.id;
+  if (quiz2Answered[qId]) return;
+  quiz2Answered[qId] = isCorrect;
+
+  const allOpts = parent.querySelectorAll('.quiz-opt');
+  allOpts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    if (o.dataset.correct === 'true') o.classList.add('correct');
+  });
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    quiz2Score++;
+  } else {
+    btn.classList.add('wrong');
+  }
+
+  const feedback = parent.querySelector('.quiz-feedback');
+  if (feedback) {
+    feedback.innerHTML = `<strong>${isCorrect ? '✅ Correct!' : '❌ Incorrect.'}</strong> ${expText}`;
+    feedback.style.background = isCorrect ? 'var(--accent-light)' : 'var(--danger-light)';
+    feedback.style.color = isCorrect ? 'var(--accent-text)' : 'var(--danger-text)';
+    feedback.classList.add('show');
+  }
+
+  const scoreEl = document.getElementById('quiz2-score');
+  if (scoreEl) scoreEl.innerText = quiz2Score;
+}
+
+function resetQuiz2() {
+  quiz2Answered = {};
+  quiz2Score = 0;
+  const scoreEl = document.getElementById('quiz2-score');
+  if (scoreEl) scoreEl.innerText = '0';
+  document.querySelectorAll('#quiz-net-section .quiz-box').forEach(box => {
+    box.querySelectorAll('.quiz-opt').forEach(opt => {
+      opt.style.pointerEvents = 'auto';
+      opt.classList.remove('correct', 'wrong');
+    });
+    const fb = box.querySelector('.quiz-feedback');
+    if (fb) {
+      fb.innerHTML = '';
+      fb.classList.remove('show');
+    }
+  });
+}
 
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {

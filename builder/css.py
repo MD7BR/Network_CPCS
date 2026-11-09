@@ -1348,6 +1348,89 @@ body {
   }
 }
 
+/* Midterm & Quiz Custom Styles */
+.word-chip {
+  display: inline-block;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: default;
+  transition: all 0.15s ease;
+}
+.word-chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+.fill-blank-input {
+  font-family: inherit;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.6rem;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  width: 220px;
+  max-width: 100%;
+  transition: all 0.2s ease;
+}
+.fill-blank-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.fill-blank-input.correct {
+  border-color: #10b981;
+  background-color: #ecfdf5;
+  color: #065f46;
+}
+.fill-blank-input.wrong {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+.fill-feedback {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-left: 0.4rem;
+}
+
+.solution-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 8px;
+  padding: 1.25rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.calc-table {
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+}
+.calc-table th, .calc-table td {
+  border: 1px solid var(--border);
+  padding: 0.6rem 0.75rem;
+}
+.calc-table th {
+  background: var(--bg-elevated);
+  font-weight: 700;
+}
+.calc-table tr:nth-child(even) {
+  background: var(--bg-secondary);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Print Styles */
 @media print {
   .app-header, .sidebar, .section-nav-footer, .nav-btn, .icon-btn, .quiz-controls, .sim-controls {

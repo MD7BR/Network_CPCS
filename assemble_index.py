@@ -16,6 +16,8 @@ from builder.ch8 import CH8_DATA
 from builder.ch9 import CH9_DATA
 from builder.interactives import INTERACTIVES_HTML
 from builder.exams_glossary import EXAMS_GLOSSARY_HTML
+from builder.midterm_sample import MIDTERM_SAMPLE_HTML
+from builder.network_quiz import NETWORK_QUIZ_HTML
 from builder.app_js import APP_JS
 
 import re
@@ -205,10 +207,46 @@ def build_dashboard():
           Interactive, visual digital textbook covering <strong>all 9 chapters</strong> based on Kurose & Ross (6th Edition) and lecture slides. Features bit-accurate calculators, step-by-step protocol simulators, inline SVG figures, and exam problem walkthroughs.
         </p>
         <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-          <button class="btn-primary" style="background:white; color:#1e40af; font-weight:700;" onclick="navigateTo('ch1-1')">Begin Chapter 1 →</button>
-          <button class="btn-secondary" style="background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.3);" onclick="navigateTo('dissector')">HTTP Message Dissector (Exam Focus)</button>
+          <button class="btn-primary" style="background:white; color:#1e40af; font-weight:700;" onclick="navigateTo('sample-midterm')">📝 Sample Midterm Exam (Ch 1–3) →</button>
+          <button class="btn-secondary" style="background:rgba(255,255,255,0.25); color:white; border-color:rgba(255,255,255,0.4); font-weight:700;" onclick="navigateTo('quiz-net')">⚡ Upcoming Quiz 2: Network Layer →</button>
+          <button class="btn-secondary" style="background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.3);" onclick="navigateTo('ch1-1')">Begin Chapter 1 →</button>
           <button class="btn-secondary" style="background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.3);" onclick="navigateTo('calculators')">18 Calculators Hub</button>
           <button class="btn-secondary" style="background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.3);" onclick="navigateTo('exam')">50-Question Final Exam</button>
+        </div>
+      </div>
+
+      <!-- ACTIVE EXAM PREP & TARGETED QUIZZES BANNER -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-bottom:2rem;">
+        <!-- Card 1: Sample Midterm Exam -->
+        <div class="interactive-card" style="border-top:4px solid #2563eb; cursor:pointer;" onclick="navigateTo('sample-midterm')">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <span class="interactive-badge" style="background:#eff6ff; color:#1d4ed8; font-weight:700;">Chapters 1, 2 &amp; 3</span>
+            <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">21 Exam Problems</span>
+          </div>
+          <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-primary); margin-bottom:0.5rem;">📝 Sample Midterm Exam</h3>
+          <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1rem;">
+            Practice with 21 high-yield questions (10 MCQs and 11 Written Problems) covering Chapters 1–3. Includes complete step-by-step collapsible solutions, calculation tables, and clear tags for slide references and student-reported book topics.
+          </p>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.85rem; font-weight:700; color:var(--primary-text);">
+            <span>Open Sample Midterm &rarr;</span>
+            <span style="font-size:0.75rem; background:#ecfdf5; color:#047857; padding:2px 8px; border-radius:4px;">100% Solved</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Upcoming Network Layer Quiz -->
+        <div class="interactive-card" style="border-top:4px solid #10b981; cursor:pointer;" onclick="navigateTo('quiz-net')">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <span class="interactive-badge" style="background:#ecfdf5; color:#047857; font-weight:700;">Chapters 4 &amp; 5 Focus</span>
+            <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">10 Target Questions</span>
+          </div>
+          <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-primary); margin-bottom:0.5rem;">⚡ Upcoming Quiz 2: Network Layer</h3>
+          <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1rem;">
+            Master the 10 specific exam focus topics: Forwarding vs. Routing, Best-Effort Service, Longest Prefix Matching, Subnet Masks, DHCP DORA, IPv4/IPv6 Tunneling, SDN Control Plane, Link-State Dijkstra, Bellman-Ford Distance Vector, and RIP vs. OSPF.
+          </p>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.85rem; font-weight:700; color:#047857;">
+            <span>Start 10-Question Quiz &rarr;</span>
+            <span style="font-size:0.75rem; background:#eff6ff; color:#1d4ed8; padding:2px 8px; border-radius:4px;">Interactive Scoring</span>
+          </div>
         </div>
       </div>
 
@@ -373,6 +411,8 @@ def assemble_all():
     <nav class="header-nav" id="header-nav" aria-label="Main Navigation">
       <span id="overall-progress-pct" class="interactive-badge" style="margin-right:0.2rem;">0% Mastered</span>
       <button class="nav-btn" data-route="dashboard" onclick="navigateTo('dashboard')">🏠 Home</button>
+      <button class="nav-btn" data-route="sample-midterm" onclick="navigateTo('sample-midterm')">📝 Sample Midterm</button>
+      <button class="nav-btn" data-route="quiz-net" onclick="navigateTo('quiz-net')">⚡ Quiz 2 (Net Layer)</button>
       <button class="nav-btn" data-route="dissector" onclick="navigateTo('dissector')">🔍 HTTP Dissector</button>
       <button class="nav-btn" data-route="calculators" onclick="navigateTo('calculators')">🧮 Calculators</button>
       <button class="nav-btn" data-route="simulators" onclick="navigateTo('simulators')">⚡ Simulators</button>
@@ -402,6 +442,8 @@ def assemble_all():
     <!-- MAIN READING & INTERACTIVE CONTENT -->
     <main class="main-content">
       {dashboard_content}
+      {clean_math(MIDTERM_SAMPLE_HTML)}
+      {clean_math(NETWORK_QUIZ_HTML)}
       {chapters_content}
       {clean_math(INTERACTIVES_HTML)}
       {clean_math(EXAMS_GLOSSARY_HTML)}

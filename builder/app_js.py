@@ -92,6 +92,12 @@ function handleRoute() {
   } else if (hash === 'checklist') {
     const chk = document.getElementById('checklist-section');
     if (chk) chk.classList.add('active');
+  } else if (hash === 'sample-midterm') {
+    const sm = document.getElementById('sample-midterm-section');
+    if (sm) sm.classList.add('active');
+  } else if (hash === 'quiz-net') {
+    const qn = document.getElementById('quiz-net-section');
+    if (qn) qn.classList.add('active');
   } else {
     // Standard section like ch1-1
     const secEl = document.getElementById(hash + '-section');
@@ -3277,6 +3283,131 @@ document.addEventListener('keydown', (e) => {
     openSearch();
   }
 });
+
+// ==========================================
+// SAMPLE MIDTERM & NETWORK QUIZ LOGIC
+// ==========================================
+function toggleSolution(id) {
+  const box = document.getElementById(id);
+  if (!box) return;
+  if (box.style.display === 'none' || !box.style.display) {
+    box.style.display = 'block';
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+function revealSolution(id) {
+  const box = document.getElementById(id);
+  if (box) box.style.display = 'block';
+}
+
+function revealAllMidtermSolutions() {
+  document.querySelectorAll('#sample-midterm-section .solution-box').forEach(el => el.style.display = 'block');
+}
+
+function hideAllMidtermSolutions() {
+  document.querySelectorAll('#sample-midterm-section .solution-box').forEach(el => el.style.display = 'none');
+}
+
+const Q11_ANSWERS = {
+  'q11-1': ['internet exchange point', 'internet exchange point (ixp)', 'ixp'],
+  'q11-2': ['encapsulation'],
+  'q11-3': ['botnet'],
+  'q11-4': ['cookie'],
+  'q11-5': ['local dns server'],
+  'q11-6': ['enter deep'],
+  'q11-7': ['tracker'],
+  'q11-8': ['flow control'],
+  'q11-9': ['congestion control'],
+  'q11-10': ['cumulative ack', 'cumulative']
+};
+
+function checkWordBankQ11() {
+  let correctCount = 0;
+  for (const [id, validAnswers] of Object.entries(Q11_ANSWERS)) {
+    const input = document.getElementById(id);
+    const fb = document.getElementById('fb-' + id);
+    if (!input || !fb) continue;
+    const val = input.value.trim().toLowerCase();
+    const isCorrect = validAnswers.some(ans => val === ans || val.includes(ans));
+    if (isCorrect) {
+      input.className = 'fill-blank-input correct';
+      fb.innerHTML = '✅ Correct!';
+      fb.style.color = '#047857';
+      correctCount++;
+    } else {
+      input.className = 'fill-blank-input wrong';
+      fb.innerHTML = `❌ Expected: <em>${validAnswers[0]}</em>`;
+      fb.style.color = '#b91c1c';
+    }
+  }
+}
+
+function resetWordBankQ11() {
+  for (const id of Object.keys(Q11_ANSWERS)) {
+    const input = document.getElementById(id);
+    const fb = document.getElementById('fb-' + id);
+    if (input) {
+      input.value = '';
+      input.className = 'fill-blank-input';
+    }
+    if (fb) fb.innerHTML = '';
+  }
+}
+
+let quiz2Answered = {};
+let quiz2Score = 0;
+
+function handleQuiz2Click(btn, isCorrect, expText) {
+  const parent = btn.closest('.quiz-box');
+  if (!parent) return;
+  const qId = parent.id;
+  if (quiz2Answered[qId]) return;
+  quiz2Answered[qId] = isCorrect;
+
+  const allOpts = parent.querySelectorAll('.quiz-opt');
+  allOpts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    if (o.dataset.correct === 'true') o.classList.add('correct');
+  });
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    quiz2Score++;
+  } else {
+    btn.classList.add('wrong');
+  }
+
+  const feedback = parent.querySelector('.quiz-feedback');
+  if (feedback) {
+    feedback.innerHTML = `<strong>${isCorrect ? '✅ Correct!' : '❌ Incorrect.'}</strong> ${expText}`;
+    feedback.style.background = isCorrect ? 'var(--accent-light)' : 'var(--danger-light)';
+    feedback.style.color = isCorrect ? 'var(--accent-text)' : 'var(--danger-text)';
+    feedback.classList.add('show');
+  }
+
+  const scoreEl = document.getElementById('quiz2-score');
+  if (scoreEl) scoreEl.innerText = quiz2Score;
+}
+
+function resetQuiz2() {
+  quiz2Answered = {};
+  quiz2Score = 0;
+  const scoreEl = document.getElementById('quiz2-score');
+  if (scoreEl) scoreEl.innerText = '0';
+  document.querySelectorAll('#quiz-net-section .quiz-box').forEach(box => {
+    box.querySelectorAll('.quiz-opt').forEach(opt => {
+      opt.style.pointerEvents = 'auto';
+      opt.classList.remove('correct', 'wrong');
+    });
+    const fb = box.querySelector('.quiz-feedback');
+    if (fb) {
+      fb.innerHTML = '';
+      fb.classList.remove('show');
+    }
+  });
+}
 
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
