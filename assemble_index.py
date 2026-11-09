@@ -149,12 +149,15 @@ def build_sidebar():
 
     for ch in CHAPTERS:
         badge_style = f"background-color: {ch['color']};"
+        is_book_exclusive = ch['num'] in [7, 9] or "BOOK EXCLUSIVE" in ch.get('title', '')
+        book_badge = '<span style="background:#ffedd5; color:#c2410c; font-size:0.65rem; font-weight:700; padding:0.1rem 0.35rem; border-radius:3px; margin-left:0.35rem; border:1px solid #fdba74;">Book Only</span>' if is_book_exclusive else ''
+        display_title = ch['title'].replace(' [BOOK EXCLUSIVE]', '')
         sidebar_html.append(f'''
         <div class="ch-accordion">
           <div class="ch-header" onclick="toggleChapterAccordion(this)">
             <div class="ch-header-left">
               <span class="ch-badge" style="{badge_style}">Ch {ch['num']}</span>
-              <span class="ch-title-text">{ch['title']}</span>
+              <span class="ch-title-text">{display_title}{book_badge}</span>
             </div>
             <span class="arrow-icon" style="transition:transform 0.2s ease;">▶</span>
           </div>
@@ -177,13 +180,19 @@ def build_dashboard():
     cards = []
     for ch in CHAPTERS:
         sec_count = len(ch['sections'])
+        is_book_exclusive = ch['num'] in [7, 9] or "BOOK EXCLUSIVE" in ch.get('title', '')
+        book_badge = '<span style="background:#ffedd5; color:#9a3412; font-size:0.7rem; font-weight:700; padding:0.15rem 0.45rem; border-radius:4px; border:1px solid #fdba74;">⚠️ Book Exclusive</span>' if is_book_exclusive else ''
+        display_title = ch['title'].replace(' [BOOK EXCLUSIVE]', '')
         cards.append(f'''
         <div class="interactive-card" style="margin:0; cursor:pointer;" onclick="navigateTo('{ch['sections'][0]['id']}')">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-            <span class="ch-badge" style="background:{ch['color']}; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter {ch['num']}</span>
+            <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+              <span class="ch-badge" style="background:{ch['color']}; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter {ch['num']}</span>
+              {book_badge}
+            </div>
             <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">{sec_count} Sections</span>
           </div>
-          <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">{ch['title']}</h3>
+          <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">{display_title}</h3>
           <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5; margin-bottom:1rem;">{ch['subtitle']}</p>
           <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; font-weight:600; color:var(--primary-text);">
             <span>Start Chapter →</span>
@@ -204,7 +213,7 @@ def build_dashboard():
         </div>
         <h2 style="font-size:2.2rem; font-weight:800; line-height:1.2; margin-bottom:0.75rem;">Computer Networking: A Top-Down Approach</h2>
         <p style="font-size:1.05rem; opacity:0.95; max-width:760px; line-height:1.6; margin-bottom:1.5rem;">
-          Interactive, visual digital textbook covering <strong>all 9 chapters</strong> based on Kurose & Ross (6th Edition) and lecture slides. Features bit-accurate calculators, step-by-step protocol simulators, inline SVG figures, and exam problem walkthroughs.
+          Interactive, visual digital textbook covering <strong>all 9 chapters</strong> based on Kurose & Ross (8th Edition) and semester lecture slides. Features bit-accurate calculators, step-by-step protocol simulators, inline SVG figures, and exam problem walkthroughs.
         </p>
         <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
           <button class="btn-primary" style="background:white; color:#1e40af; font-weight:700;" onclick="navigateTo('sample-midterm')">📝 Sample Midterm Exam (Ch 1–3) →</button>
@@ -265,13 +274,17 @@ def build_dashboard():
             <div><strong style="color:#1d4ed8;">Layer 4: Transport Layer</strong> (TCP, UDP, Congestion Control) — Segment</div>
             <button class="btn-secondary" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="navigateTo('ch3-1')">Taught in Chapter 3 →</button>
           </div>
-          <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#ecfdf5; border-left:5px solid #10b981; display:flex; justify-content:space-between; align-items:center;">
-            <div><strong style="color:#047857;">Layer 3: Network Layer</strong> (IPv4, IPv6, OSPF, BGP) — Datagram</div>
+          <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#ecfdf5; border-left:5px solid #10b981; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <div><strong style="color:#047857;">Layer 3: Network Layer</strong> (Data Plane &amp; Control Plane, IPv4/IPv6, Dijkstra, Bellman-Ford, OSPF) — Datagram</div>
             <button class="btn-secondary" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="navigateTo('ch4-1')">Taught in Chapter 4 →</button>
           </div>
-          <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#fffbeb; border-left:5px solid #f59e0b; display:flex; justify-content:space-between; align-items:center;">
-            <div><strong style="color:#b45309;">Layer 2: Link Layer</strong> (Ethernet, Switches, ARP, WiFi) — Frame</div>
+          <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#fffbeb; border-left:5px solid #f59e0b; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <div><strong style="color:#b45309;">Layer 2: Link Layer &amp; LANs</strong> (Ethernet, Switches, ARP, MAC, CRC, ALOHA) — Frame</div>
             <button class="btn-secondary" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="navigateTo('ch5-1')">Taught in Chapter 5 →</button>
+          </div>
+          <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#faf5ff; border-left:5px solid #a855f7; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <div><strong style="color:#7e22ce;">Wireless &amp; Mobile Networks</strong> (802.11 WiFi, CDMA, Cellular 4G/5G, Mobile IP) — Radio/Mobility</div>
+            <button class="btn-secondary" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="navigateTo('ch6-1')">Taught in Chapter 6 →</button>
           </div>
           <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#fef2f2; border-left:5px solid #ef4444; display:flex; justify-content:space-between; align-items:center;">
             <div><strong style="color:#b91c1c;">Layer 1: Physical Layer</strong> (Copper, Fiber, Radio) — Bits</div>
@@ -337,11 +350,12 @@ def build_chapter_sections():
         prev_btn = f'''<button class="btn-secondary" onclick="navigateTo('{prev_sec['id']}')">← Previous: §{prev_sec['num']} {prev_sec['title']}</button>''' if prev_sec else '<div></div>'
         next_btn = f'''<button class="btn-primary" onclick="navigateTo('{next_sec['id']}')">Next: §{next_sec['num']} {next_sec['title']} →</button>''' if next_sec else '<div></div>'
 
+        subheading_html = f'<p class="sec-subheading">{sec["subtitle"]}</p>' if sec.get('subtitle') else ''
         sections_html.append(f'''
         <section id="{sec['id']}-section" class="content-section">
           <div class="breadcrumb">Chapter {ch['num']}: {ch['title']} &bull; Section {sec['num']}</div>
           <h2 class="sec-heading">§{sec['num']} {sec['title']}</h2>
-          <p class="sec-subheading">{sec['subtitle']}</p>
+          {subheading_html}
           
           <div class="sec-body-content">
             {clean_math(sec['content'])}
@@ -370,7 +384,7 @@ def assemble_all():
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CPCS-371 Computer Networks — Interactive Visual Textbook (Kurose & Ross 6th Ed.)</title>
+  <title>CPCS-371 Computer Networks — Interactive Visual Textbook (Kurose & Ross 8th Edition & Lecture Slides)</title>
   <style>
 {CSS_STYLES}
   </style>

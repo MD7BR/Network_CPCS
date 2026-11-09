@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CPCS-371 Computer Networks — Interactive Visual Textbook (Kurose & Ross 6th Ed.)</title>
+  <title>CPCS-371 Computer Networks — Interactive Visual Textbook (Kurose & Ross 8th Edition & Lecture Slides)</title>
   <style>
 
 :root {
@@ -1913,7 +1913,7 @@ body {
           <div class="ch-header" onclick="toggleChapterAccordion(this)">
             <div class="ch-header-left">
               <span class="ch-badge" style="background-color: #ec4899;">Ch 7</span>
-              <span class="ch-title-text">Multimedia Networking</span>
+              <span class="ch-title-text">Multimedia Networking<span style="background:#ffedd5; color:#c2410c; font-size:0.65rem; font-weight:700; padding:0.1rem 0.35rem; border-radius:3px; margin-left:0.35rem; border:1px solid #fdba74;">Book Only</span></span>
             </div>
             <span class="arrow-icon" style="transition:transform 0.2s ease;">▶</span>
           </div>
@@ -2039,7 +2039,7 @@ body {
           <div class="ch-header" onclick="toggleChapterAccordion(this)">
             <div class="ch-header-left">
               <span class="ch-badge" style="background-color: #475569;">Ch 9</span>
-              <span class="ch-title-text">Network Management</span>
+              <span class="ch-title-text">Network Management<span style="background:#ffedd5; color:#c2410c; font-size:0.65rem; font-weight:700; padding:0.1rem 0.35rem; border-radius:3px; margin-left:0.35rem; border:1px solid #fdba74;">Book Only</span></span>
             </div>
             <span class="arrow-icon" style="transition:transform 0.2s ease;">▶</span>
           </div>
@@ -2093,7 +2093,7 @@ body {
         </div>
         <h2 style="font-size:2.2rem; font-weight:800; line-height:1.2; margin-bottom:0.75rem;">Computer Networking: A Top-Down Approach</h2>
         <p style="font-size:1.05rem; opacity:0.95; max-width:760px; line-height:1.6; margin-bottom:1.5rem;">
-          Interactive, visual digital textbook covering <strong>all 9 chapters</strong> based on Kurose & Ross (6th Edition) and lecture slides. Features bit-accurate calculators, step-by-step protocol simulators, inline SVG figures, and exam problem walkthroughs.
+          Interactive, visual digital textbook covering <strong>all 9 chapters</strong> based on Kurose & Ross (8th Edition) and semester lecture slides. Features bit-accurate calculators, step-by-step protocol simulators, inline SVG figures, and exam problem walkthroughs.
         </p>
         <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
           <button class="btn-primary" style="background:white; color:#1e40af; font-weight:700;" onclick="navigateTo('sample-midterm')">📝 Sample Midterm Exam (Ch 1–3) →</button>
@@ -2154,13 +2154,17 @@ body {
             <div><strong style="color:#1d4ed8;">Layer 4: Transport Layer</strong> (TCP, UDP, Congestion Control) — Segment</div>
             <button class="btn-secondary" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="navigateTo('ch3-1')">Taught in Chapter 3 →</button>
           </div>
-          <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#ecfdf5; border-left:5px solid #10b981; display:flex; justify-content:space-between; align-items:center;">
-            <div><strong style="color:#047857;">Layer 3: Network Layer</strong> (IPv4, IPv6, OSPF, BGP) — Datagram</div>
+          <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#ecfdf5; border-left:5px solid #10b981; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <div><strong style="color:#047857;">Layer 3: Network Layer</strong> (Data Plane &amp; Control Plane, IPv4/IPv6, Dijkstra, Bellman-Ford, OSPF) — Datagram</div>
             <button class="btn-secondary" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="navigateTo('ch4-1')">Taught in Chapter 4 →</button>
           </div>
-          <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#fffbeb; border-left:5px solid #f59e0b; display:flex; justify-content:space-between; align-items:center;">
-            <div><strong style="color:#b45309;">Layer 2: Link Layer</strong> (Ethernet, Switches, ARP, WiFi) — Frame</div>
+          <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#fffbeb; border-left:5px solid #f59e0b; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <div><strong style="color:#b45309;">Layer 2: Link Layer &amp; LANs</strong> (Ethernet, Switches, ARP, MAC, CRC, ALOHA) — Frame</div>
             <button class="btn-secondary" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="navigateTo('ch5-1')">Taught in Chapter 5 →</button>
+          </div>
+          <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#faf5ff; border-left:5px solid #a855f7; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <div><strong style="color:#7e22ce;">Wireless &amp; Mobile Networks</strong> (802.11 WiFi, CDMA, Cellular 4G/5G, Mobile IP) — Radio/Mobility</div>
+            <button class="btn-secondary" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="navigateTo('ch6-1')">Taught in Chapter 6 →</button>
           </div>
           <div style="padding:0.75rem 1.25rem; border-radius:6px; background:#fef2f2; border-left:5px solid #ef4444; display:flex; justify-content:space-between; align-items:center;">
             <div><strong style="color:#b91c1c;">Layer 1: Physical Layer</strong> (Copper, Fiber, Radio) — Bits</div>
@@ -2175,7 +2179,10 @@ body {
         
         <div class="interactive-card" style="margin:0; cursor:pointer;" onclick="navigateTo('ch1-1')">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-            <span class="ch-badge" style="background:#64748b; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 1</span>
+            <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+              <span class="ch-badge" style="background:#64748b; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 1</span>
+              
+            </div>
             <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">8 Sections</span>
           </div>
           <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">Computer Networks and the Internet</h3>
@@ -2189,7 +2196,10 @@ body {
 
         <div class="interactive-card" style="margin:0; cursor:pointer;" onclick="navigateTo('ch2-1')">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-            <span class="ch-badge" style="background:#8b5cf6; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 2</span>
+            <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+              <span class="ch-badge" style="background:#8b5cf6; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 2</span>
+              
+            </div>
             <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">8 Sections</span>
           </div>
           <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">Application Layer</h3>
@@ -2203,7 +2213,10 @@ body {
 
         <div class="interactive-card" style="margin:0; cursor:pointer;" onclick="navigateTo('ch3-1')">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-            <span class="ch-badge" style="background:#2563eb; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 3</span>
+            <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+              <span class="ch-badge" style="background:#2563eb; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 3</span>
+              
+            </div>
             <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">8 Sections</span>
           </div>
           <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">Transport Layer</h3>
@@ -2217,7 +2230,10 @@ body {
 
         <div class="interactive-card" style="margin:0; cursor:pointer;" onclick="navigateTo('ch4-1')">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-            <span class="ch-badge" style="background:#10b981; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 4</span>
+            <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+              <span class="ch-badge" style="background:#10b981; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 4</span>
+              
+            </div>
             <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">8 Sections</span>
           </div>
           <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">The Network Layer</h3>
@@ -2231,7 +2247,10 @@ body {
 
         <div class="interactive-card" style="margin:0; cursor:pointer;" onclick="navigateTo('ch5-1')">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-            <span class="ch-badge" style="background:#f59e0b; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 5</span>
+            <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+              <span class="ch-badge" style="background:#f59e0b; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 5</span>
+              
+            </div>
             <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">8 Sections</span>
           </div>
           <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">The Link Layer and LANs</h3>
@@ -2245,7 +2264,10 @@ body {
 
         <div class="interactive-card" style="margin:0; cursor:pointer;" onclick="navigateTo('ch6-1')">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-            <span class="ch-badge" style="background:#06b6d4; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 6</span>
+            <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+              <span class="ch-badge" style="background:#06b6d4; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 6</span>
+              
+            </div>
             <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">9 Sections</span>
           </div>
           <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">Wireless and Mobile Networks</h3>
@@ -2259,21 +2281,27 @@ body {
 
         <div class="interactive-card" style="margin:0; cursor:pointer;" onclick="navigateTo('ch7-1')">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-            <span class="ch-badge" style="background:#ec4899; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 7</span>
+            <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+              <span class="ch-badge" style="background:#ec4899; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 7</span>
+              <span style="background:#ffedd5; color:#9a3412; font-size:0.7rem; font-weight:700; padding:0.15rem 0.45rem; border-radius:4px; border:1px solid #fdba74;">⚠️ Book Exclusive</span>
+            </div>
             <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">6 Sections</span>
           </div>
           <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">Multimedia Networking</h3>
-          <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5; margin-bottom:1rem;">Streaming Video, DASH, CDNs, Voice-over-IP (VoIP), RTP/SIP, and QoS Token Bucket Scheduling</p>
+          <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5; margin-bottom:1rem;">[BOOK EXCLUSIVE: Kurose & Ross — Not in Lecture Slides!] Streaming Video, DASH, CDNs, Voice-over-IP (VoIP), RTP/SIP, and QoS Token Bucket Scheduling</p>
           <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; font-weight:600; color:var(--primary-text);">
             <span>Start Chapter →</span>
-            <span style="color:var(--text-muted); font-weight:400;">Multimedia & QoS</span>
+            <span style="color:var(--text-muted); font-weight:400;">Multimedia & QoS (Textbook Exclusive)</span>
           </div>
         </div>
         
 
         <div class="interactive-card" style="margin:0; cursor:pointer;" onclick="navigateTo('ch8-1')">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-            <span class="ch-badge" style="background:#e11d48; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 8</span>
+            <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+              <span class="ch-badge" style="background:#e11d48; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 8</span>
+              
+            </div>
             <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">10 Sections</span>
           </div>
           <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">Security in Computer Networks</h3>
@@ -2287,14 +2315,17 @@ body {
 
         <div class="interactive-card" style="margin:0; cursor:pointer;" onclick="navigateTo('ch9-1')">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-            <span class="ch-badge" style="background:#475569; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 9</span>
+            <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+              <span class="ch-badge" style="background:#475569; font-size:0.8rem; padding:0.25rem 0.6rem;">Chapter 9</span>
+              <span style="background:#ffedd5; color:#9a3412; font-size:0.7rem; font-weight:700; padding:0.15rem 0.45rem; border-radius:4px; border:1px solid #fdba74;">⚠️ Book Exclusive</span>
+            </div>
             <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">5 Sections</span>
           </div>
           <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">Network Management</h3>
-          <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5; margin-bottom:1rem;">ISO FCAPS, SNMP Infrastructure, SMI / MIB Object Trees, and ASN.1 / BER TLV Encoding</p>
+          <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5; margin-bottom:1rem;">[BOOK EXCLUSIVE: Kurose & Ross — Not in Lecture Slides!] ISO FCAPS, SNMP Infrastructure, SMI / MIB Object Trees, and ASN.1 / BER TLV Encoding</p>
           <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; font-weight:600; color:var(--primary-text);">
             <span>Start Chapter →</span>
-            <span style="color:var(--text-muted); font-weight:400;">Network Management</span>
+            <span style="color:var(--text-muted); font-weight:400;">Network Management (Textbook Exclusive)</span>
           </div>
         </div>
         
@@ -8268,6 +8299,20 @@ Word 2: 1100 0110 0111 0101 (0xC675)</pre>
   </ol>
 </div>
 
+<div class="callout callout-info" style="margin:1.5rem 0;">
+  <div class="callout-header">🧭 Data Plane vs. Control Plane: The Two Core Network-Layer Functions</div>
+  <p>Modern network architectures (Kurose & Ross 8th Edition) divide the network layer into two architectural planes:</p>
+  <ul>
+    <li><strong>Data Plane (Forwarding):</strong> Local, per-router action that transfers arriving datagrams from an input link to the appropriate output link in <em>nanoseconds</em>, implemented directly in fast hardware (ASICs/TCAM). Analogy: navigating through a single highway interchange.</li>
+    <li><strong>Control Plane (Routing):</strong> Network-wide logic that coordinates and determines the end-to-end path taken by packets from source host to destination host across routers in <em>seconds</em>, implemented in software. Analogy: planning the entire driving route from Jeddah to Riyadh on a GPS map.</li>
+  </ul>
+  <p><strong>Two Control-Plane Paradigms:</strong></p>
+  <ol>
+    <li><em>Traditional Per-Router Control:</em> Routing algorithms (OSPF, RIP, BGP) execute in software on every router, exchanging messages with peers to compute local forwarding tables.</li>
+    <li><em>Software-Defined Networking (SDN) Logically Centralized Control:</em> A distinct remote software controller calculates forwarding tables globally and installs flow rules directly into data-plane switches via protocols like OpenFlow.</li>
+  </ol>
+</div>
+
           </div>
 
           <!-- Section Mini-Quizzes -->
@@ -8671,6 +8716,32 @@ Word 2: 1100 0110 0111 0101 (0xC675)</pre>
   </div>
 </div>
 
+<div class="callout callout-tip" style="margin:1.5rem 0;">
+  <div class="callout-header">⚡ Longest Prefix Matching (LPM) Binary Trace & TCAM Hardware</div>
+  <p>With 4.3 billion possible 32-bit IPv4 addresses, routers cannot store every destination. Instead, forwarding tables store <strong>address prefixes</strong>. When an IP address matches multiple entries, the router uses the <strong>Longest Prefix Match</strong> (the most specific matching prefix):</p>
+  
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr><th>Prefix Pattern</th><th>Prefix Length</th><th>Output Link Interface</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>11001000 00010111 00010*** ********</code></td><td>/21</td><td><strong>Interface 0</strong></td></tr>
+        <tr><td><code>11001000 00010111 00011000 ********</code></td><td>/24</td><td><strong>Interface 1</strong></td></tr>
+        <tr><td><code>11001000 00010111 00011*** ********</code></td><td>/21</td><td><strong>Interface 2</strong></td></tr>
+        <tr><td><em>otherwise (default route)</em></td><td>/0</td><td><strong>Interface 3</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>Lecture Slide Practice Traces:</strong></p>
+  <ul>
+    <li><strong>Packet 1 Destination:</strong> <code>11001000 00010111 00011000 10101010</code> &rarr; Matches both Interface 1 (/24) and Interface 2 (/21). Since 24 &gt; 21 bits, it is forwarded to <strong>Interface 1</strong>!</li>
+    <li><strong>Packet 2 Destination:</strong> <code>11001000 00010111 00011001 10101010</code> &rarr; Matches Interface 2 (/21). Forwarded to <strong>Interface 2</strong>!</li>
+  </ul>
+  <p><strong>Hardware Execution (TCAM):</strong> In high-speed routers, destination prefix lookup is implemented in <strong>TCAM (Ternary Content Addressable Memory)</strong>, where a 1-million entry table can be searched in a single clock cycle (~1 nanosecond), supporting <code>0</code>, <code>1</code>, and <code>*</code> (wildcard) bits simultaneously.</p>
+</div>
+
           </div>
 
           <!-- Section Mini-Quizzes -->
@@ -8855,6 +8926,91 @@ Word 2: 1100 0110 0111 0101 (0xC675)</pre>
   <li>Usable host IP addresses = <span class="math-inline">2<sup>32 &minus; <i>x</i></sup> &minus; 2</span> (all zeros host is the Network Address; all ones host is the Directed Broadcast Address).</li>
 </ul>
 
+
+<!-- ============================================================================== -->
+<!-- 🎥 VIDEO DEEP-DIVE 1: PROF. SUNNY SUN (SUNNY CLASSROOM) - SUBNETTING IS SIMPLE -->
+<!-- URL: https://youtu.be/ecCuyq-Wprc -->
+<!-- ============================================================================== -->
+<div class="interactive-card" style="border:2px solid #0284c7; background:#f0f9ff; margin:2rem 0; padding:1.5rem; border-radius:10px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+    <div style="display:flex; align-items:center; gap:0.6rem;">
+      <span style="font-size:1.5rem;">🎥</span>
+      <div>
+        <h4 style="margin:0; color:#0369a1; font-size:1.15rem; font-weight:800;">Video Deep-Dive: Sunny Classroom's "Subnetting is Simple" Method</h4>
+        <span style="font-size:0.8rem; color:#0284c7; font-weight:600;">Reference Video Tutorial &bull; Prof. Sunny Sun</span>
+      </div>
+    </div>
+    <span style="background:#0284c7; color:white; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:20px;">Required Study Video</span>
+  </div>
+
+  <p style="font-size:0.92rem; color:#1e293b; line-height:1.6; margin-bottom:1rem;">
+    Subnetting is frequently tested on exams, but manual binary calculations are slow and prone to errors. Prof. Sunny Sun's famous <strong>"Subnetting is Simple"</strong> method provides a repeatable, 4-step framework based on a structured <strong>Block Size (Magic Jump Number)</strong> cheat-sheet table.
+  </p>
+
+  <h5 style="color:#0369a1; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">1. The Sunny Subnetting Master Reference Table</h5>
+  <div class="table-responsive" style="margin-bottom:1.25rem;">
+    <table class="table" style="background:white; font-size:0.85rem;">
+      <thead>
+        <tr style="background:#e0f2fe; color:#0369a1;">
+          <th>Borrowed Bits (<span class="math-inline">n</span>)</th>
+          <th>CIDR Prefix</th>
+          <th>Subnet Mask (4th Octet)</th>
+          <th>Block Size / Magic Jump (<span class="math-inline">2<sup>h</sup></span>)</th>
+          <th>Usable Hosts (<span class="math-inline">2<sup>h</sup> - 2</span>)</th>
+          <th>Total Subnets (<span class="math-inline">2<sup>n</sup></span>)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td><code>/25</code></td><td><code>128</code></td><td><strong>128</strong></td><td><strong>126</strong></td><td>2</td></tr>
+        <tr><td><strong>2</strong></td><td><code>/26</code></td><td><code>192</code></td><td><strong>64</strong></td><td><strong>62</strong></td><td>4</td></tr>
+        <tr><td><strong>3</strong></td><td><code>/27</code></td><td><code>224</code></td><td><strong>32</strong></td><td><strong>30</strong></td><td>8</td></tr>
+        <tr><td><strong>4</strong></td><td><code>/28</code></td><td><code>240</code></td><td><strong>16</strong></td><td><strong>14</strong></td><td>16</td></tr>
+        <tr><td><strong>5</strong></td><td><code>/29</code></td><td><code>248</code></td><td><strong>8</strong></td><td><strong>6</strong></td><td>32</td></tr>
+        <tr><td><strong>6</strong></td><td><code>/30</code></td><td><code>252</code></td><td><strong>4</strong></td><td><strong>2</strong></td><td>64</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h5 style="color:#0369a1; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">2. The 4-Step Sunny Problem-Solving Method</h5>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:0.75rem; margin-bottom:1.25rem;">
+    <div style="background:white; border-left:4px solid #0284c7; padding:0.75rem 1rem; border-radius:4px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+      <strong style="color:#0369a1; font-size:0.85rem;">Step 1: Identify Requirements</strong>
+      <p style="font-size:0.8rem; color:#475569; margin:0.25rem 0 0 0;">Check how many subnets or usable hosts are required. Round up to the nearest power of 2 (<span class="math-inline">2<sup>n</sup> &ge; subnets</span> or <span class="math-inline">2<sup>h</sup> - 2 &ge; hosts</span>).</p>
+    </div>
+    <div style="background:white; border-left:4px solid #0284c7; padding:0.75rem 1rem; border-radius:4px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+      <strong style="color:#0369a1; font-size:0.85rem;">Step 2: Find Mask & Block Size</strong>
+      <p style="font-size:0.8rem; color:#475569; margin:0.25rem 0 0 0;">Find the row in the table matching borrowed bits. The <em>Block Size</em> (e.g. 32 for /27) is your <strong>magic jump number</strong> between consecutive subnets.</p>
+    </div>
+    <div style="background:white; border-left:4px solid #0284c7; padding:0.75rem 1rem; border-radius:4px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+      <strong style="color:#0369a1; font-size:0.85rem;">Step 3: Map Subnet Ranges</strong>
+      <p style="font-size:0.8rem; color:#475569; margin:0.25rem 0 0 0;">Start at base Network ID (.0). Add the Block Size to get the next subnet ID. The broadcast ID is 1 less than the next subnet ID!</p>
+    </div>
+    <div style="background:white; border-left:4px solid #0284c7; padding:0.75rem 1rem; border-radius:4px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+      <strong style="color:#0369a1; font-size:0.85rem;">Step 4: Answer Exam Questions</strong>
+      <p style="font-size:0.8rem; color:#475569; margin:0.25rem 0 0 0;">Extract Subnet Mask, Network ID, First Usable IP (+1), Last Usable IP (&minus;1 from broadcast), and Broadcast ID directly.</p>
+    </div>
+  </div>
+
+  <h5 style="color:#0369a1; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">3. Sunny Classroom Worked Example Walkthrough</h5>
+  <div style="background:white; padding:1rem; border-radius:6px; border:1px solid #bae6fd;">
+    <p style="font-size:0.85rem; color:#0f172a; margin-top:0;"><strong>Problem:</strong> Given network ID <code>192.168.4.0/24</code>, create subnets to support <strong>3 distinct company departments</strong>, each requiring up to 25 hosts.</p>
+    <ul style="font-size:0.85rem; color:#334155; line-height:1.6; margin-bottom:0.5rem;">
+      <li><strong>Step 1:</strong> Need 3 subnets. <span class="math-inline">2<sup>1</sup> = 2</span> (too small), so we must borrow <span class="math-inline">n = 2</span> bits? Wait, 2 bits gives 4 subnets, which satisfies 3 subnets! Check host count: <span class="math-inline">h = 6</span> bits remaining &rarr; <span class="math-inline">2<sup>6</sup> - 2 = 62</span> hosts per subnet. Alternatively, if we need at most 25 hosts, <span class="math-inline">2<sup>5</sup> - 2 = 30 &ge; 25</span> hosts, so we can borrow <strong>3 bits</strong> (/27) giving 8 subnets with 30 usable hosts each!</li>
+      <li><strong>Step 2:</strong> Borrowing 3 bits &rarr; New Subnet Mask is <code>255.255.255.224</code> (<code>/27</code>). From Sunny's table, Block Size = <strong>32</strong>.</li>
+      <li><strong>Step 3:</strong> Step by 32s in the 4th octet:
+        <ul>
+          <li><strong>Subnet 1:</strong> Network ID = <code>192.168.4.0</code> &bull; Usable Hosts = <code>192.168.4.1</code> to <code>192.168.4.30</code> &bull; Broadcast = <code>192.168.4.31</code></li>
+          <li><strong>Subnet 2:</strong> Network ID = <code>192.168.4.32</code> &bull; Usable Hosts = <code>192.168.4.33</code> to <code>192.168.4.62</code> &bull; Broadcast = <code>192.168.4.63</code></li>
+          <li><strong>Subnet 3:</strong> Network ID = <code>192.168.4.64</code> &bull; Usable Hosts = <code>192.168.4.65</code> to <code>192.168.4.94</code> &bull; Broadcast = <code>192.168.4.95</code></li>
+        </ul>
+      </li>
+    </ul>
+    <div style="font-size:0.8rem; color:#0369a1; font-weight:700;">
+      🔗 Video Source: <a href="https://youtu.be/ecCuyq-Wprc" target="_blank" rel="noopener" style="color:#0284c7; text-decoration:underline;">Sunny Classroom — "Subnetting is Simple" (YouTube)</a>
+    </div>
+  </div>
+</div>
+
 <!-- EMBEDDED INTERACTIVE: LIVE CIDR SUBNET CALCULATOR -->
 <div class="interactive-card">
   <div class="interactive-header">
@@ -9004,6 +9160,19 @@ Word 2: 1100 0110 0111 0101 (0xC675)</pre>
 
 <h3>IPv6 Transition: Tunneling</h3>
 <p>Because the billions of IPv4 routers cannot be upgraded simultaneously, the primary migration mechanism is <strong>Tunneling (RFC 4213)</strong>. An IPv6 datagram is encapsulated as the complete payload of an IPv4 datagram (with IPv4 Protocol field = 41). The IPv4 core routes the packet normally between dual-stack routers at the tunnel endpoints.</p>
+
+<div class="callout callout-info" style="margin:1.5rem 0;">
+  <div class="callout-header">🌐 Hierarchical Route Aggregation & More Specific Routes</div>
+  <p>CIDR enables hierarchical address allocation and <strong>Route Summarization</strong>. An ISP can advertise a single aggregated prefix (e.g. <code>200.23.16.0/20</code>) representing 8 individual customer organizations (<code>200.23.16.0/23</code> through <code>200.23.30.0/23</code>) to the global Internet routing table.</p>
+  <p><strong>What happens when an organization switches ISP?</strong><br>
+  If Organization 1 (<code>200.23.18.0/23</code>) moves to ISP-2 while keeping its IP block:
+  <ul>
+    <li>ISP-1 still advertises the aggregate <code>200.23.16.0/20</code>.</li>
+    <li>ISP-2 advertises the more specific route <code>200.23.18.0/23</code>.</li>
+    <li>Routers worldwide receive both routes. By <strong>Longest Prefix Matching</strong>, because 23 &gt; 20 bits, traffic for Organization 1 is routed through ISP-2, while traffic for all other organizations continues seamlessly through ISP-1!</li>
+  </ul>
+  </p>
+</div>
 
           </div>
 
@@ -9244,6 +9413,124 @@ Word 2: 1100 0110 0111 0101 (0xC675)</pre>
   <div class="math-display"><i>d<sub>z</sub></i>(<i>x</i>) = &infin; &emsp; (advertised strictly to <i>y</i>)</div>
   This prevents <span class="math-inline"><i>y</i></span> from ever attempting to route back through <span class="math-inline"><i>z</i></span> to reach <span class="math-inline"><i>x</i></span>!
   <br><em>Important Limitation: Poisoned reverse completely eliminates 2-node loops, but does NOT prevent loops involving 3 or more nodes!</em>
+</div>
+
+
+<!-- ============================================================================== -->
+<!-- 🎥 VIDEO DEEP-DIVE 4: SHORTEST PATH (DIJKSTRA'S ALGORITHM) -->
+<!-- URL: https://youtu.be/O7d-BgIqx-I -->
+<!-- ============================================================================== -->
+<div class="interactive-card" style="border:2px solid #8b5cf6; background:#f5f3ff; margin:2rem 0; padding:1.5rem; border-radius:10px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+    <div style="display:flex; align-items:center; gap:0.6rem;">
+      <span style="font-size:1.5rem;">🎥</span>
+      <div>
+        <h4 style="margin:0; color:#6d28d9; font-size:1.15rem; font-weight:800;">Video Deep-Dive: Dijkstra's Shortest Path Algorithm Step-by-Step Method</h4>
+        <span style="font-size:0.8rem; color:#7c3aed; font-weight:600;">Reference Video Tutorial &bull; Shortest Path Trace Walkthrough</span>
+      </div>
+    </div>
+    <span style="background:#7c3aed; color:white; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:20px;">Required Study Video</span>
+  </div>
+
+  <p style="font-size:0.92rem; color:#1e293b; line-height:1.6; margin-bottom:1rem;">
+    In this educational walkthrough, Dijkstra's algorithm is demonstrated using the <strong>Permanent vs. Temporary Node Labeling</strong> technique. This method systematically builds the least-cost path tree without missing shorter detour routes.
+  </p>
+
+  <h5 style="color:#6d28d9; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">1. The Node Labeling Methodology</h5>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-bottom:1.25rem;">
+    <div style="background:white; border-left:4px solid #8b5cf6; padding:0.85rem 1rem; border-radius:4px;">
+      <strong style="color:#6d28d9;">Temporary Label: <span class="math-inline">[d, p]</span></strong>
+      <p style="font-size:0.82rem; color:#475569; margin:0.3rem 0 0 0;">Represents the current tentative distance <span class="math-inline">d</span> from the source node to this node via predecessor <span class="math-inline">p</span>. Can be updated if a shorter path is discovered through another newly visited neighbor.</p>
+    </div>
+    <div style="background:white; border-left:4px solid #10b981; padding:0.85rem 1rem; border-radius:4px;">
+      <strong style="color:#047857;">Permanent Label: <span class="math-inline">[d^*, p^*]</span></strong>
+      <p style="font-size:0.82rem; color:#475569; margin:0.3rem 0 0 0;">Once an unvisited node with the smallest tentative distance is chosen, its label is locked as <strong>Permanent</strong> (added to set <span class="math-inline">N'</span>). Its shortest path from source is mathematically guaranteed!</p>
+    </div>
+  </div>
+
+  <h5 style="color:#6d28d9; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">2. Step-by-Step Algorithm Loop</h5>
+  <ol style="font-size:0.85rem; color:#334155; line-height:1.6; margin-bottom:1rem;">
+    <li><strong>Initialization:</strong> Mark source node <span class="math-inline">u</span> permanent with label <code>[0, -]</code>. Label all directly connected neighbors <span class="math-inline">v</span> with temporary label <code>[c(u,v), u]</code>; all others with <code>[&infin;, -]</code>.</li>
+    <li><strong>Greedy Selection:</strong> Find the node <span class="math-inline">w</span> with the smallest temporary distance. Mark <span class="math-inline">w</span> permanent.</li>
+    <li><strong>Neighbor Relaxation:</strong> For every unvisited neighbor <span class="math-inline">v</span> of <span class="math-inline">w</span>, calculate candidate distance:
+      <div style="background:#f1f5f9; padding:0.4rem 0.75rem; border-radius:4px; font-family:monospace; margin:0.4rem 0;">candidate = D(w) + c(w, v)</div>
+      If <code>candidate &lt; D(v)</code>, update <span class="math-inline">v</span>'s temporary label to <code>[candidate, w]</code>.
+    </li>
+    <li><strong>Predecessor Traceback:</strong> To find the path from source to any node <span class="math-inline">z</span>, follow the predecessor pointers backwards from <span class="math-inline">z</span> until <span class="math-inline">u</span> is reached, then reverse the sequence.</li>
+  </ol>
+
+  <div style="font-size:0.8rem; color:#6d28d9; font-weight:700;">
+    🔗 Video Source: <a href="https://youtu.be/O7d-BgIqx-I" target="_blank" rel="noopener" style="color:#7c3aed; text-decoration:underline;">Shortest Path (Dijkstra's Algorithm) — Video Tutorial (YouTube)</a>
+  </div>
+</div>
+
+
+<!-- ============================================================================== -->
+<!-- 🎥 VIDEO DEEP-DIVE 5: SIMPLILEARN DISTANCE VECTOR ROUTING ALGORITHM -->
+<!-- URL: https://youtu.be/hdpnoOcrGck -->
+<!-- ============================================================================== -->
+<div class="interactive-card" style="border:2px solid #059669; background:#ecfdf5; margin:2rem 0; padding:1.5rem; border-radius:10px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+    <div style="display:flex; align-items:center; gap:0.6rem;">
+      <span style="font-size:1.5rem;">🎥</span>
+      <div>
+        <h4 style="margin:0; color:#047857; font-size:1.15rem; font-weight:800;">Video Deep-Dive: Simplilearn Distance Vector Routing & Bellman-Ford</h4>
+        <span style="font-size:0.8rem; color:#059669; font-weight:600;">Reference Video Tutorial &bull; DVR Convergence & Loop Mitigation</span>
+      </div>
+    </div>
+    <span style="background:#059669; color:white; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:20px;">Required Study Video</span>
+  </div>
+
+  <p style="font-size:0.92rem; color:#1e293b; line-height:1.6; margin-bottom:1rem;">
+    The Simplilearn video tutorial provides an in-depth breakdown of how the <strong>Distance Vector Routing (DVR)</strong> algorithm operates across asynchronous iterations, how routing tables converge, and how industry routing protocols handle the classic <strong>Count-to-Infinity</strong> vulnerability.
+  </p>
+
+  <h5 style="color:#047857; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">1. Routing Table Architecture at Each Node</h5>
+  <p style="font-size:0.85rem; color:#334155; line-height:1.5; margin-bottom:0.75rem;">
+    In DVR, every router maintains a table storing three fields for every destination in the network:
+  </p>
+  <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem; margin-bottom:1.25rem; text-align:center;">
+    <div style="background:white; border:1px solid #a7f3d0; padding:0.6rem; border-radius:6px;">
+      <div style="font-weight:700; color:#047857; font-size:0.85rem;">Destination</div>
+      <div style="font-size:0.75rem; color:#64748b;">Target host / network</div>
+    </div>
+    <div style="background:white; border:1px solid #a7f3d0; padding:0.6rem; border-radius:6px;">
+      <div style="font-weight:700; color:#047857; font-size:0.85rem;">Cost (Metric)</div>
+      <div style="font-size:0.75rem; color:#64748b;">Least distance via Bellman-Ford</div>
+    </div>
+    <div style="background:white; border:1px solid #a7f3d0; padding:0.6rem; border-radius:6px;">
+      <div style="font-weight:700; color:#047857; font-size:0.85rem;">Next Hop</div>
+      <div style="font-size:0.75rem; color:#64748b;">Neighbor interface to forward to</div>
+    </div>
+  </div>
+
+  <h5 style="color:#047857; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">2. The Iterative Convergence Process</h5>
+  <ul style="font-size:0.85rem; color:#334155; line-height:1.6; margin-bottom:1rem;">
+    <li><strong>Round 0 (Initial State):</strong> Each router only knows the cost of reaching its directly attached physical neighbors (cost = link cost); all other destinations are marked <span class="math-inline">&isin;fty</span>.</li>
+    <li><strong>Round 1 (First Exchange):</strong> Routers share their vectors with neighbors. When router <span class="math-inline">x</span> receives vector <span class="math-inline">D<sub>v</sub></span> from neighbor <span class="math-inline">v</span>, it updates:
+      <div style="background:white; padding:0.4rem 0.75rem; border-radius:4px; font-family:monospace; margin:0.3rem 0; border:1px solid #a7f3d0;">D_x(y) = min_v { c(x, v) + D_v(y) }</div>
+    </li>
+    <li><strong>Equilibrium:</strong> Vectors continue to propagate until no router calculates any distance changes. The network has converged!</li>
+  </ul>
+
+  <h5 style="color:#047857; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">3. Count-to-Infinity & The Two Industry Solutions</h5>
+  <p style="font-size:0.85rem; color:#334155; line-height:1.6; margin-bottom:0.75rem;">
+    When a link breaks (cost becomes <span class="math-inline">&isin;fty</span>), two routers can become trapped in a circular loop, incrementally adding cost until reaching the threshold of infinity. Simplilearn highlights two classic solutions:
+  </p>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:0.75rem; margin-bottom:1rem;">
+    <div style="background:white; border-left:4px solid #f59e0b; padding:0.75rem 1rem; border-radius:4px;">
+      <strong style="color:#b45309; font-size:0.85rem;">1. Split Horizon</strong>
+      <p style="font-size:0.8rem; color:#475569; margin:0.25rem 0 0 0;">Rule: <em>"Never tell a neighbor about a destination if you learned that destination through that same neighbor!"</em> The router simply omits that route from advertisements sent to that neighbor.</p>
+    </div>
+    <div style="background:white; border-left:4px solid #ef4444; padding:0.75rem 1rem; border-radius:4px;">
+      <strong style="color:#b91c1c; font-size:0.85rem;">2. Poison Reverse (Split Horizon with Poison)</strong>
+      <p style="font-size:0.8rem; color:#475569; margin:0.25rem 0 0 0;">Rule: Instead of omitting the route, the router explicitly advertises the cost as <strong>infinity (<span class="math-inline">&isin;fty = 16</span>)</strong> back to that neighbor, proactively poisoning the reverse path and immediately halting 2-node loops!</p>
+    </div>
+  </div>
+
+  <div style="font-size:0.8rem; color:#047857; font-weight:700;">
+    🔗 Video Source: <a href="https://youtu.be/hdpnoOcrGck" target="_blank" rel="noopener" style="color:#059669; text-decoration:underline;">Distance Vector Routing Algorithm — Simplilearn (YouTube)</a>
+  </div>
 </div>
 
           </div>
@@ -9940,6 +10227,99 @@ Word 2: 1100 0110 0111 0101 (0xC675)</pre>
   </div>
 </div>
 
+
+<!-- ============================================================================== -->
+<!-- 🎥 VIDEO DEEP-DIVE 2 & 3: NESO ACADEMY - CYCLIC REDUNDANCY CHECK (CRC) PARTS 1 & 2 -->
+<!-- URLs: https://youtu.be/A9g6rTMblz4 (Part 1) & https://youtu.be/wQGwfBS3gpk (Part 2) -->
+<!-- ============================================================================== -->
+<div class="interactive-card" style="border:2px solid #d97706; background:#fffbeb; margin:2rem 0; padding:1.5rem; border-radius:10px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+    <div style="display:flex; align-items:center; gap:0.6rem;">
+      <span style="font-size:1.5rem;">🎥</span>
+      <div>
+        <h4 style="margin:0; color:#b45309; font-size:1.15rem; font-weight:800;">Video Deep-Dive: Neso Academy CRC Masterclass (Parts 1 & 2)</h4>
+        <span style="font-size:0.8rem; color:#d97706; font-weight:600;">Sender-Side Modulo-2 Division &bull; Receiver-Side Verification &bull; Error Detection Power</span>
+      </div>
+    </div>
+    <span style="background:#d97706; color:white; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:20px;">Required Study Video</span>
+  </div>
+
+  <p style="font-size:0.92rem; color:#1e293b; line-height:1.6; margin-bottom:1rem;">
+    In this two-part lecture series, <strong>Neso Academy</strong> provides an exhaustive, step-by-step mathematical demonstration of <strong>Cyclic Redundancy Check (CRC)</strong> error detection, deconstructing both the sender generation and receiver verification pipelines.
+  </p>
+
+  <h5 style="color:#b45309; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">Part 1: Sender-Side CRC Generation (<a href="https://youtu.be/A9g6rTMblz4" target="_blank" rel="noopener" style="color:#d97706; text-decoration:underline;">Watch Video 1</a>)</h5>
+  <div style="background:white; border-left:4px solid #d97706; padding:1rem; border-radius:6px; margin-bottom:1.25rem;">
+    <p style="font-size:0.85rem; color:#334155; line-height:1.6; margin-top:0;">
+      <strong>1. Key Terminology:</strong>
+      <br>&bull; <em>Dataword (<span class="math-inline">D</span>):</em> The raw message to be sent of length <span class="math-inline">d</span> bits.
+      <br>&bull; <em>Divisor / Generator Polynomial (<span class="math-inline">P</span>):</em> Predetermined bit pattern of length <span class="math-inline">k</span> bits (degree <span class="math-inline">r = k - 1</span>).
+      <br>&bull; <em>Remainder (<span class="math-inline">R</span>):</em> The CRC bits of length exactly <span class="math-inline">k - 1</span> bits.
+    </p>
+    <p style="font-size:0.85rem; color:#334155; line-height:1.6;">
+      <strong>2. Three Immutable Sender Rules:</strong>
+      <br>&bull; <strong>The Zero-Appending Rule:</strong> Always append exactly <strong><span class="math-inline">k - 1</span> zeros</strong> to the dataword dividend before dividing!
+      <br>&bull; <strong>Modulo-2 XOR Arithmetic:</strong> Addition and subtraction are identical and performed via bitwise XOR without carries or borrows (<span class="math-inline">0 &oplus; 0 = 0</span>, <span class="math-inline">1 &oplus; 1 = 0</span>, <span class="math-inline">0 &oplus; 1 = 1</span>, <span class="math-inline">1 &oplus; 0 = 1</span>).
+      <br>&bull; <strong>The Leftmost Bit Rule:</strong>
+      If the leftmost bit of the current dividend chunk is <code>1</code>, align the divisor <span class="math-inline">P</span> and perform XOR. If the leftmost bit is <code>0</code>, align <code>0000</code> and XOR (or shift to the next <code>1</code>).
+    </p>
+    <p style="font-size:0.85rem; color:#334155; line-height:1.6; margin-bottom:0;">
+      <strong>3. Codeword Generation:</strong>
+      The final remainder <span class="math-inline">R</span> (<span class="math-inline">k - 1</span> bits) replaces the appended zeros:
+      <br><span style="font-family:monospace; background:#fef3c7; padding:2px 6px; border-radius:3px; font-weight:700;">Transmitted Codeword = Dataword + Remainder</span>
+    </p>
+  </div>
+
+  <h5 style="color:#b45309; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">Part 2: Receiver-Side Verification & Error Detection (<a href="https://youtu.be/wQGwfBS3gpk" target="_blank" rel="noopener" style="color:#d97706; text-decoration:underline;">Watch Video 2</a>)</h5>
+  <div style="background:white; border-left:4px solid #10b981; padding:1rem; border-radius:6px; margin-bottom:1.25rem;">
+    <p style="font-size:0.85rem; color:#334155; line-height:1.6; margin-top:0;">
+      <strong>1. The Zero-Remainder Decision Rule:</strong>
+      <br>The receiver divides the entire received codeword by the exact same generator divisor <span class="math-inline">P</span> using modulo-2 binary division.
+      <br>&bull; If <span class="math-inline">Remainder == 00\dots0</span> &rarr; <strong>No Error Detected!</strong> The frame is accepted.
+      <br>&bull; If <span class="math-inline">Remainder &ne; 00\dots0</span> &rarr; <strong>Bit Error Detected!</strong> The frame is rejected / discarded.
+    </p>
+    <p style="font-size:0.85rem; color:#334155; line-height:1.6; margin-bottom:0;">
+      <strong>2. Error Detection Capabilities of CRC:</strong>
+      <br>&bull; <strong>100% of Single-Bit Errors:</strong> Detected as long as <span class="math-inline">P</span> has at least two non-zero terms.
+      <br>&bull; <strong>100% of Double-Bit Errors:</strong> Detected as long as <span class="math-inline">P</span> does not divide <span class="math-inline">x<sup>t</sup> + 1</span>.
+      <br>&bull; <strong>100% of Odd-Numbered Bit Errors:</strong> Detected as long as <span class="math-inline">P</span> contains the factor <span class="math-inline">(x + 1)</span>.
+      <br>&bull; <strong>100% of Burst Errors:</strong> All burst errors of length <span class="math-inline">&le; k - 1</span> bits are guaranteed to be detected!
+    </p>
+  </div>
+
+  <h5 style="color:#b45309; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem;">3. Course Slide & Neso Academy Fully Worked Example</h5>
+  <div style="background:white; padding:1rem; border-radius:6px; border:1px solid #fed7aa; font-family:monospace; font-size:0.85rem;">
+    Given Dataword <span class="math-inline">D = 101110</span> (<span class="math-inline">d=6</span>) and Generator <span class="math-inline">G = 1001</span> (<span class="math-inline">k=4 &rArr; r=3</span>):<br>
+    Append 3 zeros: <code>101110000</code><br>
+    Divide by <code>1001</code> using XOR:<br>
+    <pre style="margin:0.5rem 0; background:#f8fafc; padding:0.5rem; border-radius:4px; font-size:0.8rem;">
+       101011  (Quotient)
+     ----------
+1001 ) 101110000
+       1001
+       ----
+        01010  (bring down 1, 0)
+        00000
+        -----
+         1010
+         1001
+         ----
+          0110 (bring down 0)
+          0000
+          ----
+           1100 (bring down 0)
+           1001
+           ----
+            1010 (bring down 0)
+            1001
+            ----
+             011  &lt;--- REMAINDER R = 011!
+    </pre>
+    <strong>Transmitted Codeword:</strong> <code>101110011</code><br>
+    <strong>Receiver Check:</strong> <code>101110011 &divide; 1001 = Remainder 000</code> &rarr; Frame Accepted!
+  </div>
+</div>
+
           </div>
 
           <!-- Section Mini-Quizzes -->
@@ -10300,6 +10680,38 @@ Word 2: 1100 0110 0111 0101 (0xC675)</pre>
   <li><strong>TPID (Tag Protocol Identifier, 2 bytes):</strong> Fixed value <code>0x8100</code> identifying this as an 802.1Q tagged frame.</li>
   <li><strong>Tag Control Information (TCI, 2 bytes):</strong> Contains 3-bit Priority, 1-bit Canonical Format, and the <strong>12-bit VLAN ID (VID)</strong> (supporting up to <span class="math-inline">2<sup>12</sup> = 4096</span> VLANs).</li>
 </ul>
+
+
+<div class="callout callout-info" style="margin:1.5rem 0;">
+  <div class="callout-header">🔄 Multi-Subnet Hop-by-Hop Routing Walkthrough (MAC Swapping vs. IP Invariance)</div>
+  <p>Consider the classic scenario from the course lecture slides: Host A (Subnet 1) transmits an IP datagram to Host B (Subnet 2) through intermediate Router R:</p>
+  
+  <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; padding:1rem; margin:0.75rem 0; font-family:monospace; font-size:0.85rem;">
+    [Host A: 111.111.111.111 | MAC: 74-29-9C-E8-FF-55]<br>
+    &emsp;&emsp;&darr; (Hop 1: Ethernet Frame 1)<br>
+    [Router R Ingress: 111.111.111.110 | MAC: E6-E9-00-17-9B-4B]<br>
+    [Router R Egress: 222.222.222.220  | MAC: 1A-23-F9-CD-06-9B]<br>
+    &emsp;&emsp;&darr; (Hop 2: Ethernet Frame 2)<br>
+    [Host B: 222.222.222.222 | MAC: 49-BD-D2-C7-56-2A]
+  </div>
+
+  <div class="table-responsive">
+    <table class="table" style="font-size:0.85rem;">
+      <thead>
+        <tr><th>Header Field</th><th>Hop 1 (Host A &rarr; Router R)</th><th>Hop 2 (Router R &rarr; Host B)</th><th>Behavior</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Source IP</strong></td><td><code>111.111.111.111</code> (Host A)</td><td><code>111.111.111.111</code> (Host A)</td><td><span style="color:#16a34a; font-weight:700;">INVARIANT (Unchanged)</span></td></tr>
+        <tr><td><strong>Dest IP</strong></td><td><code>222.222.222.222</code> (Host B)</td><td><code>222.222.222.222</code> (Host B)</td><td><span style="color:#16a34a; font-weight:700;">INVARIANT (Unchanged)</span></td></tr>
+        <tr><td><strong>Source MAC</strong></td><td><code>74-29-9C-E8-FF-55</code> (Host A)</td><td><code>1A-23-F9-CD-06-9B</code> (Router Egress)</td><td><span style="color:#dc2626; font-weight:700;">SWAPPED AT ROUTER!</span></td></tr>
+        <tr><td><strong>Dest MAC</strong></td><td><code>E6-E9-00-17-9B-4B</code> (Router Ingress)</td><td><code>49-BD-D2-C7-56-2A</code> (Host B)</td><td><span style="color:#dc2626; font-weight:700;">SWAPPED AT ROUTER!</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-bottom:0;">
+    <strong>The Fundamental Network Axiom:</strong> IP addresses in the Layer 3 header remain <em>constant end-to-end</em> across all intermediate networks. MAC addresses in the Layer 2 header are <em>stripped and re-encapsulated at every single router hop</em>!
+  </p>
+</div>
 
           </div>
 
@@ -12367,12 +12779,23 @@ XOR   1001
         
 
         <section id="ch7-1-section" class="content-section">
-          <div class="breadcrumb">Chapter 7: Multimedia Networking &bull; Section 7.1</div>
+          <div class="breadcrumb">Chapter 7: Multimedia Networking [BOOK EXCLUSIVE] &bull; Section 7.1</div>
           <h2 class="sec-heading">§7.1 Multimedia Networking Applications</h2>
           <p class="sec-subheading">Properties of video/audio, compression techniques, and application classes</p>
           
           <div class="sec-body-content">
             
+<div style="background:#fff7ed; border-left:5px solid #f97316; padding:1.1rem 1.35rem; border-radius:6px; margin-bottom:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+  <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.35rem;">
+    <span style="font-size:1.1rem;">⚠️</span>
+    <strong style="color:#c2410c; font-size:1rem;">Curriculum Notice — Book Exclusive Chapter</strong>
+    <span style="background:#ffedd5; color:#9a3412; font-size:0.75rem; font-weight:700; padding:0.15rem 0.5rem; border-radius:4px; border:1px solid #fdba74;">Not in Lecture Slides</span>
+  </div>
+  <p style="margin:0; font-size:0.9rem; color:#431407; line-height:1.5;">
+    This chapter is drawn directly from <em>Computer Networking: A Top-Down Approach</em> (Kurose & Ross) and is <strong>not part of the semester lecture slide decks</strong>. Some students have reported questions from this topic appearing only for deep-dive textbook reference. It is included here for complete textbook fidelity and comprehensive study.
+  </p>
+</div>
+
 <p>Multimedia applications (streaming video, video conferencing, audio streaming) now account for over 70% of total Internet traffic. Unlike traditional text and web browsing applications (which demand 100% loss-free transmission but tolerate variable delays), multimedia applications exhibit unique transmission characteristics:</p>
 <ul>
   <li><strong>High Bandwidth Demand:</strong> High-definition video streams require hundreds of kilobits to multiple megabits per second.</li>
@@ -12532,7 +12955,7 @@ XOR   1001
         
 
         <section id="ch7-2-section" class="content-section">
-          <div class="breadcrumb">Chapter 7: Multimedia Networking &bull; Section 7.2</div>
+          <div class="breadcrumb">Chapter 7: Multimedia Networking [BOOK EXCLUSIVE] &bull; Section 7.2</div>
           <h2 class="sec-heading">§7.2 Streaming Stored Video</h2>
           <p class="sec-subheading">HTTP streaming, client playout buffers, DASH, and Content Distribution Networks (CDNs)</p>
           
@@ -12787,7 +13210,7 @@ XOR   1001
         
 
         <section id="ch7-3-section" class="content-section">
-          <div class="breadcrumb">Chapter 7: Multimedia Networking &bull; Section 7.3</div>
+          <div class="breadcrumb">Chapter 7: Multimedia Networking [BOOK EXCLUSIVE] &bull; Section 7.3</div>
           <h2 class="sec-heading">§7.3 Voice-over-IP (VoIP)</h2>
           <p class="sec-subheading">Jitter removal via adaptive playout delay, and packet loss recovery (FEC & Interleaving)</p>
           
@@ -12917,7 +13340,7 @@ XOR   1001
         
 
         <section id="ch7-4-section" class="content-section">
-          <div class="breadcrumb">Chapter 7: Multimedia Networking &bull; Section 7.4</div>
+          <div class="breadcrumb">Chapter 7: Multimedia Networking [BOOK EXCLUSIVE] &bull; Section 7.4</div>
           <h2 class="sec-heading">§7.4 Protocols for Real-Time Conversational Applications</h2>
           <p class="sec-subheading">RTP packet format, RTCP quality feedback, and SIP call setup signaling</p>
           
@@ -13100,7 +13523,7 @@ XOR   1001
         
 
         <section id="ch7-5-section" class="content-section">
-          <div class="breadcrumb">Chapter 7: Multimedia Networking &bull; Section 7.5</div>
+          <div class="breadcrumb">Chapter 7: Multimedia Networking [BOOK EXCLUSIVE] &bull; Section 7.5</div>
           <h2 class="sec-heading">§7.5 Network Support for Multimedia: Scheduling and Policing</h2>
           <p class="sec-subheading">FIFO, Priority Queuing, Round Robin, WFQ, and Token Bucket traffic policing</p>
           
@@ -13244,7 +13667,7 @@ XOR   1001
         
 
         <section id="ch7-6-section" class="content-section">
-          <div class="breadcrumb">Chapter 7: Multimedia Networking &bull; Section 7.6</div>
+          <div class="breadcrumb">Chapter 7: Multimedia Networking [BOOK EXCLUSIVE] &bull; Section 7.6</div>
           <h2 class="sec-heading">§7.6 Chapter 7 Summary & Worked Problems</h2>
           <p class="sec-subheading">Comprehensive multimedia review and worked QoS calculation</p>
           
@@ -14302,12 +14725,23 @@ XOR   1001
         
 
         <section id="ch9-1-section" class="content-section">
-          <div class="breadcrumb">Chapter 9: Network Management &bull; Section 9.1</div>
+          <div class="breadcrumb">Chapter 9: Network Management [BOOK EXCLUSIVE] &bull; Section 9.1</div>
           <h2 class="sec-heading">§9.1 What Is Network Management?</h2>
           <p class="sec-subheading">Definition, operational challenges, and the ISO FCAPS management framework</p>
           
           <div class="sec-body-content">
             
+<div style="background:#fff7ed; border-left:5px solid #f97316; padding:1.1rem 1.35rem; border-radius:6px; margin-bottom:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+  <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.35rem;">
+    <span style="font-size:1.1rem;">⚠️</span>
+    <strong style="color:#c2410c; font-size:1rem;">Curriculum Notice — Book Exclusive Chapter</strong>
+    <span style="background:#ffedd5; color:#9a3412; font-size:0.75rem; font-weight:700; padding:0.15rem 0.5rem; border-radius:4px; border:1px solid #fdba74;">Not in Lecture Slides</span>
+  </div>
+  <p style="margin:0; font-size:0.9rem; color:#431407; line-height:1.5;">
+    This chapter is drawn directly from <em>Computer Networking: A Top-Down Approach</em> (Kurose & Ross) and is <strong>not part of the semester lecture slide decks</strong>. Some students have reported questions from this topic appearing only for deep-dive textbook reference. It is included here for complete textbook fidelity and comprehensive study.
+  </p>
+</div>
+
 <p>Modern enterprise and telecommunications networks contain thousands of routers, switches, optical transceivers, wireless access points, firewalls, and server farms. <strong>Network management</strong> encompasses the deployment, integration, and coordination of hardware, software, and human elements to monitor, test, poll, configure, analyze, evaluate, and control network resources to meet real-time operational and Quality of Service requirements.</p>
 
 <h3>9.1.1 The ISO Network Management Functional Areas (FCAPS)</h3>
@@ -14446,7 +14880,7 @@ XOR   1001
         
 
         <section id="ch9-2-section" class="content-section">
-          <div class="breadcrumb">Chapter 9: Network Management &bull; Section 9.2</div>
+          <div class="breadcrumb">Chapter 9: Network Management [BOOK EXCLUSIVE] &bull; Section 9.2</div>
           <h2 class="sec-heading">§9.2 The Infrastructure for Network Management</h2>
           <p class="sec-subheading">Managing Entity, Managed Devices, Agents, MIB, and SNMP</p>
           
@@ -14564,7 +14998,7 @@ XOR   1001
         
 
         <section id="ch9-3-section" class="content-section">
-          <div class="breadcrumb">Chapter 9: Network Management &bull; Section 9.3</div>
+          <div class="breadcrumb">Chapter 9: Network Management [BOOK EXCLUSIVE] &bull; Section 9.3</div>
           <h2 class="sec-heading">§9.3 The Internet-Standard Management Framework</h2>
           <p class="sec-subheading">SMI, MIB-2 Object Trees (OIDs), SNMP PDUs, and SNMPv3 security</p>
           
@@ -14791,7 +15225,7 @@ XOR   1001
         
 
         <section id="ch9-4-section" class="content-section">
-          <div class="breadcrumb">Chapter 9: Network Management &bull; Section 9.4</div>
+          <div class="breadcrumb">Chapter 9: Network Management [BOOK EXCLUSIVE] &bull; Section 9.4</div>
           <h2 class="sec-heading">§9.4 ASN.1 and Basic Encoding Rules (BER)</h2>
           <p class="sec-subheading">Tag-Length-Value (TLV) encoding format and byte representations</p>
           
@@ -14954,7 +15388,7 @@ XOR   1001
         
 
         <section id="ch9-5-section" class="content-section">
-          <div class="breadcrumb">Chapter 9: Network Management &bull; Section 9.5</div>
+          <div class="breadcrumb">Chapter 9: Network Management [BOOK EXCLUSIVE] &bull; Section 9.5</div>
           <h2 class="sec-heading">§9.5 Chapter 9 Summary & Review Problems</h2>
           <p class="sec-subheading">Comprehensive network management review and ASN.1 encoding problem</p>
           
